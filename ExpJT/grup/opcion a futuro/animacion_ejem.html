@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Bento Morado con Efectos Avanzados</title>
+    <style>
+        :root {
+            --hue: 27;
+            --sat: 69%;
+            --white: hsl(0, 0%, 100%);
+            --purple-primary: rgba(132, 0, 255, 1);
+            --purple-glow: rgba(132, 0, 255, 0.2); /* Para box-shadow del hover */
+            --purple-border: rgba(132, 0, 255, 0.8); /* Para el borde del glow */
+            --border-color: #392e4e; /* Borde oscuro para las tarjetas */
+            --background-dark: #060010; /* Fondo oscuro de las tarjetas */
+            --text-color-light: #f0f0f0;
+            --text-color-dark: #ccc; /* Texto más claro para el fondo oscuro */
+
+            /* Variables para el efecto glow por tarjeta */
+            --glow-x: 50%;
+            --glow-y: 50%;
+            --glow-intensity: 0;
+            --glow-radius: 200px; /* Radio del resplandor */
+
+            /* Variables para el global spotlight */
+            --global-spotlight-glow-color: 132, 0, 255; /* RGB para el spotlight */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background-dark); /* Fondo oscuro del body */
+            margin: 0;
+            overflow: hidden; /* Evita barras de desplazamiento */
+            color: var(--white);
+        }
+
+        .card-grid {
+            display: grid;
+            gap: 0.5em; /* Espacio entre las tarjetas */
+            padding: 0.75em;
+            max-width: 54em;
+            width: 90%; /* Ajuste para responsividad */
+            font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            aspect-ratio: 4/3;
+            min-height: 200px;
+            width: 100%;
+            max-width: 100%;
+            padding: 1.25em;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--background-dark); /* Fondo oscuro de la tarjeta */
+            font-weight: 300;
+            overflow: hidden;
+            /* transiciones para tilt y magnetism */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+            /* Propiedades iniciales para los efectos del mouse */
+            transform-style: preserve-3d; /* Necesario para 3D transforms */
+
+            /* Variables de glow específicas por tarjeta, serán actualizadas por JS */
+            --glow-x: 50%;
+            --glow-y: 50%;
+            --glow-intensity: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-2px); /* Un ligero lift */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra al hover */
+        }
+
+        .card__header,
+        .card__content {
+            display: flex;
+            position: relative;
+            color: var(--white); /* Texto blanco sobre fondo oscuro */
+        }
+
+        .card__header {
+            gap: 0.75em;
+            justify-content: space-between;
+        }
+
+        .card__content {
+            flex-direction: column;
+        }
+
+        .card__label {
+            font-size: 16px;
+            color: var(--text-color-light);
+        }
+
+        .card__title {
+            font-weight: 400;
+            font-size: 16px;
+            margin: 0 0 0.25em;
+            color: var(--white);
+        }
+
+        .card__description {
+            font-size: 12px;
+            line-height: 1.2;
+            opacity: 0.9;
+            color: var(--text-color-light);
+        }
+
+        /* Border glow effect */
+        .card--border-glow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 6px; /* Grosor del borde brillante */
+            background: radial-gradient(var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+                        var(--purple-border) calc(var(--glow-intensity) * 0.8%),
+                        var(--purple-border) calc(var(--glow-intensity) * 0.4%),
+                        transparent 60%);
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: subtract;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            opacity: 0; /* Oculto por defecto */
+            z-index: 1;
+        }
+
+        .card--border-glow:hover::after {
+            opacity: 1; /* Visible al hover */
+        }
+
+        .card--border-glow:hover {
+            /* box-shadow: 0 4px 20px rgba(46, 24, 78, 0.4), 0 0 30px var(--purple-glow); */
+            /* Usamos la sombra de tu CSS original con el color morado */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 30px var(--purple-glow);
+        }
+
+        /* Partículas (usaremos JS para crearlas y animarlas) */
+        .particle-container {
+            position: relative; /* Contenedor para las partículas */
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(var(--global-spotlight-glow-color), 1); /* Color de partícula morado */
+            box-shadow: 0 0 6px rgba(var(--global-spotlight-glow-color), 0.6);
+            pointer-events: none;
+            z-index: 100;
+            /* Las posiciones iniciales serán fijadas por JS */
+            /* Las animaciones serán controladas por JS */
+        }
+
+        /* Global spotlight styles */
+        .global-spotlight {
+            mix-blend-mode: screen; /* Efecto de mezcla de pantalla */
+            will-change: transform, opacity;
+            z-index: 200 !important;
+            pointer-events: none;
+            position: fixed; /* Posición fija para seguir el mouse globalmente */
+            width: 800px; /* Tamaño del foco */
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                rgba(var(--global-spotlight-glow-color), 0.15) 0%,
+                rgba(var(--global-spotlight-glow-color), 0.08) 15%,
+                rgba(var(--global-spotlight-glow-color), 0.04) 25%,
+                rgba(var(--global-spotlight-glow-color), 0.02) 40%,
+                rgba(var(--global-spotlight-glow-color), 0.01) 65%,
+                transparent 70%
+            );
+            opacity: 0; /* Oculto por defecto */
+            transform: translate(-50%, -50%); /* Centra el spotlight en el cursor */
+        }
+
+        .bento-section {
+            position: relative;
+            user-select: none;
+            width: 100%; /* Asegura que la sección ocupa el ancho para detectar el mouse */
+            height: 100%; /* Y la altura */
+            display: flex; /* Para centrar el grid */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Media queries del CSS que proporcionaste */
+        @media (max-width: 599px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                width: 90%;
+                margin: 0 auto;
+                padding: 0.5em;
+            }
+
+            .card {
+                min-height: 180px;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            /* Los nth-child son muy específicos y pueden no encajar con tu data actual */
+            /* Los dejo comentados por ahora a menos que quieras replicar ese layout exacto */
+            /* .card:nth-child(3) {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .card:nth-child(4) {
+                grid-column: 1/span 2;
+                grid-row: 2/span 2;
+            }
+
+            .card:nth-child(6) {
+                grid-column: 4;
+                grid-row: 3;
+            } */
+        }
+    </style>
+</head>
+<body>
+    <div class="bento-section">
+        <div class="card-grid">
+            <div class="card particle-container card--border-glow">
+                <div class="card__header">
+                    <div class="card__label">Insights</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Analytics</h2>
+                    <p class="card__description">Rastrea el comportamiento del usuario con datos.</p>
+                </div>
+            </div>
+
+            <div class="card particle-container card--border-glow large-card">
+                <div class="card__header">
+                    <div class="card__label">Overview</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Dashboard</h2>
+                    <p class="card__description">Una vista centralizada de tus datos más importantes.</p>
+                </div>
+            </div>
+
+            <div class="card particle-container card--border-glow">
+                <div class="card__header">
+                    <div class="card__label">Teamwork</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Colaboración</h2>
+                    <p class="card__description">Trabaja sin problemas con tu equipo.</p>
+                </div>
+            </div>
+
+            <div class="card particle-container card--border-glow">
+                <div class="card__header">
+                    <div class="card__label">Efficiency</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Automatización</h2>
+                    <p class="card__description">Optimiza tus flujos de trabajo con automatizaciones.</p>
+                </div>
+            </div>
+
+            <div class="card particle-container card--border-glow">
+                <div class="card__header">
+                    <div class="card__label">Connectivity</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Integración</h2>
+                    <p class="card__description">Conecta tus herramientas favoritas sin esfuerzo.</p>
+                </div>
+            </div>
+
+            <div class="card particle-container card--border-glow">
+                <div class="card__header">
+                    <div class="card__label">Protection</div>
+                </div>
+                <div class="card__content">
+                    <h2 class="card__title">Seguridad</h2>
+                    <p class="card__description">Protección de nivel empresarial para tus datos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="global-spotlight"></div>
+
+    <script>
+        // Data para las tarjetas (simplificada)
+        const cardData = [
+            // No es estrictamente necesario aquí ya que el HTML está hardcodeado,
+            // pero es bueno para referencia.
+        ];
+
+        const DEFAULT_PARTICLE_COUNT = 8; // Menos partículas para mejor rendimiento en JS vanilla
+        const MOBILE_BREAKPOINT = 768;
+
+        /**
+         * Crea un elemento de partícula.
+         */
+        const createParticleElement = (x, y, color = '132, 0, 255') => {
+            const el = document.createElement("div");
+            el.className = "particle";
+            el.style.cssText = `
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: rgba(${color}, 1);
+                box-shadow: 0 0 6px rgba(${color}, 0.6);
+                pointer-events: none;
+                z-index: 100;
+                left: ${x}px;
+                top: ${y}px;
+            `;
+            return el;
+        };
+
+        /**
+         * Manejo de las tarjetas individuales (ParticleCard logic adaptada)
+         */
+        document.querySelectorAll('.card.particle-container').forEach(card => {
+            let particles = [];
+            let timeouts = [];
+            let isHovered = false;
+
+            const enableTilt = true; // Activar efecto de inclinación
+            const enableMagnetism = true; // Activar efecto de magnetismo
+            const clickEffect = true; // Activar efecto de click
+            const glowColor = '132, 0, 255'; // Color RGB para partículas y ripple
+
+            const animateParticle = (particle) => {
+                const startX = parseFloat(particle.style.left);
+                const startY = parseFloat(particle.style.top);
+
+                const endX = startX + (Math.random() - 0.5) * 100; // Mover X
+                const endY = startY + (Math.random() - 0.5) * 100; // Mover Y
+
+                // Simular animación GSAP con CSS transitions (limitado)
+                particle.style.transition = 'transform 2s ease-out, opacity 1.5s ease-in-out';
+                particle.style.transform = `translate(${endX - startX}px, ${endY - startY}px) rotate(${Math.random() * 360}deg)`;
+                particle.style.opacity = 0.3 + Math.random() * 0.7; // Opacidad variable
+
+                // Para un efecto de "yoyo" (repetir y volver), esto es más complicado en JS vanilla
+                // Normalmente, GSAP maneja esto de forma nativa.
+                // Aquí, simplemente las partículas se desvanecerán después de un tiempo y serán removidas.
+                const fadeOutTimeout = setTimeout(() => {
+                    particle.style.opacity = 0;
+                    particle.style.transform = `scale(0)`;
+                    setTimeout(() => {
+                        if (particle.parentNode) {
+                            particle.parentNode.removeChild(particle);
+                        }
+                    }, 500); // Remover después de que se desvanezca
+                }, 2000 + Math.random() * 2000); // Duración de vida de la partícula
+
+                timeouts.push(fadeOutTimeout);
+            };
+
+            const spawnParticles = () => {
+                if (!isHovered) return;
+
+                const { width, height } = card.getBoundingClientRect();
+                for (let i = 0; i < DEFAULT_PARTICLE_COUNT; i++) {
+                    const particle = createParticleElement(
+                        Math.random() * width,
+                        Math.random() * height,
+                        glowColor
+                    );
+                    card.appendChild(particle);
+                    particles.push(particle);
+                    animateParticle(particle);
+                }
+            };
+
+            const clearParticles = () => {
+                timeouts.forEach(clearTimeout);
+                timeouts = [];
+                particles.forEach(p => {
+                    p.style.opacity = 0;
+                    p.style.transform = `scale(0)`;
+                    setTimeout(() => {
+                        if (p.parentNode) {
+                            p.parentNode.removeChild(p);
+                        }
+                    }, 300);
+                });
+                particles = [];
+            };
+
+            card.addEventListener('mouseenter', () => {
+                isHovered = true;
+                if (window.innerWidth > MOBILE_BREAKPOINT) { // Desactivar en móvil
+                    spawnParticles();
+
+                    // Simular tilt inicial con CSS transition
+                    if (enableTilt) {
+                        card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, transform 0.3s ease-out';
+                        card.style.transform = `translateY(-2px) rotateX(5deg) rotateY(5deg)`;
+                    }
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                isHovered = false;
+                clearParticles();
+
+                // Resetear tilt y magnetism
+                if (enableTilt || enableMagnetism) {
+                    card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, transform 0.3s ease-out';
+                    card.style.transform = `translateY(-2px) rotateX(0deg) rotateY(0deg)`; // Volver a la posición de hover
+                    card.style.setProperty('transform', 'translateY(-2px)'); // Deshacer magnetism
+                }
+            });
+
+            card.addEventListener('mousemove', e => {
+                if (window.innerWidth <= MOBILE_BREAKPOINT) return; // Desactivar en móvil
+
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                // Actualizar glow del borde
+                card.style.setProperty('--glow-x', `${x}px`);
+                card.style.setProperty('--glow-y', `${y}px`);
+                card.style.setProperty('--glow-intensity', '100'); // Activa la intensidad
+
+                // Efecto Tilt (inclinación)
+                if (enableTilt) {
+                    const rotateX = ((y - centerY) / centerY) * -10; // Invertir Y para inclinación natural
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    card.style.transform = `translateY(-2px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                }
+
+                // Efecto Magnetismo
+                if (enableMagnetism) {
+                    const magnetX = (x - centerX) * 0.05;
+                    const magnetY = (y - centerY) * 0.05;
+                    // Aplicar magnetism. Combinamos con el tilt usando translateZ
+                    card.style.transform += ` translateZ(10px)`; // Simula un ligero "push" al centro
+                    card.style.setProperty('transform', `translateY(-2px) rotateX(${card.style.transform.match(/rotateX\(([^)]+)\)/)?.[1] || 0}) rotateY(${card.style.transform.match(/rotateY\(([^)]+)\)/)?.[1] || 0}) translateX(${magnetX}px) translateY(${magnetY}px)`);
+                }
+            });
+
+            card.addEventListener('click', e => {
+                if (!clickEffect || window.innerWidth <= MOBILE_BREAKPOINT) return;
+
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const maxDistance = Math.max(
+                    Math.hypot(x, y),
+                    Math.hypot(x - rect.width, y),
+                    Math.hypot(x, y - rect.height),
+                    Math.hypot(x - rect.width, y - rect.height)
+                );
+
+                const ripple = document.createElement("div");
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${maxDistance * 2}px;
+                    height: ${maxDistance * 2}px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle, rgba(${glowColor}, 0.4) 0%, rgba(${glowColor}, 0.2) 30%, transparent 70%);
+                    left: ${x - maxDistance}px;
+                    top: ${y - maxDistance}px;
+                    pointer-events: none;
+                    z-index: 1000;
+                    opacity: 1;
+                    transform: scale(0);
+                    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+                `;
+
+                card.appendChild(ripple);
+
+                // Iniciar la animación del ripple
+                setTimeout(() => {
+                    ripple.style.transform = 'scale(1)';
+                    ripple.style.opacity = '0';
+                }, 10); // Pequeño retraso para que la transición CSS funcione
+
+                // Remover el ripple después de la animación
+                ripple.addEventListener('transitionend', () => {
+                    ripple.remove();
+                });
+            });
+        });
+
+        /**
+         * Manejo del Global Spotlight
+         */
+        const globalSpotlight = document.querySelector('.global-spotlight');
+        const bentoSection = document.querySelector('.bento-section');
+        let isInsideSection = false;
+
+        document.addEventListener('mousemove', e => {
+            if (window.innerWidth <= MOBILE_BREAKPOINT) { // Desactivar en móvil
+                if (globalSpotlight.style.opacity !== '0') {
+                    globalSpotlight.style.opacity = '0';
+                }
+                return;
+            }
+
+            const rect = bentoSection.getBoundingClientRect();
+            const mouseInside =
+                e.clientX >= rect.left &&
+                e.clientX <= rect.right &&
+                e.clientY >= rect.top &&
+                e.clientY <= rect.bottom;
+
+            if (mouseInside && !isInsideSection) {
+                isInsideSection = true;
+                globalSpotlight.style.transition = 'opacity 0.3s ease-out';
+                globalSpotlight.style.opacity = '0.8'; // Mostrar suavemente
+            } else if (!mouseInside && isInsideSection) {
+                isInsideSection = false;
+                globalSpotlight.style.transition = 'opacity 0.3s ease-out';
+                globalSpotlight.style.opacity = '0'; // Ocultar suavemente
+            }
+
+            if (isInsideSection) {
+                globalSpotlight.style.left = `${e.clientX}px`;
+                globalSpotlight.style.top = `${e.clientY}px`;
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            isInsideSection = false;
+            if (globalSpotlight) {
+                globalSpotlight.style.transition = 'opacity 0.3s ease-out';
+                globalSpotlight.style.opacity = '0';
+            }
+        });
+
+        // Desactivar animaciones en móviles
+        const checkMobileAndDisableAnimations = () => {
+            if (window.innerWidth <= MOBILE_BREAKPOINT) {
+                // Desactivar glow, tilt, magnetism en móviles
+                document.querySelectorAll('.card').forEach(card => {
+                    card.style.setProperty('--glow-intensity', '0');
+                    card.style.transform = 'none';
+                    card.style.transition = 'none'; // Desactivar transiciones para evitar saltos
+                });
+                if (globalSpotlight) {
+                    globalSpotlight.style.opacity = '0';
+                }
+            } else {
+                 // Reactivar transiciones en desktop si se deshabilitaron
+                 document.querySelectorAll('.card').forEach(card => {
+                    card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease';
+                });
+            }
+        };
+
+        window.addEventListener('resize', checkMobileAndDisableAnimations);
+        checkMobileAndDisableAnimations(); // Ejecutar al cargar
+    </script>
+</body>
+</html>

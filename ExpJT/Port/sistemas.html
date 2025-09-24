@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energía que Transforma: Sistemas Eléctricos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c; /* Color de texto principal (gris oscuro) */
+            background: linear-gradient(135deg, #e0f2f7, #d4edda); /* Azul pálido a verde pálido */
+            background-size: 200% 200%;
+            animation: backgroundPan 40s ease infinite alternate;
+            position: relative;
+            overflow-x: hidden; /* Asegura que no haya scroll horizontal */
+        }
+
+        @keyframes backgroundPan {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05; /* Muy sutil */
+            background:
+                radial-gradient(circle at 10% 90%, rgba(255, 204, 0, 0.08) 0%, transparent 60%), /* Amarillo */
+                radial-gradient(circle at 90% 10%, rgba(0, 153, 204, 0.08) 0%, transparent 60%), /* Azul turquesa */
+                linear-gradient(45deg, rgba(255, 204, 0, 0.04) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(0, 153, 204, 0.04) 0%, transparent 50%);
+            background-size: 500px 500px, 600px 600px, 700px 700px, 700px 700px;
+            animation: moveDecorativeShapes 90s linear infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes moveDecorativeShapes {
+            0% { background-position: 0% 0%, 100% 100%, 0% 0%, 100% 0%; }
+            100% { background-position: 100% 100%, 0% 0%, 100% 100%, 0% 100%; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated-element {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+
+        .animated-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bx-icon-xl { font-size: 5.5rem; }
+        .bx-icon-lg { font-size: 4.5rem; }
+
+        .hero-diagonal-pattern {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.15;
+            background-image: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,0.1)), linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%, rgba(255,255,255,0.1));
+            background-size: 60px 60px;
+        }
+
+        .module-card {
+            border-left: 8px solid;
+            border-image: linear-gradient(to bottom, #0ea5e9, #10b981) 1; /* Azul cielo a Verde esmeralda */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .module-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .career-card {
+            border-radius: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f0f9ff; /* Azul muy claro */
+        }
+        .career-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .benefit-icon-wrapper {
+            width: 12rem;
+            height: 12rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 3rem;
+            background: linear-gradient(45deg, #fbbf24, #f97316); /* Amarillo a Naranja */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive adjustments for mobile */
+        @media (max-width: 767px) {
+            .hero-title-font { font-size: 3.5rem; line-height: 1.1; } /* Más pequeño y compacto */
+            .hero-subtitle-font { font-size: 1.125rem; } /* Más pequeño */
+            .hero-section-padding { padding-top: 8rem; padding-bottom: 8rem; }
+            .section-title-font { font-size: 2.5rem; line-height: 1.2; }
+            .section-padding { padding-top: 4rem; padding-bottom: 4rem; }
+            .module-card, .career-card { padding: 2rem; }
+            .bx-icon-lg { font-size: 3rem; }
+            .bx-icon-xl { font-size: 4rem; }
+            .benefit-icon-wrapper { width: 8rem; height: 8rem; margin-bottom: 2rem; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="min-h-screen flex flex-col">
+        <header class="bg-gradient-to-r from-blue-800 to-teal-700 text-white p-4 shadow-xl">
+            <div class="container mx-auto flex justify-between items-center px-4 md:px-6">
+                <a href="#" class="text-3xl font-extrabold flex items-center space-x-3 rounded-md px-3 py-1 hover:bg-teal-600 transition duration-300">
+                    <i class='bx bxs-check-shield text-amber-300 text-4xl'></i>
+                    <span>Electro</span>
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-lg font-medium hover:text-amber-300 transition duration-300">Inicio</a>
+                    <a href="#programa" class="text-lg font-medium hover:text-amber-300 transition duration-300">Programa</a>
+                    <a href="#modulos" class="text-lg font-medium hover:text-amber-300 transition duration-300">Módulos</a>
+                    <a href="#salidas" class="text-lg font-medium hover:text-amber-300 transition duration-300">Carrera</a>
+                    <a href="#beneficios" class="text-lg font-medium hover:text-amber-300 transition duration-300">Ventajas</a>
+                    <a href="#contacto" class="text-lg font-medium hover:text-amber-300 transition duration-300">Contacto</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="md:hidden hidden bg-teal-600 py-2">
+                <a href="#inicio" class="block px-4 py-2 text-white hover:bg-teal-500">Inicio</a>
+                <a href="#programa" class="block px-4 py-2 text-white hover:bg-teal-500">Programa</a>
+                <a href="#modulos" class="block px-4 py-2 text-white hover:bg-teal-500">Módulos</a>
+                <a href="#salidas" class="block px-4 py-2 text-white hover:bg-teal-500">Carrera</a>
+                <a href="#beneficios" class="block px-4 py-2 text-white hover:bg-teal-500">Ventajas</a>
+                <a href="#contacto" class="block px-4 py-2 text-white hover:bg-teal-500">Contacto</a>
+            </div>
+        </header>
+
+        <main class="flex-grow">
+            <section id="inicio" class="relative bg-gradient-to-br from-blue-700 to-teal-800 text-white py-32 md:py-48 px-4 md:px-6 text-center shadow-2xl overflow-hidden hero-section-padding">
+                <div class="hero-diagonal-pattern"></div>
+                <div class="container mx-auto max-w-7xl relative z-10">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-10 leading-tight animated-element hero-title-font">
+                        Potencia tu Futuro:<br>Bachillerato en Sistemas Eléctricos
+                    </h1>
+                    <p class="text-lg md:text-xl lg:text-2xl mb-16 opacity-90 animated-element max-w-4xl mx-auto hero-subtitle-font">
+                        Conviértete en un experto en la energía que impulsa el mundo moderno, desde su generación hasta su control y mantenimiento.
+                    </p>
+                    <a href="#programa" class="inline-block bg-amber-400 hover:bg-amber-500 text-blue-900 font-bold py-4 px-12 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out text-xl">
+                        Explora el Programa
+                        <i class='bx bx-right-arrow-alt ml-4 text-2xl'></i>
+                    </a>
+                </div>
+            </section>
+
+            <section id="programa" class="py-20 md:py-28 px-4 md:px-6 bg-white section-padding">
+                <div class="container mx-auto max-w-6xl">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 md:mb-20 section-title-font">Nuestro Programa: Sistemas Eléctricos</h2>
+                    <p class="text-lg md:text-xl text-gray-700 mb-16 md:mb-20 text-center animated-element max-w-4xl mx-auto leading-relaxed">
+                        El Bachillerato Técnico en Sistemas Eléctricos es una especialización de educación media que te prepara con un conocimiento profundo y práctico en el campo de la electricidad, la electrónica y las instalaciones. Nuestro objetivo es que al graduarte tengas la capacidad de diseñar, instalar, mantener y reparar una amplia gama de sistemas eléctricos de manera segura y eficiente, tanto en entornos residenciales como industriales, abriendo un campo laboral en constante expansión.
+                    </p>
+                </div>
+            </section>
+
+            <section id="modulos" class="py-20 md:py-28 px-4 md:px-6 bg-blue-50 section-padding">
+                <div class="container mx-auto max-w-7xl">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-20 md:mb-24 section-title-font">Módulos de Especialización</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-12 md:gap-16">
+                        <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl animated-element module-card">
+                            <div class="flex items-center space-x-6 md:space-x-8 mb-6 md:mb-8">
+                                <i class='bx bxs-bolt-circle bx-icon-lg text-blue-600'></i>
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800">1. Fundamentos de Electricidad y Electrónica</h3>
+                            </div>
+                            <p class="text-gray-700 mb-6 md:mb-8 text-lg leading-relaxed">Profundiza en los principios esenciales que rigen cada circuito y componente electrónico, desde las leyes básicas hasta su aplicación práctica.</p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-3 md:space-y-4 text-base">
+                                <li>Principios de voltaje, corriente, resistencia (Ley de Ohm, Ley de Kirchhoff).</li>
+                                <li>Análisis de circuitos DC y AC, configuraciones en serie y paralelo.</li>
+                                <li>Funcionamiento de componentes pasivos y activos (diodos, transistores, amplificadores).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl animated-element module-card">
+                            <div class="flex items-center space-x-6 md:space-x-8 mb-6 md:mb-8">
+                                <i class='bx bxs-building bx-icon-lg text-teal-600'></i>
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800">2. Instalaciones Residenciales e Industriales</h3>
+                            </div>
+                            <p class="text-gray-700 mb-6 md:mb-8 text-lg leading-relaxed">Adquiere la habilidad para diseñar, montar y cablear sistemas eléctricos seguros y eficientes, desde el hogar hasta grandes complejos industriales.</p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-3 md:space-y-4 text-base">
+                                <li>Lectura e interpretación de planos eléctricos, planificación de cableado.</li>
+                                <li>Instalación de interruptores, tomas de corriente, y dispositivos de seguridad (GFCI).</li>
+                                <li>Sistemas de distribución de energía de alta potencia, motores y tableros de control.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl animated-element module-card">
+                            <div class="flex items-center space-x-6 md:space-x-8 mb-6 md:mb-8">
+                                <i class='bx bxs-tools bx-icon-lg text-teal-600'></i>
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800">3. Mantenimiento y Reparación Avanzada</h3>
+                            </div>
+                            <p class="text-gray-700 mb-6 md:mb-8 text-lg leading-relaxed">Conviértete en un experto en diagnóstico y solución de problemas, capaz de mantener equipos en óptimo funcionamiento y extender su vida útil.</p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-3 md:space-y-4 text-base">
+                                <li>Uso profesional de herramientas de diagnóstico (multímetro, megóhmetro, pinza amperimétrica).</li>
+                                <li>Aplicación de mantenimiento preventivo y correctivo, diagnóstico eficiente de fallas.</li>
+                                <li>Diagnóstico sistemático de fallas utilizando diagramas de circuitos y lógica de exclusión.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl animated-element module-card">
+                            <div class="flex items-center space-x-6 md:space-x-8 mb-6 md:mb-8">
+                                <i class='bx bxs-cube bx-icon-lg text-blue-600'></i>
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800">4. Automatización y Sistemas de Control</h3>
+                            </div>
+                            <p class="text-gray-700 mb-6 md:mb-8 text-lg leading-relaxed">Explora el campo de la automatización industrial, diseñando y programando sistemas que optimizan procesos productivos.</p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-3 md:space-y-4 text-base">
+                                <li>Introducción y programación de Controladores Lógicos Programables (PLC) con Ladder Logic.</li>
+                                <li>Estudio de sistemas de control en lazo cerrado y abierto, con énfasis en sensores y actuadores.</li>
+                                <li>Diseño de soluciones de automatización para mejorar la eficiencia y seguridad en la industria.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="salidas" class="py-20 md:py-28 px-4 md:px-6 bg-white section-padding">
+                <div class="container mx-auto max-w-7xl">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-20 md:mb-24 section-title-font">Tu Trayectoria Profesional</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
+                        <div class="flex flex-col items-center text-center p-8 md:p-10 rounded-xl shadow-lg animated-element career-card border-t-4 border-blue-500">
+                            <div class="flex justify-center mb-5 md:mb-6">
+                                <i class='bx bx-current-location bx-icon-lg text-blue-600'></i>
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2 md:mb-3">Técnico Electricista Residencial/Comercial</h4>
+                            <p class="text-gray-700 text-base">Experto en la instalación y mantenimiento de sistemas eléctricos en hogares y negocios.</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-8 md:p-10 rounded-xl shadow-lg animated-element career-card border-t-4 border-teal-500">
+                            <div class="flex justify-center mb-5 md:mb-6">
+                                <i class='bx bxs-factory bx-icon-lg text-teal-600'></i>
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2 md:mb-3">Técnico de Mantenimiento Industrial</h4>
+                            <p class="text-gray-700 text-base">Garantiza el funcionamiento óptimo de la maquinaria en entornos de producción a gran escala.</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-8 md:p-10 rounded-xl shadow-lg animated-element career-card border-t-4 border-blue-500">
+                            <div class="flex justify-center mb-5 md:mb-6">
+                                <i class='bx bxs-car-mechanic bx-icon-lg text-blue-600'></i>
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2 md:mb-3">Técnico en Bobinado de Motores</h4>
+                            <p class="text-gray-700 text-base">Especialista en la reparación, rebobinado y mantenimiento de motores eléctricos de diversos tipos.</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-8 md:p-10 rounded-xl shadow-lg animated-element career-card border-t-4 border-teal-500">
+                            <div class="flex justify-center mb-5 md:mb-6">
+                                <i class='bx bxs-microchip bx-icon-lg text-teal-600'></i>
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2 md:mb-3">Asistente de Automatización</h4>
+                            <p class="text-gray-700 text-base">Colabora en el desarrollo, implementación y programación de sistemas de control automatizado.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="beneficios" class="py-20 md:py-28 px-4 md:px-6 bg-gradient-to-br from-blue-800 to-teal-900 text-white section-padding">
+                <div class="container mx-auto max-w-7xl">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-20 md:mb-24 section-title-font">Ventajas de Elegir Sistemas Eléctricos</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+                        <div class="bg-blue-900 p-8 md:p-12 rounded-xl shadow-2xl text-center animated-element">
+                            <div class="benefit-icon-wrapper">
+                                <i class='bx bxs-briefcase-alt-2 text-white bx-icon-xl' ></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 md:mb-4">Alta Empleabilidad</h3>
+                            <p class="text-gray-300 text-lg leading-relaxed">Una profesión esencial y altamente demandada en todos los sectores, asegurando un futuro laboral sólido y estable.</p>
+                        </div>
+                        <div class="bg-blue-900 p-8 md:p-12 rounded-xl shadow-2xl text-center animated-element">
+                            <div class="benefit-icon-wrapper">
+                                <i class='bx bxs-rocket text-white bx-icon-xl' ></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 md:mb-4">Innovación Constante</h3>
+                            <p class="text-gray-300 text-lg leading-relaxed">Estarás inmerso en un campo en evolución, aplicando las últimas tecnologías en energía renovable, automatización y eficiencia.</p>
+                        </div>
+                        <div class="bg-blue-900 p-8 md:p-12 rounded-xl shadow-2xl text-center animated-element">
+                            <div class="benefit-icon-wrapper">
+                                <i class='bx bxs-wallet-alt text-white bx-icon-xl' ></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 md:mb-4">Proyección Económica Sólida</h3>
+                            <p class="text-gray-300 text-lg leading-relaxed">Ofrece excelentes oportunidades de desarrollo profesional, salarios competitivos y un crecimiento a largo plazo en el sector.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contacto" class="py-20 md:py-28 px-4 md:px-6 bg-gradient-to-br from-blue-800 to-teal-900 text-white section-padding">
+                <div class="container mx-auto max-w-5xl text-center">
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-10 md:mb-12">Conecta con tu Potencial</h2>
+                    <p class="text-xl md:text-2xl opacity-90 mb-16 md:mb-20 max-w-3xl mx-auto leading-relaxed">
+                        ¿Listo para energizar tu carrera y formar parte de la próxima generación de expertos en sistemas eléctricos? 
+                    </p>
+                    <a href="../admisiones.html" class="inline-block bg-amber-400 hover:bg-amber-500 text-blue-900 font-bold py-5 px-16 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out text-xl">
+                        Regresar
+                        <i class='bx bx-envelope ml-4 text-2xl'></i>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-gray-900 text-gray-400 py-10 md:py-12 px-4 md:px-6 text-center">
+            <div class="container mx-auto">
+                <p class="text-lg">&copy; 2025 Electro. Todos los derechos reservados.</p>
+                <div class="flex justify-center space-x-6 md:space-x-8 mt-4 md:mt-6 text-base">
+                    <a href="#" class="hover:text-white transition duration-300">Política de Privacidad</a>
+                    <a href="#" class="hover:text-white transition duration-300">Términos y Condiciones</a>
+                    <a href="#" class="hover:text-white transition duration-300">Aviso Legal</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animated-element');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

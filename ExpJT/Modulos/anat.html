@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomía y Parallax</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../grup/css/ani.css">
+</head>
+<body>
+    <section class="hero-section" data-aos>
+        <div class="container">
+            <div class="hand-images">
+                <img src="../grup/img/izquierda.png" alt="Mano izquierda" class="hand-small">
+                <img src="../grup/img/derecha.png" alt="Mano derecha" class="hand-small hand-top hand-rotated">
+            </div>
+            <h1 class="title">ANATOMÍA</h1>
+        </div>
+    </section>
+
+        <div class="parallax-section">
+        <div class="parallax-image" style="background-image: url('../grup/img/anat.png');"></div>
+        <div class="parallax-content">
+            <h1 class="text-5xl font-extrabold mb-4">Que es Anatomia?</h1>
+            <p class="text-xl">La anatomía es la ciencia que estudia la estructura de los seres vivos, es decir,
+     la forma, ubicación y la relación que tienen entre sí los diferentes órganos y partes que los componen como:</div>
+    </div>
+    
+        <div class="spacer"></div>
+
+        <div class="parallax-section">
+        <div class="parallax-image" style="background-image: url('../grup/img/nervioso.png');"></div>
+        <div class="parallax-content">
+            <h2 class="text-4xl font-bold mb-4">Sistema Nervioso</h2>
+            <p class="text-lg">Un rincón de paz que se despliega ante tus ojos. Mira cómo el fondo se mueve lentamente.</p>
+        </div>
+    </div>
+    <div class="spacer"></div>
+
+        <div class="parallax-section">
+        <div class="parallax-image" style="background-image: url('../grup/img/skelet.png');"></div>
+        <div class="parallax-content">
+            <h2 class="text-4xl font-bold mb-4">Sistema Esquelético</h2>
+            <p class="text-lg">El sistema esquelético es la estructura interna de los seres vivos que sirve de soporte, protección y anclaje para los músculos.
+     En el ser humano, está compuesto por 206 huesos</p>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+        <div class="parallax-section">
+        <div class="parallax-image" style="background-image: url('../grup/img/neget.jpg');"></div>
+        <div class="parallax-content">
+            <h2 class="text-4xl font-bold mb-4">Anatomia del Desarrollo</h2>
+            <p class="text-lg">La anatomía del desarrollo, o embriología, es la ciencia que estudia cómo un organismo crece y se forma desde la concepción hasta el nacimiento.</p>
+        </div>
+    </div>
+
+        <div class="spacer"></div>
+
+    <div class="parallax-section" data-aos>
+        <div class="parallax-image" style="background-image: url('../grup/img/palt.png');"></div>
+        <div class="parallax-content">
+            <h2 class="text-4xl font-bold mb-4">Desea Ver mas</h2>
+            <button id="viewMoreBtn" class="view-more-btn">Ver más tipos de Anatomía</button>
+        </div>
+    </div>
+
+    <!-- Panel Lateral de Tipos de Anatomía -->
+    <div id="anatomyTypesPanel" class="anatomy-types-panel">
+        <button class="close-panel-btn">&times;</button>
+        <h3>Tipos de Anatomía</h3>
+        <ul id="anatomyTypesList" class="anatomy-types-list"></ul>
+    </div>
+
+    <!-- Ventana Flotante (Modal) para Detalles -->
+    <div id="anatomyModal" class="anatomy-modal">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <img id="modalImage" src="" alt="Imagen de tipo de anatomía">
+        </div>
+    </div>
+
+    <!-- Botón flotante para regresar -->
+    <a href="../Port/salud.html" class="floating-btn">Regresar</a>
+
+
+    <script src="../grup/js/ani.js"></script>
+
+</body>
+</html>

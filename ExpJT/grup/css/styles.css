@@ -1,0 +1,1811 @@
+/* Variables de Estilo Inspiradas en la Imagen del index.html */
+:root {
+        --electric-blue-light: #81ecec; /* Un azul claro vibrante */
+    --electric-yellow: #feca57; /* Un amarillo energético */
+    --electric-gray: #2c3e50; /* Gris oscuro para el fondo */
+    --electric-line: #0abde3; /* Azul turquesa para las líneas */
+
+    /* Transiciones y sombras (si no las tienes ya) */
+    --transition-duration: 0.3s;
+    --transition-easing: ease-in-out;
+    --box-shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.05);
+    --box-shadow-md: 0 8px 16px rgba(0, 0, 0, 0.1);
+    --border-radius-sm: 5px;
+    --border-radius-md: 10px;
+    --primary-blue: #3b82f6; /* Un azul similar al de los elementos activos */
+    --secondary-gray: #e5e7eb; /* Gris claro para fondos de sección */
+    --text-dark: #1e293b; /* Gris oscuro para texto principal */
+    --text-gray: #6b7280; /* Gris medio para texto secundario */
+    --bg-white: #ffffff;
+    --border-radius-md: 0.5rem;
+    --box-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --font-family-primary: 'Montserrat', sans-serif;
+    --font-family-secondary: 'Nunito Sans', sans-serif;
+    --transition-duration: 0.2s;
+    --transition-easing: ease-in-out;
+
+    /* Colores para la tarjeta de código (Matrix), ajustados al estilo del index */
+    --matrix-card-bg: #1a202c; /* Fondo muy oscuro para la tarjeta */
+    --matrix-code-color: #00ff41; /* Verde brillante de Matrix */
+    --matrix-water-color: rgba(0, 255, 65, 0.08); /* Verde semi-transparente para el "agua" */
+    --matrix-border-color: #00cc33; /* Verde para el borde */
+
+    /* Colores para la tarjeta de Salud (Diseño Temático de Salud) */
+    --health-card-bg-start: #e6faff; /* Azul muy claro */
+    --health-card-bg-end: #ccebff;   /* Azul claro */
+    --health-card-border: #80bfff;   /* Azul medio */
+    --health-text-color: #0052cc;    /* Azul oscuro para texto */
+    --health-accent-color: #ff4d4d;  /* Rojo para acentos (corazón/cruz) */
+    --health-shadow-color: rgba(0, 82, 204, 0.2); /* Sombra azul sutil */
+    --health-glow-color: rgba(204, 238, 255, 0.7); /* Brillo azul claro */
+
+    /* Nuevos colores para las animaciones de Salud */
+    --health-line-color: #00ccff; /* Azul cian brillante para la línea de pulso */
+    --glitch-bg-dark: #0a0a0a;
+
+    /* INICIO NUEVAS VARIABLES PARA LA TARJETA DE CONTABILIDAD (Visualización de Datos Dinámica - Finanzas) */
+    --finance-card-bg: #f5f8fa; /* Fondo gris claro profesional */
+    --finance-border-color: #d1d9e6; /* Borde suave */
+    --finance-text-color: #3f51b5; /* Azul oscuro profesional para texto */
+    --finance-button-bg: #4caf50; /* Verde de éxito/crecimiento */
+    --finance-button-hover: #43a047; /* Verde más oscuro para hover */
+    --finance-line-color: #2196f3; /* Azul vibrante para la línea de la gráfica (primera) */
+    --finance-grid-color: rgba(0, 0, 0, 0.05); /* Líneas de cuadrícula muy sutiles */
+    --finance-accent-color: #ff9800; /* Naranja para acentos o ganancias */
+    --finance-loss-color: #f44336; /* Rojo para pérdidas */
+    --finance-glow-color: rgba(33, 150, 243, 0.4); /* Sombra de brillo para la línea */
+    --finance-icon-color: rgba(33, 150, 243, 0.1); /* Color del icono de fondo */
+
+    /* Colores para el gráfico "Stonks" */
+    --stonks-line-color: #28a745; /* Verde para la línea de crecimiento */
+    --stonks-background-color: #f8f9fa; /* Fondo claro para el gráfico Stonks */
+
+    /* Colores para los "esquemas de cálculo" flotantes */
+    --scheme-number-color: #3f51b5; /* Azul oscuro para números */
+    --scheme-operator-color: #2196f3; /* Azul vibrante para operadores */
+    --scheme-symbol-color: #4caf50; /* Verde para símbolos como ($) o [%] */
+    --scheme-block-color: rgba(33, 150, 243, 0.3); /* Bloques transparentes azules */
+
+    /* Colores para los nuevos gráficos de barras y pastel */
+    --bar-color: #2196f3; /* Azul para las barras */
+    --pie-segment-1: #4CAF50; /* Verde */
+    --pie-segment-2: #FFC107; /* Amarillo/Naranja */
+    --pie-segment-3: #F44336; /* Rojo */
+    --pie-center-color: #f0f0f0; /* Color del centro del pastel */
+    /* FIN NUEVAS VARIABLES PARA LA TARJETA DE CONTABILIDAD */
+}
+
+/* Estilos Generales */
+html, body {
+    max-width: 100%; /* Asegura que el ancho máximo sea el 100% del viewport */
+    overflow-x: hidden; /* Oculta cualquier contenido que se desborde horizontalmente */
+}
+body {
+    font-family: var(--font-family-secondary);
+    margin: 0;
+    padding: 0px;
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Header */
+.header {
+    background-color: var(--bg-white);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--secondary-gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-logo {
+    font-family: var(--font-family-primary);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #5B2333;
+}
+.header-nav {
+    display: flex;
+}
+.header-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.header-nav li {
+    margin-left: 20px;
+}
+.header-nav a {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 1rem;
+    transition: color var(--transition-duration) var(--transition-easing);
+}
+.header-nav a:hover {
+    color: var(--text-dark);
+}
+.header-nav a.active {
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+/* Mobile menu button (hamburger icon) - Hidden by default on desktop */
+.mobile-menu-button {
+    display: none; 
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--primary-blue);
+    padding: 5px 10px;
+}
+
+/* Mobile menu itself - Hidden by default on desktop, not taking up space */
+.mobile-menu {
+    display: none; 
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 60px 0;
+    background-color: #F5F1E6;
+    border-bottom: 1px solid var(--secondary-gray);
+    text-align: center;
+}
+.hero-section .container {
+    max-width: 800px;
+}
+.hero-section h1 {
+    font-family: var(--font-family-primary);
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #5B2333;
+}
+.hero-section p {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    line-height: 1.8;
+}
+
+/* Section Title */
+.section-title {
+    font-family: var(--font-family-primary);
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #5B2333;
+}
+
+/* Botón general */
+.button {
+    display: inline-block;
+    background-color: var(--primary-blue);
+    color: var(--bg-white);
+    padding: 12px 25px;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color var(--transition-duration) var(--transition-easing);
+}
+.button:hover {
+    background-color: #2563eb;
+}
+
+/* Carreras Section */
+.careers-section {
+    padding: 40px 0;
+    background-color: var(--bg-white);
+}
+.careers-grid {
+    display: grid;
+    /* CAMBIO CLAVE AQUÍ: Fuerza 2 columnas y que los elementos fluyan a la siguiente línea */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    /* Asegura que la altura de las filas se ajuste al contenido, con un mínimo automático */
+    grid-auto-rows: minmax(auto, auto);
+}
+.career-card {
+    flex-shrink: 0; /* ¡IMPORTANTE! Evita que las tarjetas se encojan */
+    background-color: var(--bg-white);
+    border: 1px solid var(--secondary-gray);
+    border-radius: var(--border-radius-md);
+    padding: 25px;
+    box-shadow: var(--box-shadow-sm);
+    text-align: left;
+    transition: transform var(--transition-duration) var(--transition-easing), box-shadow var(--transition-duration) var(--transition-easing);
+}
+.career-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+.career-card h3 {
+    font-family: var(--font-family-primary);
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+.career-card p {
+    font-size: 1rem;
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+.career-card a.button {
+    background-color: var(--primary-blue);
+    color: var(--bg-white);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+}
+.career-card a.button:hover {
+    background-color: #2563eb;
+}
+
+/* Estilos ESPECÍFICOS para la tarjeta Matrix */
+.career-card.matrix-effect {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--matrix-card-bg);
+    color: #fff;
+    border: 2px solid var(--matrix-border-color);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+    z-index: 1;
+}
+.career-card.matrix-effect:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
+}
+.career-card.matrix-effect h3 {
+    color: var(--matrix-code-color);
+    font-family: 'VT323', monospace;
+    text-shadow: 0 0 5px var(--matrix-code-color);
+    position: relative;
+    z-index: 2;
+}
+.career-card.matrix-effect p {
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 2;
+}
+.career-card.matrix-effect a.button {
+    background-color: var(--matrix-border-color);
+    color: var(--matrix-card-bg);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
+    position: relative;
+    z-index: 2;
+}
+.career-card.matrix-effect a.button:hover {
+    background-color: #00b32f;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+}
+
+/* Animación de "agua cayendo" (fondo sutil de Matrix) */
+.career-card.matrix-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--matrix-water-color),
+        var(--matrix-water-color) 1px,
+        transparent 1px,
+        transparent 25px
+    );
+    background-size: 100% 50px;
+    animation: fall-matrix 12s linear infinite;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+@keyframes fall-matrix {
+    from { background-position: 0 0; }
+    to { background-position: 0 50px; }
+}
+
+/* Estilos para los 0s y 1s flotantes (Matrix) */
+.binary-float {
+    position: absolute;
+    font-family: 'VT323', monospace;
+    color: var(--matrix-code-color);
+    font-size: 1.2rem;
+    opacity: 0;
+    pointer-events: none;
+    animation: float-binary linear infinite;
+    text-shadow: 0 0 8px var(--matrix-code-color);
+    z-index: 1;
+}
+
+/* Animación de flotar para el binario */
+@keyframes float-binary {
+    0% { transform: translate(0, 0); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.8; }
+    100% { transform: translate(0, -100px); opacity: 0; }
+}
+
+/* Variaciones para los elementos binarios flotantes */
+.binary-float:nth-child(1) { top: 10%; left: 5%; animation-duration: 12s; animation-delay: 0s; }
+.binary-float:nth-child(2) { top: 50%; left: 80%; animation-duration: 10s; animation-delay: 2s; font-size: 0.9rem;}
+.binary-float:nth-child(3) { top: 70%; left: 20%; animation-duration: 15s; animation-delay: 4s; }
+.binary-float:nth-child(4) { top: 30%; left: 60%; animation-duration: 11s; animation-delay: 6s; font-size: 1.5rem;}
+.binary-float:nth-child(5) { top: 85%; left: 45%; animation-duration: 13s; animation-delay: 8s; }
+.binary-float:nth-child(6) { top: 20%; left: 30%; animation-duration: 9s; animation-delay: 1s; font-size: 0.8rem;}
+.binary-float:nth-child(7) { top: 60%; left: 10%; animation-duration: 14s; animation-delay: 3s; }
+.binary-float:nth-child(8) { top: 40%; left: 90%; animation-duration: 10s; animation-delay: 5s; font-size: 1.3rem;}
+
+
+/* NUEVOS ESTILOS PARA EL EFECTO DE CORRUPCIÓN EN SOFTWARE */
+@keyframes glitch-overlay {
+    0%, 100% { opacity: 0; transform: translate(0,0); }
+    10% { opacity: 0.2; transform: translate(-2px, 2px); }
+    12% { opacity: 0; transform: translate(0,0); }
+    30% { opacity: 0.3; transform: translate(3px, -3px); }
+    32% { opacity: 0; transform: translate(0,0); }
+    50% { opacity: 0.1; transform: translate(-1px, 1px); }
+    52% { opacity: 0; transform: translate(0,0); }
+    70% { opacity: 0.4; transform: translate(4px, -4px); }
+    72% { opacity: 0; transform: translate(0,0); }
+}
+
+/* Estilos ESPECÍFICOS para la tarjeta de Salud */
+.career-card.health-theme {
+    position: relative;
+    background: linear-gradient(135deg, var(--health-card-bg-start), var(--health-card-bg-end));
+    color: var(--health-text-color);
+    overflow: hidden; /* IMPORTANTE: Para que los elementos caigan y desaparezcan */
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--health-card-border);
+    box-shadow: 0 4px 15px var(--health-shadow-color);
+    padding: 25px;
+    transition: transform var(--transition-duration) var(--transition-easing), box-shadow var(--transition-duration) var(--transition-easing);
+}
+
+.career-card.health-theme:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--health-shadow-color), 0 0 30px var(--health-glow-color);
+}
+
+.career-card.health-theme h3 {
+    font-family: var(--font-family-primary);
+    color: var(--health-text-color);
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.career-card.health-theme p {
+    color: var(--health-text-color);
+    font-size: 1.0rem; /* Ajuste para consistencia */
+    line-height: 1.7;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.career-card.health-theme a.button {
+    background-color: var(--health-accent-color);
+    color: var(--bg-white);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color var(--transition-duration) var(--transition-easing), box-shadow var(--transition-duration) var(--transition-easing);
+    position: relative;
+    z-index: 2;
+}
+
+.career-card.health-theme a.button:hover {
+    background-color: #cc3939;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+}
+
+/* Canvas para la animación del pulso */
+.pulse-canvas {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Tamaño del canvas para la animación */
+    z-index: 1;
+    opacity: 0.6;
+}
+
+/* --- Nuevos estilos para elementos cayendo --- */
+.health-theme .falling-item {
+    position: absolute;
+    top: -50px; /* Empiezan más arriba */
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    filter: drop-shadow(0 0 3px rgba(0,0,0,0.3)); /* Sutil sombra para que resalten */
+}
+
+/* Animación de caída general para todos los elementos */
+@keyframes fall-animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(calc(100% + 500px)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Icono de Pastilla/Cápsula (Boxicons: bxs-capsule) */
+.health-theme .falling-item.bx-capsule {
+    left: 15%;
+    width: 30px;
+    height: 30px;
+    background-image: url('https://unpkg.com/boxicons@2.1.4/svg/solid/bxs-capsule.svg');
+    animation-name: fall-animate;
+    animation-duration: 6s;
+    animation-delay: 0s;
+}
+
+/* Icono de Jeringa (Boxicons: bxs-injection) */
+.health-theme .falling-item.bx-injection {
+    left: 75%;
+    width: 30px;
+    height: 30px;
+    background-image: url('https://unpkg.com/boxicons@2.1.4/svg/solid/bxs-injection.svg');
+    animation-name: fall-animate;
+    animation-duration: 7s;
+    animation-delay: 2s;
+}
+
+/* Nuevo Icono de Primeros Auxilios (Boxicons: bxs-first-aid) */
+.health-theme .falling-item.bx-first-aid {
+    left: 45%;
+    width: 35px;
+    height: 35px;
+    background-image: url('https://unpkg.com/boxicons@2.1.4/svg/solid/bxs-first-aid.svg');
+    animation-name: fall-animate;
+    animation-duration: 5.5s;
+    animation-delay: 1s;
+}
+
+/* Nuevo Icono de Corazón (Boxicons: bxs-heart) */
+.health-theme .falling-item.bx-heart {
+    left: 30%;
+    width: 25px;
+    height: 25px;
+    background-image: url('https://unpkg.com/boxicons@2.1.4/svg/solid/bxs-heart.svg');
+    animation-name: fall-animate;
+    animation-duration: 6.5s;
+    animation-delay: 3.5s;
+}
+
+/* Nuevo Icono de Gotero (Boxicons: bxs-droplet) */
+.health-theme .falling-item.bx-droplet {
+    left: 60%;
+    width: 20px;
+    height: 20px;
+    background-image: url('https://unpkg.com/boxicons@2.1.4/svg/solid/bxs-droplet.svg');
+    animation-name: fall-animate;
+    animation-duration: 8s;
+    animation-delay: 4.5s;
+}
+
+/* --- Nuevos Iconos de Otras Fuentes (para Salud) --- */
+
+/* Icono de Pastilla Genérica (Material Design Icons) */
+/* SVG de 'pill' de Material Design Icons, con color azul claro */
+.health-theme .falling-item.md-pill {
+    left: 5%; /* Otra posición */
+    width: 28px;
+    height: 28px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2380BFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M13 9h-2V7h2v2zm0 4h-2v-2h2v2zm0 4h-2v-2h2v2zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>');
+    animation-name: fall-animate;
+    animation-duration: 7.2s;
+    animation-delay: 0.5s; /* Empieza muy pronto */
+}
+
+/* Icono de Venda/Curita (Font Awesome - fa-band-aid) */
+/* SVG de 'band-aid' de Font Awesome Free, con color rojo de acento */
+.health-theme .falling-item.fa-band-aid {
+    left: 85%; /* Otra posición */
+    width: 32px;
+    height: 32px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="%23FF4D4D"><path d="M480 32H32C14.33 32 0 46.33 0 64v384c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32V64c0-17.67-14.33-32-32-32zm-96 224c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm-96 0c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm-96 0c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm-96 0c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"/></svg>');
+    animation-name: fall-animate;
+    animation-duration: 6.8s;
+    animation-delay: 2.8s; /* Otro retraso */
+}
+
+/* INICIO NUEVOS ESTILOS PARA LA TARJETA DE CONTABILIDAD (Versión Finanzas) */
+.career-card.accounting-data-viz-theme {
+    position: relative;
+    background-color: var(--finance-card-bg); /* Fondo claro profesional */
+    color: var(--finance-text-color);
+    overflow: hidden;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--finance-border-color); /* Borde suave */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1), 0 0 0 5px rgba(33, 150, 243, 0.05); /* Sombra suave y un ligero "halo" azul */
+    padding: 25px;
+    transition: transform var(--transition-duration) var(--transition-easing), box-shadow var(--transition-duration) var(--transition-easing);
+    z-index: 1; /* Asegura que el contenido esté por encima del efecto */
+}
+
+.career-card.accounting-data-viz-theme:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 0 0 8px rgba(33, 150, 243, 0.1);
+}
+
+.career-card.accounting-data-viz-theme h3 {
+    color: var(--finance-text-color); /* Título azul oscuro */
+    font-family: var(--font-family-primary); /* Fuente de cabecera más estándar */
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 2;
+}
+.career-card.accounting-data-viz-theme p {
+    color: var(--text-gray); /* Texto gris para el cuerpo */
+    position: relative;
+    z-index: 2;
+}
+
+.career-card.accounting-data-viz-theme a.button {
+    background-color: var(--finance-button-bg); /* Botón verde de crecimiento */
+    color: var(--bg-white);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color var(--transition-duration) var(--transition-easing), box-shadow var(--transition-duration) var(--transition-easing);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.career-card.accounting-data-viz-theme a.button:hover {
+    background-color: var(--finance-button-hover); /* Verde más oscuro al pasar el ratón */
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.5);
+}
+
+/* Contenedor principal de las animaciones de contabilidad */
+.data-viz-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* No interfiere con clics */
+    overflow: hidden;
+    z-index: 0; /* Detrás del contenido */
+    background-color: var(--finance-card-bg); /* Asegura el fondo claro */
+    
+    /* Cuadrícula de fondo que simula una hoja de cálculo/ledger */
+    background-image: 
+        linear-gradient(to right, var(--finance-grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--finance-grid-color) 1px, transparent 1px);
+    background-size: 25px 25px; /* Tamaño de cada celda de la cuadrícula */
+}
+
+/* Estilos para el icono de crecimiento de fondo */
+.finance-bg-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px; /* Tamaño del icono */
+    height: 120px;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232196F31A"><path d="M16 1L15 2H21.5L16 7.5L10.5 2L5 7.5L0.5 3H7L6 2H0.5L6 7.5L11.5 2L17 7.5L23 2H16ZM18 10L17 11H23.5L18 16.5L12.5 11L7 16.5L1.5 11H8L7 10H1.5L7 15.5L12.5 10L18 15.5L24 10H18Z" transform="translate(0, -6)" fill-opacity="0.2" /></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.2; /* Muy tenue */
+    animation: finance-icon-animate 10s ease-in-out infinite alternate; /* Animación sutil */
+    z-index: 0; /* Asegura que esté en el fondo */
+}
+
+/* Animación del icono de fondo */
+@keyframes finance-icon-animate {
+    0% { transform: translate(-50%, -50%) scale(0.9) rotate(0deg); opacity: 0.15; }
+    50% { transform: translate(-50%, -50%) scale(1.0) rotate(2deg); opacity: 0.25; }
+    100% { transform: translate(-50%, -50%) scale(0.9) rotate(0deg); opacity: 0.15; }
+}
+
+/* Contenedores de gráficos individuales */
+.graph-display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Transición para el fade */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para los canvas de las gráficas */
+.finance-graph-canvas, 
+.stonks-graph-canvas, 
+.pie-chart-canvas {
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+    /* La sombra la controlamos desde JS al dibujar para mayor flexibilidad */
+}
+
+/* Estilos para el contenedor del gráfico de pastel */
+.pie-graph {
+    display: flex;
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animación para "girar un poco" */
+@keyframes spin-little-animation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.pie-graph.spin-active {
+    animation: spin-little-animation 4s linear infinite; /* Gira durante 4 segundos */
+}
+
+/* Estilos para los elementos flotantes (esquemas de cálculo) */
+.floating-scheme {
+    position: absolute;
+    bottom: 0px; /* Empiezan desde abajo */
+    opacity: 0;
+    font-family: 'Consolas', 'Courier New', monospace; /* Fuente monoespaciada para un look de código/datos */
+    font-weight: 600;
+    font-size: 1rem;
+    pointer-events: none;
+    animation: float-up-fade linear infinite;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.05); /* Sombra muy sutil */
+    padding: 2px 5px; /* Pequeño padding para los bloques */
+    border-radius: 3px;
+    line-height: 1; /* Asegura que no haya espacio extra */
+    box-sizing: border-box; /* Padding incluido en el ancho/alto */
+}
+
+/* Animación de flotar hacia arriba y desvanecerse */
+@keyframes float-up-fade {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-150px); opacity: 0; } /* Se mueven 150px hacia arriba */
+}
+
+/* Colores y tamaños específicos para cada tipo de esquema */
+.floating-scheme.num { 
+    color: var(--scheme-number-color); /* Azul oscuro para números */
+    font-size: 1.1rem;
+}
+.floating-scheme.op { 
+    color: var(--scheme-operator-color); /* Azul vibrante para operadores */
+    font-size: 1.5rem;
+}
+.floating-scheme.symbol { /* Para ()$, [%] */
+    color: var(--scheme-symbol-color); /* Verde para símbolos */
+    font-size: 1.2rem;
+}
+.floating-scheme.text { /* Para 'Avg' u otros textos */
+    color: var(--text-dark); /* Gris oscuro */
+    font-size: 0.9rem;
+}
+.floating-scheme.block { /* Pequeños bloques/celdas */
+    background-color: var(--scheme-block-color); /* Bloques transparentes azules */
+    width: 25px;
+    height: 15px;
+    padding: 0;
+}
+
+/* Posiciones y retrasos variados */
+.floating-scheme.scheme-1 { left: 10%; animation-duration: 8s; animation-delay: 0s; font-size: 1.2rem;} /* Número */
+.floating-scheme.scheme-2 { left: 25%; animation-duration: 7s; animation-delay: 1.5s; font-size: 1.5rem;} /* Operador */
+.floating-scheme.scheme-3 { left: 40%; animation-duration: 9s; animation-delay: 3s; font-size: 1.1rem;} /* Símbolo */
+.floating-scheme.scheme-4 { left: 60%; animation-duration: 6s; animation-delay: 4.5s; font-size: 1.5rem;} /* Operador */
+.floating-scheme.scheme-5 { left: 75%; animation-duration: 8s; animation-delay: 6s; font-size: 1.2rem;} /* Número */
+.floating-scheme.scheme-6 { left: 20%; animation-duration: 7.5s; animation-delay: 7s; font-size: 1.3rem;} /* Operador */
+.floating-scheme.scheme-7 { left: 50%; animation-duration: 9.5s; animation-delay: 0.5s; font-size: 1.0rem;} /* Número */
+.floating-scheme.scheme-8 { left: 35%; animation-duration: 6.5s; animation-delay: 2.5s; font-size: 1.2rem;} /* Símbolo */
+.floating-scheme.scheme-9 { left: 90%; animation-duration: 8.5s; animation-delay: 4s; font-size: 0.9rem;} /* Texto */
+
+/* FIN NUEVOS ESTILOS PARA LA TARJETA DE CONTABILIDAD */
+
+/* Media Queries para Responsividad */
+@media (max-width: 992px) {
+    /* Oculta la navegación principal de escritorio */
+    .header-nav {
+        display: none;
+    }
+
+    /* Muestra el botón de menú móvil */
+    .mobile-menu-button {
+        display: block;
+    }
+
+    /* Estilos para el menú móvil cuando está en dispositivos móviles */
+    .mobile-menu {
+        display: flex; /* Ahora es visible pero controlado por opacidad/transform */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Posiciona debajo del encabezado */
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-white);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 1000;
+        padding: 10px 0;
+        
+        /* Estado inicial para la animación (oculto y fuera de la vista) */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px); /* Comienza ligeramente por encima de su posición final */
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out;
+        pointer-events: none; /* No interactuable cuando está oculto */
+    }
+
+    .mobile-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0); /* Desliza a la vista */
+        pointer-events: auto; /* Permite interacción cuando está visible */
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-menu li {
+        padding: 10px 20px;
+        border-bottom: 1px solid var(--secondary-gray);
+    }
+
+    .mobile-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-size: 1.1rem;
+        display: block; /* Para que los enlaces ocupen todo el espacio del li */
+        width: 100%;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+    /* En pantallas menores a 992px, volvemos a una sola columna para las carreras */
+    .careers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
+    /* Aunque ya lo definimos en 992px, lo mantenemos aquí por si acaso otras reglas lo sobreescribieran */
+    .careers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .pulse-canvas {
+        height: 60px;
+    }
+}
+
+.spaceship-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spaceship-pixel-art {
+    width: 80px;
+    height: auto;
+    position: relative;
+    /* Iniciamos la animación aleatoria inmediatamente y la hacemos infinita */
+    animation: randomSpaceshipMove 10s linear infinite;
+    /* Definimos las variables CSS con un valor inicial de 0 */
+    --spaceship-random-x: 0px;
+    --spaceship-random-y: 0px;
+}
+
+/* Animación de movimiento aleatorio con desplazamiento más largo */
+@keyframes randomSpaceshipMove {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(calc(var(--spaceship-random-x) * 0.4), calc(var(--spaceship-random-y) * 0.4)); }
+    40% { transform: translate(calc(var(--spaceship-random-x) * -0.3), calc(var(--spaceship-random-y) * 0.6)); }
+    60% { transform: translate(calc(var(--spaceship-random-x) * 0.5), calc(var(--spaceship-random-y) * -0.2)); }
+    80% { transform: translate(calc(var(--spaceship-random-x) * -0.1), calc(var(--spaceship-random-y) * -0.5)); }
+    100% { transform: translate(0, 0); }
+}
+
+/* --- Estilos para la sección de Guía Paso a Paso para tu Admisión (DETALLADO, ESTÉTICO, MINIMALISTA) --- */
+.admission-process {
+    padding: 80px 0; /* Más padding para una sensación más espaciosa */
+    background-color: #F5F1E6;
+    position: relative; /* Para posibles elementos decorativos */
+    overflow: hidden; /* Asegura que los elementos flotantes no se desborden */
+}
+
+.admission-process .section-title {
+    margin-bottom: 50px; /* Más espacio debajo del título */
+    text-align: center;
+    font-size: 2.5rem;
+    color: #5B2333;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.admission-process .section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-blue); /* Ajustado a primary-blue para consistencia */
+    border-radius: var(--border-radius-sm); /* Asumiendo que esta variable existe o la definiremos */
+}
+
+.admission-steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    /* Seis columnas para pantallas grandes, ajustándose a 3, 2, 1 */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 30px;
+}
+
+.admission-steps-list li {
+    background-color: var(--bg-white);
+    border: 1px solid var(--secondary-gray); /* Borde más sutil */
+    border-radius: var(--border-radius-md);
+    padding: 30px 25px; /* Más padding interior */
+    box-shadow: var(--box-shadow-sm); /* Sombra más discreta */
+    text-align: center;
+    transition: transform var(--transition-duration) var(--transition-easing), 
+                box-shadow var(--transition-duration) var(--transition-easing),
+                border-left-color var(--transition-duration) var(--transition-easing);
+    position: relative;
+    overflow: hidden; /* Para asegurar que el borde izquierdo no sobresalga */
+    border-left: 5px solid transparent; /* Para el efecto hover */
+}
+
+.admission-steps-list li:hover {
+    transform: translateY(-8px); /* Elevación sutil */
+    box-shadow: var(--box-shadow-md); /* Asumiendo que esta variable existe o la definiremos */
+    border-left-color: var(--primary-blue); /* Color al hacer hover */
+}
+
+.admission-steps-list li .step-icon {
+    font-size: 3.5rem; /* Icono más grande */
+    color: var(--primary-blue); /* Color primario para iconos */
+    margin-bottom: 25px; /* Más espacio debajo del icono */
+    display: inline-flex; /* Para centrar el ícono y darle fondo */
+    align-items: center;
+    justify-content: center;
+    width: 80px; /* Fondo circular para el icono */
+    height: 80px;
+    background-color: #5B2333; /* Fondo azul */
+    color: var(--bg-white); /* Icono blanco */
+    border-radius: 50%; /* Circular */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el ícono */
+    transition: background-color var(--transition-duration) var(--transition-easing), transform var(--transition-duration) var(--transition-easing);
+}
+
+.admission-steps-list li:hover .step-icon {
+    background-color: #2563eb; /* Cambio de color al hover (azul más oscuro) */
+    transform: scale(1.05); /* Ligerísimo aumento de tamaño */
+}
+
+.admission-steps-list li h3 {
+    font-family: var(--font-family-primary);
+    font-size: 1.5rem; /* Título un poco más grande */
+    margin-top: 0;
+    margin-bottom: 12px; /* Espacio debajo del título del paso */
+    color: var(--text-dark);
+    font-weight: 600; /* Un poco más de peso */
+}
+
+.admission-steps-list li p {
+    font-family: var(--font-family-secondary);
+    font-size: 0.95rem; /* Texto de descripción ligeramente más pequeño */
+    color: var(--text-gray);
+    line-height: 1.6; /* Interlineado para mejor lectura */
+    margin-bottom: 0;
+}
+
+.contact-info {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-top: 60px; /* Más espacio superior */
+    padding: 30px; /* Más padding */
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius-md); /* Usamos la variable existente */
+    box-shadow: var(--box-shadow-md); /* Asumiendo que esta variable existe o la definiremos */
+    max-width: 800px; /* Limitar el ancho para legibilidad */
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--secondary-gray); /* Ajuste a secondary-gray para consistencia */
+}
+
+.contact-info a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 700; /* Más énfasis en el enlace */
+    transition: color var(--transition-duration) var(--transition-easing);
+    position: relative;
+}
+
+.contact-info a::after { /* Efecto de subrayado sutil */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background-color: #2563eb; /* Azul más oscuro para el subrayado */
+    transition: width var(--transition-duration) var(--transition-easing);
+}
+
+.contact-info a:hover {
+    color: #2563eb; /* Azul más oscuro al hover */
+}
+
+.contact-info a:hover::after {
+    width: 100%;
+}
+
+
+/* --- Estilos para el Footer (Más Estético y Minimalista) --- */
+.footer {
+    background-color: #1e293b; /* Un gris muy oscuro, cercano a text-dark */
+    color: var(--bg-white); /* Texto blanco para contraste */
+    padding: 30px 0; /* Padding uniforme */
+    font-family: var(--font-family-secondary);
+    text-align: center; /* Centrar todo el contenido */
+    border-top: 3px solid var(--primary-blue); /* Línea de color en la parte superior */
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer p {
+    margin: 5px 0; /* Espaciado mínimo entre párrafos */
+    font-size: 0.85rem; /* Texto ligeramente más pequeño y legible */
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7); /* Color de texto suave */
+}
+
+.footer p a {
+    color: var(--primary-blue); /* Enlaces con el color azul primario */
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0 8px; /* Espaciado entre enlaces */
+    position: relative;
+    transition: color var(--transition-duration) var(--transition-easing), text-decoration var(--transition-duration) var(--transition-easing);
+}
+
+.footer p a:hover {
+    color: #5b9bf8; /* Un azul ligeramente más claro al hover */
+    text-decoration: underline; /* Subrayado al hover */
+}
+
+/* Media Queries para responsividad del footer y guía de admisión */
+@media (max-width: 992px) {
+    .admission-steps-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 2 columnas en tablets */
+        gap: 25px;
+    }
+    .admission-steps-list li {
+        padding: 25px 20px;
+    }
+    .admission-steps-list li .step-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 3rem;
+    }
+    .admission-steps-list li h3 {
+        font-size: 1.3rem;
+    }
+    .admission-process .section-title {
+        font-size: 2.2rem;
+    }
+    .contact-info {
+        padding: 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .admission-steps-list {
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+        gap: 20px;
+    }
+    .admission-steps-list li {
+        padding: 20px 15px;
+    }
+    .admission-steps-list li .step-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    .admission-steps-list li h3 {
+        font-size: 1.2rem;
+    }
+    .admission-process .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    .contact-info {
+        padding: 20px;
+        font-size: 0.95rem;
+        margin-top: 40px;
+    }
+    .footer {
+        padding: 20px 0;
+    }
+    .footer p {
+        font-size: 0.8rem;
+    }
+}
+.creator-info-button {
+    position: fixed;
+    bottom: 30px; /* Posición: esquina inferior izquierda */
+    left: 20px;
+    background-color: #5B2333; /* Color del botón */
+    color: var(--bg-white);
+    width: 55px; /* Tamaño del botón */
+    height: 55px;
+    border-radius: 50%; /* Forma circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem; /* Tamaño del icono */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para que "flote" */
+    z-index: 1050; /* Alto z-index, por encima del CTA si existe */
+    transition: background-color 0.3s var(--transition-easing), transform 0.3s var(--transition-easing);
+}
+
+.creator-info-button:hover {
+    background-color: #2563eb; /* Azul más oscuro al pasar el ratón */
+    transform: scale(1.08); /* Ligeramente más grande */
+}
+
+/* --- Panel de Información del Creador --- */
+.creator-info-panel {
+    position: fixed;
+    bottom: 100px; /* Arriba del botón flotante */
+    left: 30px;
+    background-color: var(--bg-white); /* Fondo blanco */
+    color: var(--text-color); /* Color de texto estándar */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    width: 320px; /* Ancho del panel */
+    max-width: 90%; /* Máximo ancho en pantallas pequeñas */
+    opacity: 0; /* Inicialmente oculto */
+    visibility: hidden; /* Inicialmente oculto */
+    transform: translateY(20px); /* Ligeramente desplazado para la animación */
+    transition: opacity 0.4s var(--transition-easing), transform 0.4s var(--transition-easing), visibility 0.4s;
+    z-index: 1040; /* Por debajo del botón pero por encima de otros elementos */
+    border: 1px solid var(--border-color); /* Borde sutil */
+}
+
+.creator-info-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Vuelve a su posición original */
+}
+
+.creator-info-panel h3 {
+    font-family: var(--font-family-primary);
+    color: var(--primary-dark); /* Color de cabecera */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+    border-bottom: 2px solid var(--accent-color); /* Línea decorativa */
+    padding-bottom: 8px;
+}
+
+.creator-info-panel p {
+    font-family: var(--font-family-secondary);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.creator-info-panel p strong {
+    color: var(--primary-dark);
+}
+
+.creator-info-panel a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.creator-info-panel a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* Estilos para enlaces de redes sociales (si usas FontAwesome o similar) */
+.creator-info-panel .social-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.creator-info-panel .social-links a {
+    /* Si usas FontAwesome, este font-family es crucial */
+    font-family: "Font Awesome 6 Brands"; /* Esto es para los iconos de marcas como GitHub y LinkedIn */
+    font-weight: 400; /* Peso de fuente para los iconos de marcas */
+    font-size: 2rem;
+    color: var(--primary-dark);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.creator-info-panel .social-links a:hover {
+    color: var(--primary-blue);
+    transform: translateY(-3px);
+}
+
+/* Botón de cerrar (X) */
+.close-panel-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-panel-button:hover {
+    color: var(--accent-color);
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    .creator-info-button {
+        bottom: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+
+    .creator-info-panel {
+        bottom: 80px;
+        left: 20px;
+        width: calc(100% - 40px); /* Ocupa casi todo el ancho */
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .creator-info-button {
+        bottom: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.8rem;
+    }
+
+    .creator-info-panel {
+        bottom: 70px;
+        left: 15px;
+        width: calc(100% - 30px);
+        padding: 15px;
+        font-size: 0.95rem;
+    }
+
+    .creator-info-panel h3 {
+        font-size: 1.4rem;
+    }
+
+    .creator-info-panel .social-links a {
+        font-size: 1.8rem;
+    }
+}
+
+/* --- Estilos para la tarjeta de Sistemas Eléctricos --- */
+.career-card.electric-systems-theme {
+    position: relative;
+    overflow: hidden; /* Para que los elementos de fondo no se salgan */
+    background-color: var(--electric-gray); /* Fondo oscuro */
+    color: var(--bg-white); /* Texto claro */
+}
+
+/* Fondo de circuito animado */
+.electric-systems-theme::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle, var(--electric-line) 1px, transparent 1px),
+        repeating-linear-gradient(90deg, var(--electric-gray) 0, var(--electric-gray) 10px, transparent 10px, transparent 20px),
+        repeating-linear-gradient(0deg, var(--electric-gray) 0, var(--electric-gray) 10px, transparent 10px, transparent 20px);
+    background-size: 
+        20px 20px, /* Tamaño de los puntos */
+        40px 40px, /* Patrón vertical */
+        40px 40px; /* Patrón horizontal */
+    background-position: 
+        0 0, 
+        calc(var(--circuit-pos-x)) calc(var(--circuit-pos-y)), 
+        calc(var(--circuit-pos-x)) calc(var(--circuit-pos-y)); /* Posición animada */
+    opacity: 0.1; /* Sutil */
+    z-index: 0;
+    animation: moveCircuitGrid 30s linear infinite; /* Animación lenta del fondo */
+    --circuit-pos-x: 0px; /* Variables CSS para el JS */
+    --circuit-pos-y: 0px;
+}
+
+@keyframes moveCircuitGrid {
+    0% { --circuit-pos-x: 0px; --circuit-pos-y: 0px; }
+    100% { --circuit-pos-x: -40px; --circuit-pos-y: -40px; } /* Se mueve suavemente */
+}
+
+/* Contenedor para los iconos eléctricos */
+.electric-icon-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex; /* Para centrar el ícono principal */
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Por encima del fondo de circuito */
+}
+
+/* Icono central de rayo */
+.electric-icon-main {
+    font-size: 6rem; /* Ícono grande */
+    color: var(--electric-yellow); /* Color principal del rayo */
+    text-shadow: 0 0 10px var(--electric-yellow), 0 0 20px var(--electric-yellow), 0 0 30px var(--electric-yellow);
+    transition: transform 0.2s ease-out;
+    animation: electricPulse 1.5s infinite alternate ease-in-out; /* Animación de pulso de brillo */
+}
+
+@keyframes electricPulse {
+    0% { 
+        transform: scale(1); 
+        filter: brightness(1);
+        text-shadow: 0 0 5px var(--electric-yellow), 0 0 10px var(--electric-yellow), 0 0 15px rgba(254, 202, 87, 0.5);
+    }
+    100% { 
+        transform: scale(1.05); 
+        filter: brightness(1.2);
+        text-shadow: 0 0 15px var(--electric-yellow), 0 0 30px var(--electric-yellow), 0 0 45px rgba(254, 202, 87, 0.8);
+    }
+}
+
+/* Pequeñas chispas o iconos de circuito flotantes */
+.spark-icon {
+    position: absolute;
+    font-size: 1.5rem;
+    color: var(--electric-blue-light); /* Color azul claro */
+    opacity: 0;
+    animation: convergeAndFadeSpark 3s linear infinite; /* Nueva animación para converger */
+    text-shadow: 0 0 5px var(--electric-blue-light);
+}
+
+/* Nueva animación para que las chispas converjan al centro */
+@keyframes convergeAndFadeSpark {
+    0% { 
+        transform: translate(var(--spark-start-x), var(--spark-start-y)) scale(0.6); 
+        opacity: 0; 
+    }
+    20% { 
+        opacity: 0.8; 
+    }
+    80% { 
+        transform: translate(0, 0) scale(1); /* Se mueven al centro (0,0 relativo al contenedor) */
+        opacity: 0.8; 
+    }
+    100% { 
+        transform: translate(0, 0) scale(1.2); 
+        opacity: 0; 
+    }
+}
+
+/* Posiciones de inicio para las chispas individuales (las esquinas) */
+/* Usaremos top, left, right, bottom con un valor absoluto y luego el transform en la animación */
+
+.spark-1 { top: 5%; left: 5%; animation-delay: 0s; --spark-start-x: -50%; --spark-start-y: -50%; }
+.spark-2 { top: 5%; right: 5%; animation-delay: 0.5s; --spark-start-x: 50%; --spark-start-y: -50%; }
+.spark-3 { bottom: 5%; left: 5%; animation-delay: 1s; --spark-start-x: -50%; --spark-start-y: 50%; }
+.spark-4 { bottom: 5%; right: 5%; animation-delay: 1.5s; --spark-start-x: 50%; --spark-start-y: 50%; }
+
+/* Más chispas para mayor cantidad y variedad */
+.spark-5 { top: 20%; left: 10%; animation-delay: 0.2s; --spark-start-x: -60%; --spark-start-y: -40%; }
+.spark-6 { top: 10%; right: 20%; animation-delay: 0.7s; --spark-start-x: 40%; --spark-start-y: -60%; }
+.spark-7 { bottom: 15%; left: 30%; animation-delay: 1.2s; --spark-start-x: -30%; --spark-start-y: 50%; }
+.spark-8 { bottom: 25%; right: 15%; animation-delay: 1.7s; --spark-start-x: 50%; --spark-start-y: 30%; }
+.spark-9 { top: 40%; left: 0%; animation-delay: 0.4s; --spark-start-x: -70%; --spark-start-y: 0%; }
+.spark-10 { bottom: 40%; right: 0%; animation-delay: 0.9s; --spark-start-x: 70%; --spark-start-y: 0%; }
+
+
+/* Asegurarse de que el contenido de la tarjeta quede por encima de las animaciones */
+.career-card.electric-systems-theme h3,
+.career-card.electric-systems-theme p,
+.career-card.electric-systems-theme .button {
+    position: relative; /* Asegura que estén por encima de los elementos con z-index 0 o 1 */
+    z-index: 2; /* Mayor que el fondo y los iconos flotantes */
+    color: var(--bg-white); /* Asegura que el texto sea blanco */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Para mejor legibilidad sobre el fondo */
+}
+
+/* Estilo para el botón dentro de esta tarjeta */
+.career-card.electric-systems-theme .button {
+    background-color: var(--primary-blue); /* Usa tu color primario para consistencia */
+    color: var(--bg-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    transition: background-color var(--transition-duration) var(--transition-easing);
+}
+
+.career-card.electric-systems-theme .button:hover {
+    background-color: #2563eb; /* Azul más oscuro al hover */
+}
+/* Variables CSS (si no las tienes definidas globalmente, añádelas al principio de tu archivo CSS) */
+:root {
+    --font-family-primary: 'Arial Black', sans-serif; /* Ejemplo */
+    --font-family-secondary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Ejemplo */
+    --bg-white: #ffffff;
+    --text-dark: #333;
+    --text-gray: #6b7280;
+    --primary-blue: #3b82f6;
+    --secondary-gray: #e5e7eb;
+    --border-radius-md: 0.5rem;
+    --box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --transition-duration: 0.3s;
+    --transition-easing: ease-in-out;
+}
+
+/* --- ANIMACIONES ADICIONALES/MODIFICADAS --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideInRight {
+    from { width: 0; opacity: 0; }
+    to { width: 60px; opacity: 1; }
+}
+
+@keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, 100% { transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+    0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+    20% { transform: scale3d(1.1, 1.1, 1.1); }
+    40% { transform: scale3d(0.9, 0.9, 0.9); }
+    60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+    80% { transform: scale3d(0.97, 0.97, 0.97); }
+    100% { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+
+/* Animación de dispersión desde el centro */
+@keyframes disperseFloat {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 0.3;
+    }
+    100% {
+        /* Dispersión a posiciones lejanas (adaptar según el tamaño de tu tarjeta) */
+        transform: translate(calc(var(--offset-x) * 1px - 50%), calc(var(--offset-y) * 1px - 50%)) scale(0.8) rotate(var(--final-rotation, 0deg));
+        opacity: 0.05; /* Se desvanecen bastante al dispersarse */
+    }
+}
+
+/* Animación para el movimiento flotante continuo (cuando no se está dispersando) */
+@keyframes floatMovement {
+    0% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translateY(-8px) translateX(4px) rotate(3deg);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.3;
+    }
+    75% {
+        transform: translateY(8px) translateX(-4px) rotate(-3deg);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.3;
+    }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- ESTILOS DE LA TARJETA (REEMPLAZAR EN TU CSS) --- */
+.career-card.design-marketing-theme {
+    width: 90%;
+    max-width: 400px; /* Un poco más grande para los objetos */
+    margin: 50px auto;
+    padding: 40px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden; /* Muy importante para que los objetos no se salgan */
+    background-color: #f7f9fc;
+    border: 1px solid #dcdcdc;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    font-family: var(--font-family-secondary);
+    color: #333;
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    animation: fadeIn 1s ease-out forwards;
+    z-index: 1;
+}
+
+/* Pseudo-elemento para el borde animado (como un contorno de resplandor) */
+.career-card.design-marketing-theme::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, #007bff, #28a745, #ff6347, #007bff);
+    background-size: 400% 400%;
+    border-radius: 20px;
+    filter: blur(8px);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: gradientShift 15s ease infinite;
+}
+
+.career-card.design-marketing-theme:hover::before {
+    opacity: 0.7;
+}
+
+/* Fondo con patrón de cuaderno (pseudo-elemento) */
+.career-card.design-marketing-theme::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        #e0e8f0,
+        #e0e8f0 1px,
+        transparent 1px,
+        transparent 25px
+    );
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+/* Efecto hover para el "career-card" */
+.career-card.design-marketing-theme:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Estilos para el encabezado (h3) dentro del "career-card" */
+.career-card.design-marketing-theme h3 {
+    font-size: 2.2em;
+    color: #0056b3;
+    margin-bottom: 28px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 18px;
+    z-index: 2;
+    animation: pulse 2s infinite ease-in-out 1.2s;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Línea punteada superior para el h3 (pseudo-elemento) */
+.career-card.design-marketing-theme h3::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 3px;
+    background: repeating-linear-gradient(
+        to right,
+        #a7d9ff 0%,
+        #a7d9ff 7px,
+        transparent 7px,
+        transparent 14px
+    );
+    opacity: 0.8;
+}
+
+/* Subrayado decorativo para el h3 (pseudo-elemento) */
+.career-card.design-marketing-theme h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 5px;
+    background-color: #007bff;
+    border-radius: 3px;
+    transition: width 0.5s ease-out;
+}
+
+/* Animación del subrayado al pasar el ratón por la tarjeta */
+.career-card.design-marketing-theme:hover h3::after {
+    width: 80px;
+}
+
+
+/* Estilos para el párrafo de descripción (p) */
+.career-card.design-marketing-theme p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+    margin-bottom: 35px;
+    z-index: 2;
+    position: relative;
+    padding: 0 5px;
+}
+
+/* Estilo y animación para la primera letra del párrafo */
+.career-card.design-marketing-theme p::first-letter {
+    font-size: 2.5em;
+    color: #ff6347;
+    font-weight: bold;
+    margin-right: 8px;
+    float: left;
+    line-height: 1;
+    animation: bounceIn 1.2s ease-out forwards 1.5s;
+    text-shadow: 1px 1px 2px rgba(255, 99, 71, 0.2);
+}
+
+/* --- OBJETOS FLOTANTES GENERADOS POR JAVASCRIPT --- */
+.floating-object {
+    position: absolute;
+    border-radius: 50%; /* Siempre círculos */
+    filter: blur(4px); /* Más borroso para un efecto más etéreo */
+    z-index: 1; /* Detrás del texto pero delante del fondo principal */
+    pointer-events: none; /* No interactuable */
+    opacity: 0; /* Empiezan invisibles para la animación de dispersión */
+
+    /* Animation: La animación de dispersión se aplica aquí */
+    animation-name: disperseFloat;
+    animation-iteration-count: 1; /* Solo se dispersa una vez al inicio */
+    animation-fill-mode: forwards; /* Mantiene el estado final de la animación */
+    animation-timing-function: ease-out; /* Una dispersión más rápida al principio */
+}
+
+/* Efecto de dispersión: Al pasar el ratón por la tarjeta, los objetos vuelven a su posición inicial */
+.career-card.design-marketing-theme:hover .floating-object {
+    animation-name: floatMovement; /* Vuelve a la animación de flotación normal */
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    opacity: 0.3; /* Se hacen un poco más visibles */
+    /* Las duraciones y delays se mantienen por las propiedades CSS personalizadas si las usaras */
+    /* De lo contrario, se usarían las definidas en el JS */
+}
+
+/* Estilos para el botón (a.button) */
+.career-card.design-marketing-theme .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 18px 35px;
+    background-color: #28a745;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.15em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    border: 3px solid #28a745;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    transition: background-color 0.5s ease, border-color 0.5s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Efecto de degradado deslizante en el botón al hover */
+.career-card.design-marketing-theme .button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.7s ease;
+    z-index: 2;
+}
+
+.career-card.design-marketing-theme .button:hover::before {
+    left: 100%;
+}
+
+/* Icono de flecha en el botón (pseudo-elemento) */
+.career-card.design-marketing-theme .button::after {
+    content: '→';
+    font-size: 1.3em;
+    margin-left: 12px;
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Muestra la flecha al hacer hover en el botón */
+.career-card.design-marketing-theme .button:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* Efecto hover para el botón */
+.career-card.design-marketing-theme .button:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto active (cuando se hace clic) para el botón */
+.career-card.design-marketing-theme .button:active {
+    background-color: #1c7430;
+    border-color: #1c7430;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Media queries para responsividad (ajuste a diferentes tamaños de pantalla) */
+@media (max-width: 768px) {
+    .career-card.design-marketing-theme {
+        width: 95%;
+        margin: 40px auto;
+        padding: 35px;
+    }
+
+    .career-card.design-marketing-theme h3 {
+        font-size: 2em;
+        margin-bottom: 22px;
+    }
+
+    .career-card.design-marketing-theme p {
+        font-size: 1.1em;
+        margin-bottom: 30px;
+    }
+
+    .career-card.design-marketing-theme p::first-letter {
+        font-size: 2.2em;
+    }
+
+    .career-card.design-marketing-theme .button {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .career-card.design-marketing-theme {
+        margin: 30px auto;
+        padding: 30px;
+    }
+
+    .career-card.design-marketing-theme h3 {
+        font-size: 1.8em;
+        margin-bottom: 18px;
+    }
+
+    .career-card.design-marketing-theme p {
+        font-size: 1.05em;
+        margin-bottom: 25px;
+    }
+
+    .career-card.design-marketing-theme p::first-letter {
+        font-size: 1.8em;
+    }
+
+    .career-card.design-marketing-theme .button {
+        font-size: 1em;
+        padding: 14px 28px;
+    }
+}

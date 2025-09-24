@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure CSS Parallax Scroll</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden; /* Evita el scroll horizontal */
+        }
+
+        /* Contenedor principal del parallax */
+        .parallax-wrapper {
+            height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+            overflow-y: auto; /* Permite el scroll vertical dentro del wrapper */
+            overflow-x: hidden;
+            perspective: 1px; /* Clave para el efecto parallax */
+            perspective-origin: 0% 0%; /* Punto de origen de la perspectiva */
+            scroll-behavior: smooth; /* Para un scroll más suave */
+        }
+
+        /* Grupo de elementos parallax */
+        .parallax-group {
+            position: relative;
+            height: 100vh; /* Cada grupo ocupa la altura de la ventana */
+            transform-style: preserve-3d; /* Los hijos se posicionan en 3D */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Capas individuales dentro de un grupo parallax */
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Capa de fondo - se mueve más lento */
+        .parallax-layer.base {
+            transform: translateZ(0); /* Z=0 no tiene movimiento de profundidad */
+            background-color: #333; /* Color de fondo por defecto */
+        }
+
+        /* Capa intermedia - se mueve un poco más rápido */
+        .parallax-layer.back {
+            transform: translateZ(-1px) scale(2); /* Se aleja y se escala para llenar el espacio */
+            /* La escala compensa el alejamiento para que el elemento siga cubriendo el viewport */
+        }
+
+        /* Capa de contenido - se mueve a velocidad normal */
+        .parallax-layer.foreground {
+            transform: translateZ(0.5px) scale(0.5); /* Se acerca y se escala */
+            /* Esta capa es opcional, puede usarse para elementos que "flotan" */
+        }
+
+        /* Estilos específicos para cada sección/grupo */
+        .group-1 .background-img {
+            background-image: url('https://picsum.photos/id/1040/1920/1080'); /* Imagen de fondo para el grupo 1 */
+        }
+        .group-2 .background-img {
+            background-image: url('https://picsum.photos/id/1025/1920/1080'); /* Imagen de fondo para el grupo 2 */
+        }
+        .group-3 .background-img {
+            background-image: url('https://picsum.photos/id/1069/1920/1080'); /* Imagen de fondo para el grupo 3 */
+        }
+        .group-4 .background-img {
+            background-image: url('https://picsum.photos/id/1084/1920/1080'); /* Imagen de fondo para el grupo 4 */
+        }
+
+        /* Contenido que no se mueve con parallax pero está en el flujo normal */
+        .content {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 50px;
+            font-size: 1.2em;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .content p {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Estilos de las capas para las imágenes de fondo */
+        .background-img {
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="parallax-wrapper">
+        <div class="parallax-group group-1">
+            <div class="parallax-layer base background-img"></div>
+            <div class="parallax-layer foreground"><h1>¡Bienvenido!</h1></div>
+        </div>
+
+        <div class="content">
+            <h2>Acerca de Nosotros</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Aquí puedes agregar cualquier contenido que desees que se desplace normalmente, sin el efecto parallax. Esto ayuda a separar las secciones visuales y proporcionar información detallada.</p>
+        </div>
+
+        <div class="parallax-group group-2">
+            <div class="parallax-layer base background-img"></div>
+            <div class="parallax-layer foreground"><h2>Explora la Naturaleza</h2></div>
+        </div>
+
+        <div class="content">
+            <h2>Nuestros Servicios</h2>
+            <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Ofrecemos una variedad de servicios personalizados para satisfacer tus necesidades. Desde el diseño web hasta soluciones de marketing digital, estamos aquí para ayudarte a alcanzar tus objetivos.</p>
+        </div>
+
+        <div class="parallax-group group-3">
+            <div class="parallax-layer base background-img"></div>
+            <div class="parallax-layer foreground"><h2>Aventuras Inolvidables</h2></div>
+        </div>
+
+        <div class="content">
+            <h2>Contáctanos</h2>
+            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>No dudes en ponerte en contacto con nosotros si tienes alguna pregunta o necesitas más información. ¡Estamos listos para escucharte!</p>
+        </div>
+
+        <div class="parallax-group group-4">
+            <div class="parallax-layer base background-img"></div>
+            <div class="parallax-layer foreground"><h2>¡Gracias por Visitarnos!</h2></div>
+        </div>
+    </div>
+
+    <script>
+        // No se requiere JavaScript complejo para el efecto Pure CSS Parallax.
+        // El JavaScript aquí es solo un ejemplo de cómo podrías agregar interactividad si lo necesitaras,
+        // aunque para el parallax en sí, todo está manejado por CSS.
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('La página ha cargado completamente.');
+            // Aquí podrías añadir cualquier JS adicional que desees para animaciones o funcionalidad no relacionada con el parallax.
+            // Por ejemplo, un botón de "volver arriba":
+            /*
+            const wrapper = document.querySelector('.parallax-wrapper');
+            const btnScrollTop = document.createElement('button');
+            btnScrollTop.textContent = 'Volver Arriba';
+            btnScrollTop.style.position = 'fixed';
+            btnScrollTop.style.bottom = '20px';
+            btnScrollTop.style.right = '20px';
+            btnScrollTop.style.padding = '10px 15px';
+            btnScrollTop.style.backgroundColor = '#007bff';
+            btnScrollTop.style.color = 'white';
+            btnScrollTop.style.border = 'none';
+            btnScrollTop.style.borderRadius = '5px';
+            btnScrollTop.style.cursor = 'pointer';
+            btnScrollTop.style.display = 'none'; // Oculto por defecto
+            document.body.appendChild(btnScrollTop);
+
+            wrapper.addEventListener('scroll', function() {
+                if (wrapper.scrollTop > 300) {
+                    btnScrollTop.style.display = 'block';
+                } else {
+                    btnScrollTop.style.display = 'none';
+                }
+            });
+
+            btnScrollTop.addEventListener('click', function() {
+                wrapper.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            */
+        });
+    </script>
+
+</body>
+</html>

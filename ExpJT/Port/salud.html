@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Pasión por la Salud</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../grup/css/salud.css">
+</head>
+<body>
+    <header class="hero-section">
+        <div class="header-content">
+            <div class="logo">Tu Logo</div>
+            <nav>
+                <ul>
+                    <li><button class="contact-button">Contacto</button></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="hero-text">
+            <h1>Descubre el Mundo de la Salud</h1>
+            <p>Explorando la anatomía, patologías y el bienestar fundamental.</p>
+            <a href="../admisiones.html" class="hero-button">Regresar</a>
+        </div>
+        <div class="hero-background-overlay"></div>
+    </header>
+
+    <main>
+        <section class="topics-overview">
+            <h2>Temas Clave en Salud</h2>
+            <div class="topic-grid">
+                <div class="topic-card" id="anatomia-card">
+                    <img src="../grup/img/anatore.png" alt="Icono de Anatomía" class="topic-image">
+                    <h3>Anatomía</h3>
+                    <p>La base para entender el cuerpo humano.</p>
+                    <a href="../Modulos/anat.html" class="ver-mas">Ver</a>
+                </div>
+                <div class="topic-card" id="atencion-primaria-card">
+                    <img src="../grup/img/primary.png" alt="Icono de Atención Primaria" class="topic-image">
+                    <h3>Atención Primaria</h3>
+                    <p>Pilares del cuidado y prevención de la salud.</p>
+                
+                    <a href="../Modulos/aten.html" class="ver-mas">Ver</a>
+               </div>
+                <div class="topic-card" id="patologias-card">
+                    <img src="../grup/img/patologia.png" alt="Icono de Patologías" class="topic-image">
+                    <h3>Patologías</h3>
+                    <p>Estudio de enfermedades y sus tratamientos.</p>
+                    <a href="../Modulos/patl.html" class="ver-mas">Ver</a>
+                </div>
+                <div class="topic-card" id="sexualidad-card">
+                    <img src="../grup/img/sexualidad.png" alt="Icono de Sexualidad y Afectividad" class="topic-image">
+                    <h3>Sexualidad y Afectividad</h3>
+                    <p>Un enfoque integral para el bienestar.</p>
+                    <button class="ver-mas" data-target="sexualidad-modal">Ver</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Tu Pasión por la Salud. Todos los derechos reservados.</p>
+    </footer>
+
+    <div id="anatomia-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Anatomía: El Mapa Detallado del Cuerpo Humano</h3>
+            <p>La anatomía es la base para entender el cuerpo humano, explorando cómo cada estructura, órgano y sistema se une para formar un organismo complejo. Incluye el estudio de sistemas como el esquelético, muscular, nervioso, circulatorio, respiratorio, digestivo, endocrino, urinario, reproductor e inmunitario, además de la microanatomía y la anatomía regional.</p>
+        </div>
+    </div>
+
+    <div id="atencion-primaria-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Atención Primaria de Salud: Cuidando el Bienestar Esencial</h3>
+            <p>La atención primaria de salud es la primera línea de defensa, enfocada en la prevención y promoción de la salud. Incluye el monitoreo de signos vitales, vacunación, control regular de la presión y glucosa, y consejos sobre nutrición y ejercicio. Aborda la salud física, mental y social, empoderando a las comunidades y coordinando con otros niveles de atención médica.</p>
+        </div>
+    </div>
+
+    <div id="patologias-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Patologías: Entendiendo la Enfermedad y su Manejo</h3>
+            <p>El estudio de las patologías abarca cómo surge una enfermedad, su agente causal, signos y síntomas, complicaciones y tratamientos. Es fundamental para el diagnóstico y manejo efectivo de condiciones como infecciones o enfermedades crónicas, considerando factores de riesgo, prevención y epidemiología para restaurar el equilibrio corporal.</p>
+        </div>
+    </div>
+
+    <div id="sexualidad-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Sexualidad y Afectividad: Un Enfoque Integral en Atención Primaria</h3>
+            <p>Este módulo aborda la atención primaria en sexualidad y afectividad desde una perspectiva integral. Cubre la educación en salud sexual y reproductiva, prevención de ITS, apoyo a la diversidad y promoción de relaciones saludables y respetuosas. Se enfoca en crear un ambiente seguro para discutir estos temas vitales, enfatizando el consentimiento y la comunicación efectiva.</p>
+        </div>
+    </div>
+
+    <script src="../grup/js/salud.js"></script>
+</body>
+</html>

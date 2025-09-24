@@ -1,0 +1,836 @@
+/* Variables de Colores */
+:root {
+    --color-light-ice: #E0E0E6; /* Blanco Plateado/Hielo */
+    --color-dark-metallic: #4A4A52; /* Gris Metálico Oscuro */
+    --color-medium-cold-grey: #9AA0A3; /* Gris Medio Frío */
+    --color-text-dark: #333;
+    --color-text-light: #fff;
+    --color-accent: #6C5CE7; /* Un morado vibrante para llamadas a la acción, que contraste */
+}
+
+/* --- Bloquear la barra de navegación horizontal y el botón de menú --- */
+/* Por defecto, ocultar la navegación principal */
+.main-nav {
+    display: none !important; /* !important asegura que esta regla tenga prioridad */
+    visibility: hidden !important; /* Asegura que no sea visible de ninguna forma */
+}
+
+/* También ocultar el botón de menú si ya no lo necesitas */
+.menu-toggle {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    overflow-x: hidden; /* Previene el scroll horizontal no deseado */
+
+    /* Fondo con imagen y capa transparente */
+    background: url('../img/arbol.jpg') no-repeat center center fixed; /* Ruta a tu imagen de fondo */
+    background-size: cover; /* Cubre todo el body */
+    position: relative; /* Necesario para el overlay */
+    z-index: 0; /* Asegura que el contenido esté por encima del fondo y el overlay */
+}
+
+/* Capa blanca transparente sobre la imagen de fondo */
+body::before {
+    content: '';
+    position: fixed; /* Fixed para cubrir todo el viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85); /* Blanco con 85% de opacidad */
+    z-index: -1; /* Detrás del contenido pero encima de la imagen de fondo */
+}
+
+.header-container,
+.hero-content, /* Este es el flexbox interno ahora */
+.carousel-messages-wrapper, /* Este contendrá los mensajes y dots */
+.main-content-wrapper,
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-dark-metallic);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+h1, h2, h3 {
+    color: var(--color-dark-metallic);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 70px; /* Aumentado el margen superior */
+    margin-bottom: 50px; /* Aumentado el margen inferior */
+    position: relative;
+    opacity: 0;
+    transform: translateY(-20px);
+    /* Las animaciones para h2 se aplican via JS en las secciones activas */
+}
+
+h2::after {
+    content: '';
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-medium-cold-grey);
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    opacity: 0;
+    /* Las animaciones para h2::after se aplican via JS en las secciones activas */
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulse 1.5s ease-in-out infinite alternate; /* Animación sutil */
+}
+
+.btn-primary {
+    background-color: var(--color-dark-metallic);
+    color: var(--color-text-light);
+    margin-right: 15px;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-medium-cold-grey);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--color-dark-metallic);
+    color: var(--color-dark-metallic);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-dark-metallic);
+    color: var(--color-text-light);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.main-header {
+    background-color: var(--color-light-ice);
+    padding: 15px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: var(--color-dark-metallic);
+}
+
+.logo img {
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 3px;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.logo-text span:first-child {
+    font-size: 0.8em;
+    font-weight: 400;
+    color: var(--color-medium-cold-grey);
+}
+
+.logo-text span:last-child {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--color-dark-metallic);
+}
+
+/* Estos están ocultos por las reglas al inicio del archivo */
+/* .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    color: var(--color-dark-metallic);
+    cursor: pointer;
+} */
+
+/* Estos están ocultos por las reglas al inicio del archivo */
+/* .main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+} */
+
+.main-nav ul li {
+    margin-left: 25px;
+}
+
+.main-nav ul li a {
+    color: var(--color-dark-metallic);
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-dark-metallic);
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after,
+.main-nav ul li a.active::after {
+    width: 100%;
+}
+.main-nav ul li a.active {
+    color: var(--color-accent);
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: transparent; /* Ahora el fondo lo maneja el body */
+    padding: 80px 0 60px;
+    display: flex;
+    flex-direction: column; /* Apila el contenido principal y los mensajes del carrusel */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+    z-index: 1; /* Asegura que el contenido de hero esté sobre el overlay */
+}
+
+.hero-content-wrapper { /* Este es el contenedor que contendrá hero-content y hero-illustration */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    text-align: left;
+    z-index: 1;
+}
+
+.hero-text {
+    flex: 2;
+    min-width: 300px;
+    animation: fadeInSlideUp 1s ease-out forwards;
+}
+
+.hero-text h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    color: var(--color-dark-metallic);
+}
+
+.hero-text p {
+    font-size: 1.2em;
+    color: var(--color-text-dark);
+    margin-bottom: 30px;
+}
+
+.hero-cta-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.hero-illustration {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 280px;
+    animation: fadeInZoomIn 1.2s ease-out forwards;
+}
+
+.hero-illustration img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08));
+    opacity: 0.9;
+}
+
+/* Wrapper para Mensajes de Carrusel y Dots */
+.carousel-messages-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    text-align: center;
+    margin-top: 40px; /* Espacio debajo del hero-content */
+    z-index: 1;
+}
+
+.carousel-messages {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--color-dark-metallic);
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item {
+    display: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.8s ease-out;
+    max-width: 80%;
+    box-sizing: border-box;
+}
+
+.carousel-item.active {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 8px;
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    background-color: var(--color-medium-cold-grey);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.dot.active {
+    background-color: var(--color-dark-metallic);
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* Quick Access Sidebar (AJUSTADO Y CON ANIMACIONES) */
+.quick-access-sidebar {
+    position: fixed; /* Fijo en la pantalla */
+    top: 20%; /* Aparece casi al inicio, ajusta este valor si necesitas más arriba/abajo */
+    left: 20px; /* Posicionado a la izquierda */
+    width: 40px; /* Tamaño reducido (mitad de 70px) */
+    background-color: var(--color-dark-metallic); /* Fondo metálico oscuro */
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para resaltar */
+    padding: 10px 0; /* Menos espacio vacío arriba/abajo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Espacio entre los iconos */
+    z-index: 1200; /* Asegura que esté encima de todo */
+    transition: width 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; /* Añadida transición para el transform */
+}
+
+.quick-access-sidebar:hover {
+    width: 55px; /* Ligeramente más ancho al pasar el ratón */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px); /* Ligeramente elevado al pasar el ratón */
+}
+
+.sidebar-item {
+    display: flex;
+    justify-content: center; /* Centrar el icono */
+    align-items: center;
+    width: 100%;
+    padding: 5px 0; /* Reducido para menos espacio vacío */
+    color: var(--color-light-ice); /* Color de icono por defecto */
+    font-size: 1.5em; /* Ajustado para Boxicons */
+    transition: background-color 0.2s ease, color 0.3s ease, transform 0.2s ease;
+    border-radius: 8px;
+    text-decoration: none; /* Asegurar que no tenga subrayado */
+    opacity: 0.8; /* Ligeramente transparente por defecto */
+    animation: slideInLeft 0.5s ease-out forwards var(--animation-delay, 0s); /* Animación de entrada */
+}
+
+.sidebar-item:hover {
+    background-color: rgba(var(--color-light-ice), 0.1); /* Fondo sutil al pasar el ratón */
+    color: var(--color-accent); /* Color acento al pasar el ratón */
+    opacity: 1;
+    transform: scale(1.1) translateY(-2px); /* Más pronunciado al hacer hover */
+}
+
+.sidebar-item.active {
+    background-color: var(--color-accent); /* Fondo de acento cuando está activo */
+    color: var(--color-text-light); /* Color blanco cuando activo */
+    transform: scale(1.15); /* Un poco más grande cuando activo */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+}
+
+.icon-circle {
+    /* Ya no es necesario un círculo explícito, el padding del sidebar-item y el tamaño del icono lo definen */
+    display: flex; /* Asegura que el icono esté centrado */
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Toma el ancho del sidebar-item */
+    height: 40px; /* Ajusta la altura si los iconos necesitan más espacio vertical */
+    font-size: inherit; /* Hereda el tamaño del sidebar-item */
+    color: inherit; /* Hereda el color del sidebar-item */
+}
+
+/* Main Content Wrapper (Ajustado para la barra lateral fija) */
+.main-content-wrapper {
+    margin-left: 100px; /* Espacio para la barra lateral (40px de ancho + margen) */
+    padding-bottom: 60px;
+    min-height: 80vh;
+    padding-left: 20px; /* Pequeño padding para el contenido */
+}
+
+/* Content Sections (reducido el padding superior) */
+.content-section {
+    padding: 60px 0; /* Padding suficiente para separar secciones */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.content-section.fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content-section.fade-in.active h2 {
+    animation: fadeInSlideDown 0.8s ease-out forwards 0.3s;
+}
+
+.content-section.fade-in.active h2::after {
+    animation: expandLine 0.6s ease-out forwards 0.6s;
+}
+
+.content-section:nth-of-type(odd) {
+    background-color: rgba(var(--color-dark-metallic), 0.03); /* Mantener fondo sutil para contraste */
+}
+
+.subsection {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: var(--color-light-ice);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subsection:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.subsection h3 {
+    color: var(--color-dark-metallic);
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-medium-cold-grey);
+    padding-bottom: 10px;
+}
+
+.subsection ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.subsection ul li {
+    background-color: rgba(var(--color-medium-cold-grey), 0.05);
+    margin-bottom: 8px;
+    padding: 12px 15px;
+    border-left: 4px solid var(--color-dark-metallic);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.subsection ul li:hover {
+    background-color: rgba(var(--color-dark-metallic), 0.07);
+}
+
+.subsection ul li strong {
+    color: var(--color-dark-metallic);
+}
+
+/* Testimonials */
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.testimonial-item {
+    background-color: var(--color-light-ice);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-item p {
+    font-size: 1.05em;
+    font-style: italic;
+    color: var(--color-text-dark);
+    margin-bottom: 15px;
+}
+
+.testimonial-item span {
+    font-weight: 600;
+    color: var(--color-dark-metallic);
+    font-size: 0.9em;
+}
+
+/* Footer Styles */
+.main-footer {
+    background-color: var(--color-dark-metallic);
+    color: var(--color-light-ice);
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-container p {
+    margin: 0;
+    font-size: 0.85em;
+    color: var(--color-medium-cold-grey);
+}
+
+.social-links a {
+    color: var(--color-light-ice);
+    font-size: 1.8em; /* Ajustado para Boxicons */
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--color-medium-cold-grey);
+}
+
+/* Animations */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInZoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* New Animations for H2 and Sidebar Items */
+@keyframes fadeInSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes expandLine {
+    from {
+        transform: translateX(-50%) scaleX(0);
+        opacity: 0.5;
+    }
+    to {
+        transform: translateX(-50%) scaleX(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 0.8;
+    }
+}
+
+
+@media (max-width: 992px) {
+    /* Estilos del menú desplegable, pero recuerda que display: none !important; lo oculta por completo */
+    .main-nav {
+        position: absolute;
+        top: 65px; /* Altura del header */
+        left: 0;
+        width: 100%;
+        background-color: var(--color-light-ice);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        display: none; /* Oculto por defecto, pero !important lo anula */
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        z-index: 999;
+    }
+
+    .main-nav.active {
+        display: flex; /* Muestra el menú cuando está activo, pero !important lo anula */
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav ul li {
+        margin: 10px 0;
+    }
+
+    /* .menu-toggle { display: block; } */ /* Esto también está anulado por !important */
+
+    .hero-content-wrapper { /* En móvil, también se apila */
+        flex-direction: column;
+        text-align: center;
+        padding-top: 40px;
+    }
+    .hero-text {
+        order: 2;
+    }
+    .hero-illustration {
+        order: 1;
+        margin-bottom: 20px;
+    }
+    .hero-cta-buttons {
+        justify-content: center;
+    }
+
+    /* Barra lateral en móvil - mantiene posición fija pero se ajusta el tamaño y el top */
+    .quick-access-sidebar {
+        top: 10px; /* Más cerca del top en móvil */
+        left: 10px;
+        width: 35px; /* Ligeramente más pequeña */
+        padding: 8px 0;
+        gap: 6px;
+    }
+    .quick-access-sidebar:hover {
+        width: 45px;
+    }
+    .icon-circle {
+        width: 100%; /* Se adapta al width del sidebar */
+        height: 35px; /* Ajustado para iconos más pequeños */
+        font-size: 1.3em; /* Ajustado para Boxicons */
+    }
+    .sidebar-item.active {
+        transform: scale(1.1);
+    }
+
+    .main-content-wrapper {
+        margin-left: 80px; /* Ajuste para el nuevo ancho de la barra lateral en móvil */
+        padding: 20px;
+        padding-left: 20px; /* Ajuste de padding para el contenido */
+    }
+    .content-section {
+        padding: 40px 0;
+    }
+    h1 {
+        font-size: 2.8em;
+    }
+    h2 {
+        font-size: 2em;
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    .carousel-messages-wrapper {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.5em;
+    }
+    .hero-text p {
+        font-size: 1.1em;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    /* Más ajustes para la barra lateral en tablets/móviles grandes */
+    .quick-access-sidebar {
+        width: 30px;
+        top: 5px;
+        left: 5px;
+        padding: 5px 0;
+        gap: 5px;
+    }
+    .quick-access-sidebar:hover {
+        width: 40px;
+    }
+    .icon-circle {
+        height: 30px;
+        font-size: 1.2em; /* Ajustado para Boxicons */
+    }
+    .main-content-wrapper {
+        margin-left: 60px; /* Ajuste de margen */
+        padding-left: 15px;
+    }
+    .social-links a {
+        font-size: 1.6em; /* Ajustado para Boxicons */
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text span:first-child {
+        font-size: 0.7em;
+    }
+    .logo-text span:last-child {
+        font-size: 0.9em;
+    }
+    .logo img {
+        height: 28px;
+    }
+    .hero-text h1 {
+        font-size: 2em;
+    }
+    .hero-cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn {
+        width: 100%;
+    }
+    /* Ajustes para móviles pequeños */
+    .quick-access-sidebar {
+        width: 25px;
+        top: 200px;
+        left: 2px;
+        padding: 3px 0;
+        gap: 3px;
+    }
+    .quick-access-sidebar:hover {
+        width: 35px;
+    }
+    .icon-circle {
+        height: 25px;
+        font-size: 1em; /* Ajustado para Boxicons */
+    }
+    .main-content-wrapper {
+        margin-left: 50px; /* Ajuste final de margen */
+        padding: 10px;
+        padding-left: 10px;
+    }
+    h2 {
+        font-size: 1.8em;
+    }
+    .testimonial-item {
+        padding: 20px;
+    }
+    .social-links a {
+        font-size: 1.4em; /* Ajustado para Boxicons */
+    }
+}

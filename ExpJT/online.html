@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Nacional de Antiguo Cuscatlán</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Clase para la animación de aparición */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-[#F4F0E4] text-[#333333]">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-[#722F37] hover:text-[#A0525C] transition duration-300">
+                <span class="block">Instituto Nacional</span>
+                <span class="text-sm font-normal text-gray-500">Antiguo Cuscatlán</span>
+            </a>
+            <div class="space-x-4 md:space-x-8 hidden md:flex">
+                <a href="#inicio" class="text-gray-600 hover:text-[#722F37] transition duration-300">Inicio</a>
+                <a href="#carreras" class="text-gray-600 hover:text-[#722F37] transition duration-300">Carreras</a>
+            </div>
+            <a href="#carreras" class="bg-[#722F37] hover:bg-[#A0525C] text-white font-bold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105 hidden md:block">
+                Inscríbete
+            </a>
+            <button id="menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4">
+            <a href="index.html" class="block text-gray-600 hover:bg-gray-100 px-4 py-2 transition duration-300">Inicio</a>
+            <a href="admisiones.html" class="block text-gray-600 hover:bg-gray-100 px-4 py-2 transition duration-300">Carreras</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio" class="relative bg-gradient-to-r from-[#722F37] to-[#A0525C] text-white py-20 md:py-32 overflow-hidden rounded-b-3xl">
+            <div class="container mx-auto px-4 text-center relative z-10 fade-in">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+                    Clases Flexibles para Adultos
+                </h1>
+                <p class="text-lg sm:text-xl lg:text-2xl mb-8 max-w-3xl mx-auto">
+                    Aprende a tu propio ritmo con nuestra modalidad híbrida: clases en línea y un día presencial para tus actividades.
+                </p>
+                <a href="#carreras" class="bg-white text-[#722F37] font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105">
+                    ¡Inscríbete Ahora!
+                </a>
+            </div>
+
+        </section>
+
+        <!-- Carreras Section -->
+        <section id="carreras" class="container mx-auto px-4 py-16">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center text-[#722F37] mb-12 fade-in">Nuestras Carreras de Aprendizaje</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Carrera 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300 fade-in">
+                    <img src="https://placehold.co/600x400/F4F0E4/722F37?text=Desarrollo+de+Software" alt="Técnico en Desarrollo de Software" class="rounded-xl mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Técnico en Desarrollo de Software</h3>
+                    <p class="text-gray-600 mb-4">
+                        Aprende a crear aplicaciones y sistemas informáticos para el mundo digital.
+                    </p>
+                    <p class="text-sm font-semibold text-gray-500 mb-4">Modalidad: 90% Online, 10% Presencial</p>
+                    <a href="#" class="inline-block bg-[#722F37] text-white font-bold py-2 px-6 rounded-full hover:bg-[#A0525C] transition duration-300">
+                        Ver
+                    </a>
+                </div>
+                <!-- Carrera 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300 fade-in">
+                    <img src="https://placehold.co/600x400/F4F0E4/722F37?text=Salud" alt="Técnico en Salud" class="rounded-xl mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Técnico en Salud</h3>
+                    <p class="text-gray-600 mb-4">
+                        Formación especializada para apoyar en el sector de la salud y el bienestar.
+                    </p>
+                    <p class="text-sm font-semibold text-gray-500 mb-4">Modalidad: 90% Online, 10% Presencial</p>
+                    <a href="#" class="inline-block bg-[#722F37] text-white font-bold py-2 px-6 rounded-full hover:bg-[#A0525C] transition duration-300">
+                        Ver
+                    </a>
+                </div>
+                <!-- Carrera 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300 fade-in">
+                    <img src="https://placehold.co/600x400/F4F0E4/722F37?text=Administracion+Contable" alt="Técnico en Administración Contable" class="rounded-xl mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Técnico en Administración Contable</h3>
+                    <p class="text-gray-600 mb-4">
+                        Domina los principios de la contabilidad y gestión administrativa.
+                    </p>
+                    <p class="text-sm font-semibold text-gray-500 mb-4">Modalidad: 90% Online, 10% Presencial</p>
+                    <a href="#" class="inline-block bg-[#722F37] text-white font-bold py-2 px-6 rounded-full hover:bg-[#A0525C] transition duration-300">
+                        Ver
+                    </a>
+                </div>
+                <!-- Carrera 4 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300 fade-in">
+                    <img src="https://placehold.co/600x400/F4F0E4/722F37?text=Sistemas+Electricos" alt="Técnico en Sistemas Eléctricos" class="rounded-xl mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Técnico en Sistemas Eléctricos</h3>
+                    <p class="text-gray-600 mb-4">
+                        Conviértete en un experto en la instalación y mantenimiento de sistemas eléctricos.
+                    </p>
+                    <p class="text-sm font-semibold text-gray-500 mb-4">Modalidad: 90% Online, 10% Presencial</p>
+                    <a href="#" class="inline-block bg-[#722F37] text-white font-bold py-2 px-6 rounded-full hover:bg-[#A0525C] transition duration-300">
+                        Ver
+                    </a>
+                </div>
+                <!-- Carrera 5 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300 fade-in">
+                    <img src="https://placehold.co/600x400/F4F0E4/722F37?text=Bachillerato+General" alt="Bachillerato General" class="rounded-xl mb-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Bachillerato General</h3>
+                    <p class="text-gray-600 mb-4">
+                        Prepara tu camino hacia la universidad con un bachillerato completo y flexible.
+                    </p>
+                    <p class="text-sm font-semibold text-gray-500 mb-4">Modalidad: 90% Online, 10% Presencial</p>
+                    <a href="#" class="inline-block bg-[#722F37] text-white font-bold py-2 px-6 rounded-full hover:bg-[#A0525C] transition duration-300">
+                        Ver
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="bg-[#F4F0E4] py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center text-[#722F37] mb-12 fade-in">Preguntas Frecuentes</h2>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <!-- FAQ 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg fade-in">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-lg text-gray-900">¿Qué día debo ir al instituto?</h4>
+                            <span class="text-[#722F37]">+</span>
+                        </div>
+                        <p class="text-gray-600 mt-2 hidden">
+                            Debes asistir un día a la semana. El día específico será asignado al momento de tu inscripción, dependiendo del curso y tu disponibilidad.
+                        </p>
+                    </div>
+                    <!-- FAQ 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg fade-in">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-lg text-gray-900">¿Qué necesito para tomar clases en línea?</h4>
+                            <span class="text-[#722F37]">+</span>
+                        </div>
+                        <p class="text-gray-600 mt-2 hidden">
+                            Solo necesitas una computadora o tablet con conexión a internet estable. Te proporcionaremos todas las herramientas de software necesarias.
+                        </p>
+                    </div>
+                    <!-- FAQ 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg fade-in">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-lg text-gray-900">¿Puedo inscribirme si soy menor de 18 años?</h4>
+                            <span class="text-[#722F37]">+</span>
+                        </div>
+                        <p class="text-gray-600 mt-2 hidden">
+                            Nuestros programas están diseñados exclusivamente para adultos mayores de 18 años.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#333333] text-gray-400 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Instituto Nacional de Antiguo Cuscatlán. Todos los derechos reservados.</p>
+            <p class="text-sm mt-2">Hecho con ❤️ para estudiantes modernos.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript para el menú móvil y animaciones -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Lógica para mostrar las respuestas de las FAQ
+            const faqItems = document.querySelectorAll('#faq .p-6');
+            faqItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const answer = item.querySelector('p');
+                    const icon = item.querySelector('span');
+                    if (answer.classList.contains('hidden')) {
+                        document.querySelectorAll('#faq .p-6 p').forEach(p => p.classList.add('hidden'));
+                        document.querySelectorAll('#faq .p-6 span').forEach(s => s.textContent = '+');
+                        answer.classList.remove('hidden');
+                        icon.textContent = '-';
+                    } else {
+                        answer.classList.add('hidden');
+                        icon.textContent = '+';
+                    }
+                });
+            });
+
+            // Lógica para las animaciones de fade-in
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            const observerOptions = {
+                root: null,
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeInElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos de Desarrollo de Software Gótico - GothicDev</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="../grup/css/Gm.css">
+</head>
+<body>
+
+    <div id="custom-cursor"><img src="../grup/img/cursor-crosshair-dot.png" alt="Cursor Personalizado"></div>
+    <div id="cursor-trail-container"></div>
+
+    <div id="splash-screen">
+        <h1 class="welcome-text" data-text="Bienvenido a GothicDev"></h1>
+        <img src="https://placehold.co/600x150/1e1e1e/F0F0F0?text=NUESTROS+PROYECTOS" alt="Nuestros Proyectos" class="subtitle-image">
+    </div>
+
+    <button id="menu-toggle" class="menu-toggle-button" aria-label="Abrir Menú">
+        <i class='bx bx-menu'></i>
+    </button>
+
+    <div id="navbar-overlay" class="navbar-overlay"></div>
+
+    <nav id="vertical-navbar">
+        <div class="navbar-header">
+            <i class='bx bxs-ghost ghost-icon'></i> <span class="navbar-title">Gothic Dev</span>
+            <button class="close-navbar-button" aria-label="Cerrar Menú"><i class='bx bx-x'></i></button>
+        </div>
+        <ul>
+            <li><a href="#inicio"><i class='bx bx-home-alt'></i> Inicio</a></li>
+            <li><a href="#proyectos"><i class='bx bx-code-alt'></i> Proyectos</a></li>
+            <li><a href="#acerca-de"><i class='bx bx-info-circle'></i> Acerca De</a></li>
+            </ul>
+        <div class="navbar-footer">
+            <p>&copy; 2025 GothicDev</p>
+        </div>
+    </nav>
+
+    <div id="main-content">
+        <section id="inicio" class="content-section fade-in">
+            <h1 class="main-section-title">
+                <i class='bx bxl-devto'></i> Portafolio de Proyectos de Software
+            </h1>
+            <p>Explora las innovadoras soluciones desarrolladas por nuestro equipo en GothicDev. Nos especializamos en la creación de software robusto y escalable, aplicando las mejores prácticas y metodologías de desarrollo para resolver problemas complejos y generar valor.</p>
+            <p>Desde la conceptualización hasta la implementación y el mantenimiento, nuestro enfoque técnico garantiza aplicaciones web de alto rendimiento, sistemas de escritorio eficientes y soluciones móviles intuitivas. Cada proyecto es un testimonio de nuestra dedicación a la calidad del código y la arquitectura de software sólida.</p>
+            <p><i class='bx bx-code-alt'></i> ¡Descubre la ingeniería detrás de nuestras creaciones!</p>
+
+
+        </section>
+
+        <hr>
+
+        <section id="proyectos" class="content-section fade-in">
+            <h2 class="section-heading"><i class='bx bx-cube-alt'></i> Proyectos Destacados de Ingeniería de Software</h2>
+            <p>Una muestra de la diversidad técnica y la calidad de ingeniería que aplicamos en cada uno de nuestros desarrollos. Explora las soluciones a medida que hemos construido.</p>
+
+            <div class="project-grid">
+                <div class="project-card" data-project-id="1">
+                    <i class='bx bx-laptop bx-tada'></i> <h3>Sistema de Gestión Empresarial (ERP)</h3>
+                    <p>Aplicación web y de escritorio que centraliza la administración de recursos empresariales, optimizando flujos de trabajo y toma de decisiones.</p>
+                    <button class="view-details-btn">Ver Detalles <i class='bx bx-right-arrow-alt'></i></button>
+                </div>
+                <div class="project-card" data-project-id="2">
+                    <i class='bx bx-cart bx-tada'></i> <h3>Plataforma E-commerce Escalable</h3>
+                    <p>Desarrollo de una solución de comercio electrónico con arquitectura de microservicios, integración de APIs de pago y optimización de bases de datos.</p>
+                    <button class="view-details-btn">Ver Detalles <i class='bx bx-right-arrow-alt'></i></button>
+                </div>
+                <div class="project-card" data-project-id="3">
+                    <i class='bx bx-run bx-tada'></i> <h3>Aplicación Móvil de Salud y Bienestar</h3>
+                    <p>App nativa (iOS/Android) con integración de sensores de salud, sincronización de datos en la nube y funcionalidades de aprendizaje automático para recomendaciones personalizadas.</p>
+                    <button class="view-details-btn">Ver Detalles <i class='bx bx-right-arrow-alt'></i></button>
+                </div>
+                <div class="project-card" data-project-id="4">
+                    <i class='bx bx-analyse bx-tada'></i> <h3>Sistema de Big Data Analytics</h3>
+                    <p>Implementación de una plataforma basada en la nube para la ingesta, procesamiento y visualización de grandes volúmenes de datos en tiempo real.</p>
+                    <button class="view-details-btn">Ver Detalles <i class='bx bx-right-arrow-alt'></i></button>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="acerca-de" class="content-section fade-in">
+            <h2 class="section-heading"><i class='bx bx-info-circle'></i> Acerca de GothicDev: Nuestra Filosofía de Desarrollo</h2>
+            <p>En GothicDev, nuestra pasión por la tecnología se une a una metodología rigurosa de desarrollo de software. Somos un equipo de ingenieros de software, arquitectos de sistemas y desarrolladores front-end/back-end dedicados a la excelencia técnica y la satisfacción del cliente.</p>
+            <p>Nuestra misión es transformar tus ideas en soluciones digitales robustas y eficientes, aplicando principios de diseño de software, patrones de arquitectura y pruebas exhaustivas. Creemos en un proceso de desarrollo transparente y colaborativo, donde la innovación y la calidad del código son nuestros pilares.</p>
+            <p>Únete a nosotros en este viaje para construir el futuro digital con ingeniería de software de vanguardia.</p>
+        </section>
+                    <div style="text-align: center; margin-top: 40px;">
+                <a href="../admisiones.html" class="submit-button">
+                    <i class='bx bx-user-plus'></i> Ver Otros Técnicos
+                </a>
+            </div>
+
+    </div>
+    
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-project-title"></h2>
+            <p id="modal-project-description"></p>
+            <ul id="modal-project-features">
+                <li><i class='bx bx-check-circle'></i> Característica clave 1</li>
+                <li><i class='bx bx-check-circle'></i> Característica clave 2</li>
+                <li><i class='bx bx-check-circle'></i> Característica clave 3</li>
+            </ul>
+            <div class="modal-buttons">
+                <a href="#" target="_blank" class="modal-button live-demo-button"><i class='bx bx-link-external'></i> Ver Demo en Vivo</a>
+                <a href="#" target="_blank" class="modal-button repo-button"><i class='bx bxl-github'></i> Repositorio</a>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="../grup/js/Gm.js"></script>
+</body>
+</html>

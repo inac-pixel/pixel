@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Web Dinámica - Enseñanza de Atención Primaria</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente Inter de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Carga de Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Configuración de la fuente Inter para todo el cuerpo */
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Previene el desbordamiento horizontal */
+            background-color: #E7E7E7; /* Color de fondo principal */
+        }
+
+        /* Estilos para la pantalla de carga */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF; /* Fondo blanco para la pantalla de carga */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Asegura que esté por encima de todo */
+            opacity: 1;
+            transition: opacity 1s ease-out; /* Transición suave para desaparecer */
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none; /* Permite hacer clic a través una vez oculto */
+        }
+
+        /* Animación para el texto de bienvenida */
+        @keyframes welcomeTextFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-animation {
+            animation: welcomeTextFadeIn 1.5s ease-out forwards;
+        }
+
+        /* Estilos para el botón flotante "Regresar" */
+        #return-button {
+            position: fixed; /* Hace el botón flotante */
+            bottom: 20px; /* Distancia desde la parte inferior */
+            right: 20px; /* Distancia desde la parte derecha */
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 0.5s ease-in-out; /* Transición suave para aparecer */
+            z-index: 10000; /* Asegura que esté por encima de la pantalla de carga y el contenido */
+        }
+
+        /* ------------------------------------ */
+        /* Keyframes para las Animaciones del Contenido Principal */
+        /* ------------------------------------ */
+
+        /* Encabezado (animate-header-entry) - Usado para subtítulo */
+        @keyframes headerEntry {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Imágenes y Texto en Secciones (slide-in-left-rotate, slide-in-right-rotate) */
+        @keyframes slideInLeftRotate {
+            from {
+                opacity: 0;
+                transform: translateX(-100px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        @keyframes slideInRightRotate {
+            from {
+                opacity: 0;
+                transform: translateX(100px) rotate(5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        /* Tarjetas de Características (fade-in-up-stagger) */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Botones (pulse-button) - Animación repetitiva para llamar la atención */
+        @keyframes pulseButton {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Animación general para elementos que se deslizan hacia arriba (usado en títulos de sección, etc.) */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ANIMACIONES REASIGNADAS / MEJORADAS */
+
+        /* Fade In Scale - Para Preguntas Frecuentes y texto de Por Qué Elegirnos */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Light Swing - Para el título principal del encabezado y título de FAQ */
+        @keyframes lightSwing {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) rotate(-3deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        /* Pop In - Para el botón principal del encabezado */
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Fade In Down - Para títulos de sección (Fortalezas, Logros, Call to Action text) */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Bounce In - Para el pie de página */
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% {
+                opacity: 0;
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(0.9, 0.9, 0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(0.97, 0.97, 0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        /* Slide In Left Stagger - Para bloques de texto en Por Qué Elegirnos */
+        @keyframes slideInLeftStagger {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Scale Up Center - Para la imagen en Por Qué Elegirnos */
+        @keyframes scaleUpCenter {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Fade In Slide Up - Para tarjetas de equipo */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide In Right Fade - Para artículos de noticias/blog */
+        @keyframes slideInRightFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Scale In Rotate - Para títulos de sección (Equipo, Noticias) */
+        @keyframes scaleInRotate {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* Fade In Left - Para textos en secciones (Equipo, Logros, Noticias) */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Grow In Up - Para cifras de logros */
+        @keyframes growInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Zoom In Fade - Para el título de Preguntas Frecuentes */
+        @keyframes zoomInFade {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Slide In Right - Para el título de Nuestros Logros */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Slide In Left - Para el título de Últimas Noticias */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Fade In Zoom - Para el título de Llamada a la Acción */
+        @keyframes fadeInZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* NUEVAS ANIMACIONES */
+
+        /* Flip In X - Para tarjetas de recursos */
+        @keyframes flipInX {
+            from {
+                opacity: 0;
+                transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(400px) rotate3d(1, 0, 0, 0deg);
+            }
+        }
+
+        /* ------------------------------------ */
+        /* Clases de Animación y Retardos */
+        /* ------------------------------------ */
+
+        /* Clases base para los elementos que serán animados */
+        .animated-element {
+            opacity: 0; /* Por defecto, los elementos están ocultos */
+        }
+
+        /* Clases para aplicar las animaciones cuando son visibles */
+        .animated-element.visible.animate-header-entry {
+            animation: headerEntry 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.slide-in-left-rotate {
+            animation: slideInLeftRotate 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.slide-in-right-rotate {
+            animation: slideInRightRotate 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.fade-in-up-stagger {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animated-element.visible.pulse-button {
+            animation: pulseButton 2s infinite ease-in-out;
+        }
+
+        .animated-element.visible.slide-in-up {
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .animated-element.visible.fade-in-scale {
+            animation: fadeInScale 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.light-swing {
+            animation: lightSwing 1s ease-out forwards;
+        }
+
+        .animated-element.visible.pop-in {
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Curva de rebote */
+        }
+
+        .animated-element.visible.fade-in-down {
+            animation: fadeInDown 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.bounce-in {
+            animation: bounceIn 1s ease-out forwards;
+        }
+
+        .animated-element.visible.slide-in-left-stagger {
+            animation: slideInLeftStagger 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.scale-up-center {
+            animation: scaleUpCenter 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.fade-in-slide-up {
+            animation: fadeInSlideUp 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.slide-in-right-fade {
+            animation: slideInRightFade 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.scale-in-rotate {
+            animation: scaleInRotate 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.fade-in-left {
+            animation: fadeInLeft 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.grow-in-up {
+            animation: growInUp 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.zoom-in-fade {
+            animation: zoomInFade 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.slide-in-right {
+            animation: slideInRight 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.slide-in-left {
+            animation: slideInLeft 0.7s ease-out forwards;
+        }
+
+        .animated-element.visible.fade-in-zoom {
+            animation: fadeInZoom 0.8s ease-out forwards;
+        }
+
+        /* Clases para las NUEVAS animaciones */
+        .animated-element.visible.flip-in-x-stagger {
+            animation: flipInX 0.7s ease-out forwards;
+        }
+
+        /* Retardos para animaciones escalonadas */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+        .delay-900 { animation-delay: 0.9s; }
+        .delay-1000 { animation-delay: 1s; }
+        .delay-1100 { animation-delay: 1.1s; }
+        .delay-1200 { animation-delay: 1.2s; }
+        .delay-1300 { animation-delay: 1.3s; }
+        .delay-1400 { animation-delay: 1.4s; }
+        .delay-1500 { animation-delay: 1.5s; }
+        .delay-1600 { animation-delay: 1.6s; }
+        .delay-1700 { animation-delay: 1.7s; }
+        .delay-1800 { animation-delay: 1.8s; }
+
+
+        /* Estilos generales para las secciones */
+        section {
+            padding: 4rem 1rem; /* Espaciado interno */
+            margin-bottom: 2rem; /* Margen inferior entre secciones */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla de Carga Inicial -->
+    <div id="loading-screen">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-8 welcome-animation">
+            Bienvenido a Atención Médica
+        </h1>
+    </div>
+
+    <!-- Botón Flotante de Regresar (fuera de la pantalla de carga para control de visibilidad) -->
+    <button id="return-button" class="bg-[#CFCFCF] text-gray-800 hover:bg-[#E7E7E7] font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-full shadow-lg transition duration-300 text-sm sm:text-base">
+        Regresar
+    </button>
+
+    <!-- Contenido Principal de la Página -->
+    <div id="main-content" style="display: none;">
+        <!-- Encabezado -->
+        <header class="bg-gradient-to-r from-white to-[#E7E7E7] text-gray-800 py-16 sm:py-20 px-4 text-center rounded-b-3xl shadow-lg">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-3 sm:mb-4 animated-element light-swing">
+                    Formación Integral en Atención Primaria
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 animated-element animate-header-entry delay-200">
+                    Capacitando a los futuros líderes de la salud comunitaria.
+                </p>
+
+            </div>
+        </header>
+
+        <!-- Sección de Introducción -->
+        <section class="bg-white py-12 sm:py-16 px-4 md:px-8">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 sm:gap-12">
+                <div class="md:w-1/2 animated-element slide-in-left-rotate">
+                    <img src="https://placehold.co/600x400/CFCFCF/000000?text=Educacion+Salud" alt="Educación en Salud Primaria" class="rounded-2xl shadow-xl w-full h-auto object-cover">
+                </div>
+                <div class="md:w-1/2 text-center md:text-left animated-element slide-in-right-rotate">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">Pioneros en la Educación en Salud Comunitaria</h2>
+                    <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+                        Ofrecemos programas educativos de vanguardia diseñados para formar profesionales de la salud con un enfoque holístico y preventivo, esenciales para fortalecer la atención primaria en nuestras comunidades.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Nuestras Fortalezas (Tarjetas de Características) -->
+        <section class="bg-[#E7E7E7] py-12 sm:py-16 px-4 md:px-8">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 sm:mb-12 animated-element fade-in-down">Pilares de Nuestra Formación</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- Tarjeta 1 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 animated-element fade-in-up-stagger delay-100">
+                        <div class="text-4xl sm:text-5xl text-gray-700 mb-3 sm:mb-4"><i class='bx bx-book-open'></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">Currículo Innovador</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Programas actualizados con las últimas tendencias y necesidades en atención primaria.
+                        </p>
+                    </div>
+                    <!-- Tarjeta 2 (Modificada para enfocarse en aprendizaje) -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 animated-element fade-in-up-stagger delay-300">
+                        <div class="text-4xl sm:text-5xl text-gray-700 mb-3 sm:mb-4"><i class='bx bx-bulb'></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">Metodología Activa</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Enfocada en la práctica, la resolución de problemas reales y el aprendizaje colaborativo.
+                        </p>
+                    </div>
+                    <!-- Tarjeta 3 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 animated-element fade-in-up-stagger delay-500">
+                        <div class="text-4xl sm:text-5xl text-gray-700 mb-3 sm:mb-4"><i class='bx bx-hand'></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">Enfoque Práctico</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Aprendizaje basado en casos reales y prácticas en entornos de atención primaria.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Por Qué Elegirnos -->
+        <section class="bg-[#CFCFCF] py-12 sm:py-16 px-4 md:px-8">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 sm:mb-12 animated-element slide-in-up">¿Por Qué Elegir Nuestra Formación?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
+                    <div class="text-left">
+                        <h3 class="text-2xl sm:text-3xl font-semibold text-gray-800 mb-3 sm:mb-4 animated-element slide-in-left-stagger delay-100">Impacto Real en la Salud</h3>
+                        <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-3 sm:mb-4 animated-element slide-in-left-stagger delay-300">
+                            Nuestros egresados contribuyen directamente a mejorar la calidad de vida en sus comunidades, aplicando conocimientos y habilidades en prevención y promoción de la salud.
+                        </p>
+                        <h3 class="text-2xl sm:text-3xl font-semibold text-gray-800 mb-3 sm:mb-4 animated-element slide-in-left-stagger delay-500">Red de Profesionales</h3>
+                        <p class="text-base sm:text-lg text-gray-600 leading-relaxed animated-element slide-in-left-stagger delay-700">
+                            Únete a una comunidad de profesionales comprometidos con la atención primaria, con oportunidades de networking y desarrollo continuo.
+                        </p>
+                    </div>
+                    <div class="animated-element scale-up-center delay-500">
+                        <img src="https://placehold.co/600x400/CFCFCF/000000?text=Comunidad+Salud" alt="Comunidad de Profesionales de la Salud" class="rounded-2xl shadow-xl w-full h-auto object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Recursos de Aprendizaje (Nueva Sección) -->
+        <section class="bg-white py-12 sm:py-16 px-4 md:px-8">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 sm:mb-12 animated-element scale-in-rotate">Recursos de Aprendizaje</h2>
+                <p class="text-base sm:text-lg text-gray-600 mb-8 sm:mb-12 animated-element fade-in-left delay-200">
+                    Herramientas y plataformas diseñadas para maximizar tu experiencia formativa.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- Recurso 1 -->
+                    <div class="bg-[#CFCFCF] p-6 sm:p-8 rounded-2xl shadow-lg animated-element flip-in-x-stagger delay-100">
+                        <div class="text-4xl sm:text-5xl text-gray-700 mb-3 sm:mb-4"><i class='bx bx-desktop'></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">Plataforma Virtual Interactiva</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Accede a módulos, foros de discusión y materiales multimedia en un entorno dinámico.
+                        </p>
+                    </div>
+                    <!-- Recurso 2 -->
+                    <div class="bg-[#CFCFCF] p-6 sm:p-8 rounded-2xl shadow-lg animated-element flip-in-x-stagger delay-300">
+                        <div class="text-4xl sm:text-5xl text-gray-700 mb-3 sm:mb-4"><i class='bx bx-microscope'></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">Simuladores Clínicos</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Practica diagnósticos y procedimientos en un entorno seguro y controlado.
+                        </p>
+                    </div>
+                    <!-- Recurso 3 -->
+                    <div class="bg-[#CFCFCF] p-6 sm:p-8 rounded-2xl shadow-lg animated-element flip-in-x-stagger delay-500">
+                        <div class="text-4xl sm:text-5xl text-gray-700 mb-3 sm:mb-4"><i class='bx bx-book'></i></div>
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 sm:mb-4">Biblioteca Digital Especializada</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Acceso ilimitado a una vasta colección de recursos académicos y científicos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Nuestros Logros -->
+        <section class="bg-[#E7E7E7] py-12 sm:py-16 px-4 md:px-8">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 sm:mb-12 animated-element slide-in-right">Nuestros Impactos Educativos</h2>
+                <p class="text-base sm:text-lg text-gray-600 mb-8 sm:mb-12 animated-element fadeInDown delay-200">
+                    Cifras que demuestran el alcance de nuestra formación.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- Logro 1 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg animated-element grow-in-up delay-100">
+                        <div class="text-5xl sm:text-6xl font-extrabold mb-2 text-gray-800">1000+</div>
+                        <p class="text-lg sm:text-xl font-semibold text-gray-800">Estudiantes Formados</p>
+                    </div>
+                    <!-- Logro 2 -->
+
+                    <!-- Logro 3 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg animated-element grow-in-up delay-500">
+                        <div class="text-5xl sm:text-6xl font-extrabold mb-2 text-gray-800">15+</div>
+                        <p class="text-lg sm:text-xl font-semibold text-gray-800">Años de Experiencia Educativa</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Últimas Noticias -->
+        <section class="bg-[#E7E7E7] py-12 sm:py-16 px-4 md:px-8">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 sm:mb-12 animated-element slide-in-left">Novedades en Atención Primaria</h2>
+                <p class="text-base sm:text-lg text-gray-600 mb-8 sm:mb-12 animated-element slide-in-up delay-200">
+                    Artículos, investigaciones y eventos relevantes para tu desarrollo profesional.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- Noticia 1 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden animated-element slide-in-right-fade delay-100">
+                        <img src="https://placehold.co/600x300/CFCFCF/000000?text=Noticia+Educacion" alt="Noticia Educación Primaria" class="w-full h-48 object-cover">
+                        <div class="p-4 sm:p-6 text-left">
+                            <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">Innovaciones en Telemedicina para APS</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">15 de Julio, 2025</p>
+                            <p class="text-sm sm:text-base text-gray-600">
+                                Exploramos cómo la telemedicina está transformando la atención primaria y su enseñanza.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Noticia 2 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden animated-element slide-in-right-fade delay-300">
+                        <img src="https://placehold.co/600x300/CFCFCF/000000?text=Noticia+Prevencion" alt="Noticia Prevención Comunitaria" class="w-full h-48 object-cover">
+                        <div class="p-4 sm:p-6 text-left">
+                            <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">Estrategias de Prevención en Salud Comunitaria</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">10 de Julio, 2025</p>
+                            <p class="text-sm sm:text-base text-gray-600">
+                                Un análisis de los programas más efectivos para la promoción de la salud a nivel local.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Noticia 3 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden animated-element slide-in-right-fade delay-500">
+                        <img src="https://placehold.co/600x300/CFCFCF/000000?text=Noticia+Investigacion" alt="Noticia Investigación APS" class="w-full h-48 object-cover">
+                        <div class="p-4 sm:p-6 text-left">
+                            <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">Investigación en Atención Primaria: Nuevos Enfoques</h3>
+                            <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">05 de Julio, 2025</p>
+                            <p class="text-sm sm:text-base text-gray-600">
+                                Descubre los últimos hallazgos que están moldeando el futuro de la atención primaria.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Preguntas Frecuentes -->
+        <section class="bg-[#E7E7E7] py-12 sm:py-16 px-4 md:px-8">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-8 sm:mb-12 text-center animated-element zoom-in-fade">Preguntas Frecuentes sobre Nuestra Formación</h2>
+                <div class="space-y-4 sm:space-y-6">
+                    <!-- FAQ Item 1 (Animación: fade-in-scale) -->
+                    <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md animated-element fade-in-scale delay-100">
+                        <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2">¿Qué requisitos necesito para inscribirme?</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Los requisitos varían según el curso o programa. Te invitamos a revisar la sección de cada curso para más detalles.
+                        </p>
+                    </div>
+                    <!-- FAQ Item 2 (Reemplazada) -->
+                    <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md animated-element fade-in-scale delay-300">
+                        <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2">¿Qué habilidades clave adquiriré?</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Nuestros programas están diseñados para que adquieras competencias en diagnóstico temprano, prevención de enfermedades, gestión de casos complejos y promoción de la salud comunitaria.
+                        </p>
+                    </div>
+                    <!-- FAQ Item 3 (Animación: fade-in-scale) -->
+                    <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md animated-element fade-in-scale delay-500">
+                        <h3 class="text-lg sm:text-xl font-semibold text-gray-800 mb-2">¿Hay oportunidades de prácticas clínicas?</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Sí, nuestros programas incluyen componentes prácticos y convenios con centros de atención primaria para una experiencia real.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Llamada a la Acción -->
+        <section class="bg-gradient-to-r from-[#CFCFCF] to-[#E7E7E7] text-gray-800 py-16 sm:py-20 px-4 text-center rounded-t-3xl shadow-lg">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-4 sm:mb-6 animated-element fadeInZoom">
+                    ¡Inicia tu Camino en la Atención Primaria!
+                </h2>
+                <p class="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-10 animated-element fadeInDown delay-200">
+                    Descubre cómo nuestra formación puede impulsar tu carrera en la salud comunitaria.
+                </p>
+                <button class="bg-white text-gray-800 hover:bg-[#CFCFCF] font-bold py-3 px-8 sm:py-4 sm:px-10 rounded-full shadow-lg transition duration-300 animated-element pulse-button delay-400 text-base sm:text-lg">
+                    Ver Programas
+                </button>
+            </div>
+        </section>
+
+        <!-- Pie de Página -->
+        <footer class="bg-[#E7E7E7] text-gray-800 py-6 sm:py-8 text-center">
+            <p class="animated-element bounce-in text-sm sm:text-base">&copy; 2025 Centro de Formación en Atención Primaria. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('main-content');
+            const returnButton = document.getElementById('return-button');
+
+            // Oculta el contenido principal al inicio
+            mainContent.style.display = 'none';
+
+            // Muestra la pantalla de carga
+            loadingScreen.classList.remove('hidden');
+
+            // Oculta el botón de regresar inicialmente
+            returnButton.style.opacity = '0';
+
+            // Redirige al hacer clic en el botón "Regresar"
+            returnButton.addEventListener('click', () => {
+                window.location.href = '../port/salud.html';
+            });
+
+            // Después de un breve retraso (1.8s), muestra el botón de regresar
+            setTimeout(() => {
+                returnButton.style.opacity = '1';
+            }, 1800); // Aparece después de que el texto de bienvenida se haya animado
+
+            // Después de un tiempo total (2.5s), oculta la pantalla de carga y muestra el contenido principal
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                // Espera a que la transición de opacidad termine antes de ocultar completamente
+                loadingScreen.addEventListener('transitionend', () => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.style.display = 'block'; // Muestra el contenido principal
+                    
+                    // Inicia el Intersection Observer para las animaciones del contenido principal
+                    const animatedElements = document.querySelectorAll('.animated-element');
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.1
+                    };
+
+                    const observerCallback = (entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    };
+                    const observer = new IntersectionObserver(observerCallback, observerOptions);
+                    animatedElements.forEach(element => {
+                        observer.observe(element);
+                    });
+                }, { once: true }); // Asegura que el listener se ejecute solo una vez
+            }, 2500); // Duración total antes de que la pantalla de carga desaparezca
+        });
+    </script>
+</body>
+</html>

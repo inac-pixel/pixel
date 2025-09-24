@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admisiones - Instituto Antiguo Cuscatlán</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="grup/css/styles.css">
+
+    <style>
+        /* Ajustes para la simulación de física, para que no interfiera con el estilo general */
+        /* Eliminamos .bac-general-icon-container ya que los íconos irán directo en .career-card */
+
+        .icon {
+            position: absolute; /* Crucial para z-index y posicionamiento libre */
+            font-size: 2.5rem;
+            color: #fb8c00;
+            pointer-events: none; /* Hace que el clic pase a través del icono */
+            user-select: none;
+            will-change: transform; /* Optimización de rendimiento para animaciones */
+            z-index: 1; /* Los íconos tienen un z-index más bajo, estarán detrás */
+        }
+
+        /* Estilo para el contenido de la tarjeta del Bachillerato General */
+        .general-bac-theme {
+            position: relative; /* Asegura un contexto de apilamiento para los hijos */
+            overflow: hidden; /* Oculta íconos que salgan del contenedor */
+            /* El resto de estilos de tu tarjeta .career-card */
+            padding: 20px; /* Asegura un padding para que el contenido no se pegue a los bordes */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centra el contenido verticalmente si es necesario */
+            align-items: center; /* Centra el contenido horizontalmente */
+            text-align: center; /* Centra el texto */
+        }
+
+        .general-bac-theme h3,
+        .general-bac-theme p,
+        .general-bac-theme .button {
+            position: relative; /* Necesario para que z-index funcione */
+            z-index: 2; /* El contenido de texto y botón tienen un z-index más alto */
+            color: #0d47a1; /* O el color de texto que uses en tus tarjetas */
+            text-align: center; /* Ajusta según tu diseño */
+            padding: 5px 10px; /* Pequeño padding para visualización */
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para legibilidad */
+            border-radius: 5px;
+            margin: 5px 0; /* Espaciado entre elementos */
+            /* Añadir ancho máximo para que no ocupe todo el espacio y colisione con los íconos */
+            max-width: 90%;
+            box-sizing: border-box; /* Incluir padding y border en el ancho/alto */
+        }
+
+        /* Ajustes para el botón si es necesario */
+        .general-bac-theme .button {
+            background-color: #0d47a1; /* Color de fondo de tu botón */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-logo">Instituto Antiguo Cuscatlán</div>
+            <nav class="header-nav" id="desktop-menu">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="admisiones.html" class="active">Admisiones</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-button" id="mobileMenuButton">&#9776;</div>
+        </div>
+        <nav class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="admisiones.html" class="active">Admisiones</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1>Proceso de Admisión al INAC</h1>
+            <p>Descubre los pasos esenciales para unirte a nuestra vibrante comunidad estudiantil y las emocionantes carreras técnicas que te impulsarán hacia un futuro exitoso. ¡Tu camino profesional comienza aquí!</p>
+        </div>
+    </section>
+
+    <section class="careers-section">
+        <div class="container">
+            <h2 class="section-title">Nuestras Carreras Técnicas</h2>
+            <div class="careers-grid">
+
+                <div class="career-card matrix-effect">
+                    <span class="binary-float">010</span>
+                    <span class="binary-float">10110</span>
+                    <span class="binary-float">0011011</span>
+                    <span class="binary-float">11010</span>
+                    <span class="binary-float">0101</span>
+                    <span class="binary-float">101101</span>
+                    <span class="binary-float">010</span>
+                    <span class="binary-float">110110</span>
+                    <span class="binary-float">01</span>
+                    <span class="binary-float">10</span>
+                    <span class="binary-float">011</span>
+                    <span class="binary-float">10</span>
+                    <span class="binary-float">0101</span>
+                    <span class="binary-float">1001</span>
+                    <span class="binary-float">1001</span>
+                    <span class="binary-float">110</span>
+                    <div class="spaceship-container">
+                        <img src="./grup/img/nave.png" alt="Nave espacial pixel art" class="spaceship-pixel-art">
+                    </div>
+                    <h3>Técnico en Desarrollo de Software</h3>
+                    <p>Este programa te capacitará en las metodologías y lenguajes de programación más demandados, preparándote para diseñar, desarrollar e implementar soluciones de software innovadoras para diversas plataformas, desde aplicaciones móviles hasta sistemas empresariales.</p>
+                    <a href="Port/DS.html" class="button">Ver Detalles del Plan de Estudio</a>
+                </div>
+                <div class="career-card health-theme">
+                    <canvas class="pulse-canvas"></canvas>
+                    <div class="falling-item bx-capsule"></div>
+                    <div class="falling-item bx-injection"></div>
+                    <div class="falling-item bx-first-aid"></div>
+                    <div class="falling-item bx-heart"></div>
+                    <div class="falling-item bx-droplet"></div>
+
+                    <div class="falling-item md-pill"></div>
+                    <div class="falling-item fa-band-aid"></div>
+                    <h3>Técnico en Salud</h3>
+                    <p>Prepárate para una carrera vital y de impacto en el sector de la salud. Aprenderás sobre asistencia al paciente, manejo de equipos médicos, procedimientos de laboratorio y gestión de registros, contribuyendo activamente al bienestar y la calidad de vida de la comunidad.</p>
+                    <a href="Port/salud.html" class="button">Ver Detalles del Plan de Estudio</a>
+                </div>
+
+                <div class="career-card accounting-data-viz-theme">
+                    <div class="finance-bg-icon"></div>
+                    <div class="data-viz-container">
+                        <div class="graph-display line-graph active">
+                            <canvas class="finance-graph-canvas"></canvas>
+                        </div>
+                        <div class="graph-display stonks-graph">
+                            <canvas class="stonks-graph-canvas"></canvas>
+                        </div>
+                        <div class="graph-display pie-graph">
+                            <canvas class="pie-chart-canvas"></canvas>
+                        </div>
+
+                        <div class="floating-scheme scheme-1 num">100</div>
+                        <div class="floating-scheme scheme-2 op">+</div>
+                        <div class="floating-scheme scheme-3 symbol">($)</div>
+                        <div class="floating-scheme scheme-4 op">=</div>
+                        <div class="floating-scheme scheme-5 num">50k</div>
+                        <div class="floating-scheme scheme-6 op">/</div>
+                        <div class="floating-scheme scheme-7 num">25</div>
+                        <div class="floating-scheme scheme-8 symbol">[%]</div>
+                        <div class="floating-scheme scheme-9 text">Avg</div>
+                    </div>
+                    <h3>Técnico en Administración Contable</h3>
+                    <p>Formamos profesionales dinámicos y capaces de gestionar procesos contables, financieros y administrativos con precisión y eficiencia. Serás esencial para la toma de decisiones estratégicas y la operación óptima de cualquier tipo de organización.</p>
+                    <a href="./Port/contable.html" class="button">Ver Detalles del Plan de Estudio</a>
+                </div>
+
+                <div class="career-card electric-systems-theme">
+                    <div class="electric-icon-container">
+                        <i class="fas fa-bolt electric-icon-main"></i> <i class="bx bx-atom spark-icon spark-1"></i>
+                        <i class="bx bx-microchip spark-icon spark-2"></i>
+                        <i class="bx bx-plug spark-icon spark-3"></i>
+                        <i class="bx bx-current-location spark-icon spark-4"></i>
+                        <i class="bx bx-chip spark-icon spark-5"></i>
+                        <i class="bx bx-bulb spark-icon spark-6"></i> <i class="bx bx-cable-car spark-icon spark-7"></i>
+                        <i class="bx bx-line-chart spark-icon spark-8"></i>
+                        <i class="bx bx-power-off spark-icon spark-9"></i>
+                        <i class="bx bx-loader spark-icon spark-10"></i>
+                    </div>
+                    <h3>Técnico en Sistemas Eléctricos</h3>
+                    <p>Este programa te preparará para instalar, mantener y reparar sistemas eléctricos residenciales, comerciales e industriales. Adquirirás conocimientos en seguridad eléctrica, normativas, lectura de planos y diagnóstico de fallas, fundamental para la infraestructura moderna.</p>
+                    <a href="./Port/sistemas.html" class="button">Ver Detalles del Plan de Estudio</a>
+                </div><div class="career-card general-bac-theme" id="bacGeneralCard">
+                    <i class='bx bx-book-bookmark icon'></i>
+                    <h3>Bachillerato General</h3>
+                    <p>El Bachillerato General proporciona una formación integral y multidisciplinaria, sentando las bases sólidas para estudios universitarios en diversas áreas o para una rápida incorporación al mundo laboral. Desarrollarás habilidades críticas, analíticas y comunicativas esenciales para tu futuro.</p>
+                    <a href="./Port/general.html" class="button">Ver Detalles del Plan de Estudio</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="admission-process">
+        <div class="container">
+            <h2 class="section-title">Guía Paso a Paso para tu Admisión</h2>
+            <ul class="admission-steps-list"> <li>
+                    <div class="step-icon"><i class='bx bx-search-alt-2'></i></div>
+                    <h3>Paso 1: Investigación y Selección de Carrera</h3>
+                    <p>Tómate el tiempo necesario para explorar a fondo nuestras diversas ofertas de carreras técnicas. Considera tus pasiones, habilidades e intereses, y elige el programa que mejor se alinee con tus aspiraciones profesionales y personales.</p>
+                </li>
+                <li>
+                    <div class="step-icon"><i class='bx bx-file-blank'></i></div>
+                    <h3>Paso 2: Solicitud en presencial</h3>
+                    <p>Accede a nuestra instituvcion. Completa cuidadosamente el formulario de solicitud, asegurándote de proporcionar toda la información requerida de manera precisa y veraz. .</p>
+                </li>
+                <li>
+                    <div class="step-icon"><i class='bx bx-upload'></i></div>
+                    <h3>Paso 3: Presentación de Documentos</h3>
+                    <p>Prepara y reúne toda la documentación solicitada (partida de nacimiento, historial académico, certificaciones, etc.). Deberás presentar estos documentos en la secretaría académica de nuestras instalaciones dentro de las fechas límite establecidas para la admisión.</p>
+                </li>
+                <li>
+                    <div class="step-icon"><i class='bx bx-conversation'></i></div>
+                    <h3>Paso 4: Entrevista y Evaluación de Aptitud</h3>
+                    <p>Participarás en una entrevista personal con nuestro equipo de admisiones, donde podremos conocerte mejor. Para algunas carreras, .</p>
+                </li>
+                <li>
+                    <div class="step-icon"><i class='bx bx-bell'></i></div>
+                    <h3>Paso 5: Resultados y Notificación</h3>
+                    <p>Mantente atento a las fechas de publicación de resultados. Te notificaremos oficialmente sobre tu estado de admisión vía correo electrónico y/o a través de nuestro portal de estudiantes. ¡Este es un momento emocionante!</p>
+                </li>
+                <li>
+                    <div class="step-icon"><i class='bx bx-check-circle'></i></div>
+                    <h3>Paso 6: Matrícula Final y Confirmación</h3>
+                    <p>Una vez que hayas sido admitido, es crucial que completes el proceso de matrícula oficial dentro del plazo indicado. Esto asegurará tu cupo en la carrera y te permitirá comenzar tu viaje académico en el Instituto Antiguo Cuscatlán.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="creator-info-button" id="creatorInfoButton">
+        <span>&#x1F6C8;</span>
+    </div>
+    <div class="creator-info-panel" id="creatorInfoPanel">
+        <h3>Acerca del Creador</h3>
+        <p>Hecho sin fines de lucro con &#x2764; por <strong>Josue Tabora</strong></p>
+        <p>Estudiante del Instituto Nacional de Antiguo Cuscatlán de 3° de Bachillerato de Desarrollo de software</p>
+        <p>junto con <strong>https://boxicons.com</strong> el cual autorizo el uso de su portafolio de iconos para este fin.</p>
+        <div class="social-links">
+            <button class="close-panel-button" id="closePanelButton">&#x2715;</button>
+        </div>
+    </div>
+
+    <script src="./grup/js/script.js"></script>
+            <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('active');
+            });
+
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 992) {
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        }
+
+        // Monitor cardíaco en div de salud
+        const pulseCanvas = document.querySelector(".pulse-canvas");
+        if (pulseCanvas) {
+            const ctx = pulseCanvas.getContext("2d");
+
+            function resizePulseCanvas() {
+                const card = pulseCanvas.parentElement;
+                pulseCanvas.width = card.clientWidth > 0 ? card.clientWidth : 1; 
+                pulseCanvas.height = card.clientHeight > 0 ? card.clientHeight * 0.5 : 100;
+            }
+
+            resizePulseCanvas();
+            window.addEventListener("resize", resizePulseCanvas);
+
+            let wave = [];
+            let x = 0;
+            const baseY = pulseCanvas.height * 0.5;
+
+            function generateRandomPulse() {
+                const height = Math.random() * (pulseCanvas.height * 0.15) + (pulseCanvas.height * 0.1);
+                const smallHeight = height / 2;
+                return [
+                    { dx: 4, dy: 0 },
+                    { dx: 3, dy: -height },
+                    { dx: 3, dy: height },
+                    { dx: 5, dy: 0 },
+                    { dx: 3, dy: -smallHeight },
+                    { dx: 3, dy: smallHeight },
+                    { dx: 15 + Math.random() * 10, dy: 0 }
+                ];
+            }
+
+            let pulse = generateRandomPulse();
+            let pulseIndex = 0;
+
+            function generateWaveStep() {
+                if (x >= pulseCanvas.width - 50) {
+                    x = 0;
+                    wave = [];
+                    pulse = generateRandomPulse();
+                    pulseIndex = 0;
+                }
+
+                if (pulseIndex >= pulse.length) {
+                    pulse = generateRandomPulse();
+                    pulseIndex = 0;
+                }
+
+                const step = pulse[pulseIndex];
+                const lastX = wave.length > 0 ? wave[wave.length - 1].x : x;
+                const lastY = wave.length > 0 ? wave[wave.length - 1].y : baseY;
+
+                const newX = lastX + step.dx;
+                const newY = lastY + step.dy;
+
+                wave.push({ x: newX, y: newY });
+                x = newX;
+                pulseIndex++;
+            }
+
+            function drawPulse() {
+                ctx.clearRect(0, 0, pulseCanvas.width, pulseCanvas.height);
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--health-line-color').trim();
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let i = 0; i < wave.length; i++) {
+                    const pt = wave[i];
+                    if (i === 0) ctx.moveTo(pt.x, pt.y);
+                    else ctx.lineTo(pt.x, pt.y);
+                }
+                ctx.stroke();
+            }
+
+            function animatePulse() {
+                generateWaveStep();
+                drawPulse();
+                setTimeout(() => requestAnimationFrame(animatePulse), 65);
+            }
+
+            animatePulse();
+        }
+
+        // --- Lógica para el movimiento aleatorio continuo de la nave ---
+        const spaceship = document.querySelector('.spaceship-pixel-art');
+
+        if (spaceship) {
+            function setRandomSpaceshipMovement() {
+                const randomX = (Math.random() - 0.5) * 900;
+                const randomY = (Math.random() - 0.5) * 900;
+
+                spaceship.style.setProperty('--spaceship-random-x', `${randomX}px`);
+                spaceship.style.setProperty('--spaceship-random-y', `${randomY}px`);
+            }
+
+            setRandomSpaceshipMovement();
+
+            spaceship.addEventListener('animationiteration', (event) => {
+                if (event.animationName === 'randomSpaceshipMove') {
+                    setRandomSpaceshipMovement();
+                }
+            });
+        }
+
+        // --- Lógica para la Visualización de Datos de Contabilidad (Ciclo de Gráficas) ---
+        const accountingDataVizContainer = document.querySelector('.accounting-data-viz-theme .data-viz-container');
+
+        if (accountingDataVizContainer) {
+            const graphDisplays = accountingDataVizContainer.querySelectorAll('.graph-display');
+            let currentGraphIndex = 0;
+            const intervalTime = 8000;
+            const fadeDuration = 1000;
+
+            // Gráfico de Línea (primero)
+            const lineGraphCanvas = accountingDataVizContainer.querySelector('.finance-graph-canvas');
+            const lineGraphCtx = lineGraphCanvas ? lineGraphCanvas.getContext('2d') : null;
+            let lineGraphAnimationFrameId;
+
+            function resizeLineGraphCanvas() {
+                if (lineGraphCanvas) {
+                    lineGraphCanvas.width = accountingDataVizContainer.clientWidth;
+                    lineGraphCanvas.height = accountingDataVizContainer.clientHeight;
+                }
+            }
+            resizeLineGraphCanvas();
+            window.addEventListener('resize', resizeLineGraphCanvas);
+
+            let financePhase = 0;
+            const financeAmplitude = 40;
+            const financeFrequency = 0.02;
+            const financeSpeed = 0.08;
+            const baseLineY = lineGraphCanvas ? lineGraphCanvas.height * 0.7 : 0;
+
+            function drawFinanceGraph() {
+                if (lineGraphCtx) {
+                    lineGraphCtx.clearRect(0, 0, lineGraphCanvas.width, lineGraphCanvas.height);
+                    
+                    lineGraphCtx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--finance-line-color').trim();
+                    lineGraphCtx.lineWidth = 3;
+                    lineGraphCtx.shadowBlur = 10;
+                    lineGraphCtx.shadowColor = getComputedStyle(document.documentElement).getPropertyValue('--finance-line-color').trim();
+
+                    lineGraphCtx.beginPath();
+                    
+                    for (let x = 0; x < lineGraphCanvas.width; x++) {
+                        const y = baseLineY + financeAmplitude * Math.sin(x * financeFrequency + financePhase) + 
+                                            (financeAmplitude / 2) * Math.cos(x * financeFrequency * 2 + financePhase * 1.5);
+                        if (x === 0) {
+                            lineGraphCtx.moveTo(x, y);
+                        } else {
+                            lineGraphCtx.lineTo(x, y);
+                        }
+                    }
+                    lineGraphCtx.stroke();
+                }
+                financePhase += financeSpeed;
+                lineGraphAnimationFrameId = requestAnimationFrame(drawFinanceGraph);
+            }
+
+            function stopLineGraphAnimation() {
+                if (lineGraphAnimationFrameId) {
+                    cancelAnimationFrame(lineGraphAnimationFrameId);
+                    lineGraphAnimationFrameId = null;
+                }
+            }
+
+            function startLineGraphAnimation() {
+                if (!lineGraphAnimationFrameId) {
+                    drawFinanceGraph();
+                }
+            }
+
+            // Gráfico Stonks (segundo)
+            const stonksCanvas = accountingDataVizContainer.querySelector('.stonks-graph-canvas');
+            const stonksCtx = stonksCanvas ? stonksCanvas.getContext('2d') : null;
+            let stonksAnimationFrameId;
+
+            function resizeStonksCanvas() {
+                if (stonksCanvas) {
+                    stonksCanvas.width = accountingDataVizContainer.clientWidth;
+                    stonksCanvas.height = accountingDataVizContainer.clientHeight;
+                }
+            }
+            resizeStonksCanvas();
+            window.addEventListener('resize', resizeStonksCanvas);
+
+            function drawStonksGraph() {
+                if (stonksCtx) {
+                    stonksCtx.clearRect(0, 0, stonksCanvas.width, stonksCanvas.height);
+                    stonksCtx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--stonks-line-color').trim();
+                    stonksCtx.lineWidth = 4;
+                    stonksCtx.lineJoin = 'round';
+                    stonksCtx.shadowBlur = 15;
+                    stonksCtx.shadowColor = getComputedStyle(document.documentElement).getPropertyValue('--stonks-line-color').trim();
+
+                    const width = stonksCanvas.width;
+                    const height = stonksCanvas.height;
+                    const baseY = height * 0.8;
+
+                    const dataPoints = [
+                        { x: 0, y: baseY - 10 },
+                        { x: width * 0.05, y: baseY - 15 },
+                        { x: width * 0.15, y: baseY - 5 },
+                        { x: width * 0.25, y: baseY - 25 },
+                        { x: width * 0.35, y: baseY - 10 },
+                        { x: width * 0.45, y: baseY - 35 },
+                        { x: width * 0.55, y: height * 0.15 },
+                        { x: width * 0.65, y: height * 0.20 },
+                        { x: width * 0.75, y: height * 0.28 },
+                        { x: width * 0.85, y: height * 0.25 },
+                        { x: width, y: height * 0.30 }
+                    ];
+
+                    stonksCtx.beginPath();
+                    stonksCtx.moveTo(dataPoints[0].x, dataPoints[0].y);
+                    for (let i = 1; i < dataPoints.length; i++) {
+                        stonksCtx.lineTo(dataPoints[i].x, dataPoints[i].y);
+                    }
+                    stonksCtx.stroke();
+                }
+                stonksAnimationFrameId = requestAnimationFrame(drawStonksGraph);
+            }
+
+            function stopStonksGraphAnimation() {
+                if (stonksAnimationFrameId) {
+                    cancelAnimationFrame(stonksAnimationFrameId);
+                    stonksAnimationFrameId = null;
+                }
+            }
+
+            function startStonksGraphAnimation() {
+                if (!stonksAnimationFrameId) {
+                    drawStonksGraph();
+                }
+            }
+            
+            const pieGraphContainer = accountingDataVizContainer.querySelector('.pie-graph');
+            const pieChartCanvas = pieGraphContainer ? pieGraphContainer.querySelector('.pie-chart-canvas') : null;
+            const pieChartCtx = pieChartCanvas ? pieChartCanvas.getContext('2d') : null;
+            let pieChartAnimationFrameId;
+            let pieAnimationStartTime = 0;
+            let pieAnimationDuration = 4000;
+
+            function resizePieChartCanvas() {
+                if (pieChartCanvas) {
+                    const parentRect = pieGraphContainer.getBoundingClientRect();
+                    pieChartCanvas.width = parentRect.width;
+                    pieChartCanvas.height = parentRect.height;
+                }
+            }
+            resizePieChartCanvas();
+            window.addEventListener('resize', resizePieChartCanvas);
+
+            function drawPieChart(timestamp) {
+                if (!pieChartCtx) return;
+
+                if (!pieAnimationStartTime) pieAnimationStartTime = timestamp;
+                const elapsed = timestamp - pieAnimationStartTime;
+                const progress = Math.min(elapsed / pieAnimationDuration, 1);
+
+                pieChartCtx.clearRect(0, 0, pieChartCanvas.width, pieChartCanvas.height);
+
+                const centerX = pieChartCanvas.width / 2;
+                const centerY = pieChartCanvas.height / 2;
+                const radius = Math.min(centerX, centerY) * 0.7;
+
+                const segments = [
+                    { value: 40, color: getComputedStyle(document.documentElement).getPropertyValue('--pie-segment-1').trim() },
+                    { value: 30, color: getComputedStyle(document.documentElement).getPropertyValue('--pie-segment-2').trim() },
+                    { value: 30, color: getComputedStyle(document.documentElement).getPropertyValue('--pie-segment-3').trim() }
+                ];
+
+                let total = segments.reduce((sum, seg) => sum + seg.value, 0);
+                let currentAngle = 0;
+
+                for (const segment of segments) {
+                    const sliceAngle = (segment.value / total) * 2 * Math.PI;
+                    const animatedEndAngle = currentAngle + (sliceAngle * progress);
+
+                    pieChartCtx.beginPath();
+                    pieChartCtx.moveTo(centerX, centerY);
+                    pieChartCtx.arc(centerX, centerY, radius, currentAngle, animatedEndAngle);
+                    pieChartCtx.closePath();
+                    pieChartCtx.fillStyle = segment.color;
+                    pieChartCtx.shadowColor = 'rgba(0,0,0,0.2)';
+                    pieChartCtx.shadowBlur = 10;
+                    pieChartCtx.fill();
+
+                    currentAngle += sliceAngle;
+                }
+                pieChartCtx.beginPath();
+                pieChartCtx.arc(centerX, centerY, radius * 0.3, 0, 2 * Math.PI);
+                pieChartCtx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--pie-center-color').trim();
+                pieChartCtx.shadowColor = 'rgba(0,0,0,0.1)';
+                pieChartCtx.shadowBlur = 5;
+                pieChartCtx.fill();
+                if (progress < 1) {
+                    pieChartAnimationFrameId = requestAnimationFrame(drawPieChart);
+                } else {
+                    pieChartAnimationFrameId = null;
+                }
+            }
+            function startPieChartAnimation() {
+                if (!pieChartAnimationFrameId) {
+                    pieAnimationStartTime = 0;
+                    pieChartAnimationFrameId = requestAnimationFrame(drawPieChart);
+                }
+            }
+            function stopPieChartAnimation() {
+                if (pieChartAnimationFrameId) {
+                    cancelAnimationFrame(pieChartAnimationFrameId);
+                    pieChartAnimationFrameId = null;
+                    pieChartCtx.clearRect(0, 0, pieChartCanvas.width, pieChartCanvas.height);
+                }
+            }
+            function cycleGraphs() {
+                graphDisplays[currentGraphIndex].style.opacity = 0;
+                if (graphDisplays[currentGraphIndex].classList.contains('line-graph')) {
+                    stopLineGraphAnimation();
+                } else if (graphDisplays[currentGraphIndex].classList.contains('stonks-graph')) {
+                    stopStonksGraphAnimation();
+                } else if (graphDisplays[currentGraphIndex].classList.contains('pie-graph')) {
+                    stopPieChartAnimation();
+                    pieGraphContainer.classList.remove('spin-active');
+                }
+                setTimeout(() => {
+                    graphDisplays[currentGraphIndex].style.display = 'none';
+                    currentGraphIndex = (currentGraphIndex + 1) % graphDisplays.length;
+                    const nextGraph = graphDisplays[currentGraphIndex];
+                    nextGraph.style.display = 'block';
+                    void nextGraph.offsetWidth;
+                    nextGraph.style.opacity = 1;
+
+                    if (nextGraph.classList.contains('line-graph')) {
+                        startLineGraphAnimation();
+                    } else if (nextGraph.classList.contains('stonks-graph')) {
+                        startStonksGraphAnimation();
+                    } else if (nextGraph.classList.contains('pie-graph')) {
+                        startPieChartAnimation();
+                        setTimeout(() => {
+                            pieGraphContainer.classList.add('spin-active');
+                        }, 4000); 
+                    }
+                }, fadeDuration); 
+            }
+            if (graphDisplays.length > 0) {
+                graphDisplays.forEach((graph, index) => {
+                    graph.style.opacity = 0;
+                    graph.style.transition = `opacity ${fadeDuration / 1000}s ease-in-out`;
+                    graph.style.display = 'none';
+                });
+                graphDisplays[0].style.display = 'block';
+                void graphDisplays[0].offsetWidth;
+                graphDisplays[0].style.opacity = 1;
+                
+                if (graphDisplays[0].classList.contains('line-graph')) {
+                    startLineGraphAnimation();
+                }
+                setInterval(cycleGraphs, intervalTime);
+            }
+        }
+    });
+
+    // --- Lógica de la simulación de física de íconos para Bachillerato General ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const bacGeneralCard = document.getElementById('bacGeneralCard');
+        if (!bacGeneralCard) return;
+
+        const iconClasses = ['bx-book','bx-pencil','bx-globe','bx-graduation','bx-ruler','bx-bus',
+            'bx-mortar-board','bx-camera','bx-notepad','bx-diploma','bx-calendar','bx-learning',
+            'bx-alarm','bx-clipboard','bx-brain','bx-flask','bx-heart','bx-magnet','bx-music',
+            'bx-paint','bx-rocket','bx-shield','bx-star','bx-time'];
+        const N = iconClasses.length, icons = [], vel = [];
+        const gravity = 0.2, friction = 0.8;
+        let lastScrollY = window.scrollY; // Para detectar la dirección y cantidad del scroll
+
+        let containerRect;
+        function updateContainerDimensions() {
+            containerRect = bacGeneralCard.getBoundingClientRect();
+        }
+        updateContainerDimensions();
+        window.addEventListener('resize', updateContainerDimensions);
+
+        // Crear iconos
+        iconClasses.forEach(cls => {
+            const el = document.createElement('i');
+            el.className = `icon bx ${cls}`;
+            bacGeneralCard.appendChild(el);
+            
+            const x = Math.random() * (bacGeneralCard.clientWidth - el.offsetWidth);
+            const y = Math.random() * (bacGeneralCard.clientHeight - el.offsetHeight);
+            el.style.left = `${x}px`;
+            el.style.top = `${y}px`;
+
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 5 + Math.random() * 5;
+            vel.push({ x: Math.cos(angle) * speed, y: Math.sin(angle) * speed });
+            icons.push(el);
+        });
+
+        function updatePhysics() {
+            icons.forEach((el, i) => {
+                vel[i].y += gravity;
+
+                let x = el.offsetLeft + vel[i].x;
+                let y = el.offsetTop + vel[i].y;
+                const r = el.offsetWidth;
+                const b = el.offsetHeight;
+
+                // Detección de colisiones con los bordes de la TARJETA
+                if (x < 0) { 
+                    x = 0; 
+                    vel[i].x = -vel[i].x * friction; 
+                }
+                if (x + r > bacGeneralCard.clientWidth) { 
+                    x = bacGeneralCard.clientWidth - r; 
+                    vel[i].x = -vel[i].x * friction; 
+                }
+                if (y < 0) {
+                    y = 0;
+                    vel[i].y = -vel[i].y * friction;
+                }
+                if (y + b > bacGeneralCard.clientHeight) { 
+                    y = bacGeneralCard.clientHeight - b; 
+                    vel[i].y = -vel[i].y * friction; 
+                }
+
+                el.style.left = `${x}px`;
+                el.style.top = `${y}px`;
+            });
+            requestAnimationFrame(updatePhysics);
+        }
+
+        // --- Nueva lógica para el efecto de rebote con scroll ---
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = currentScrollY - lastScrollY; // Diferencia de scroll
+
+            // Aplica una fuerza o impulso a los íconos proporcional al scroll
+            // Puedes ajustar la sensibilidad (0.05) según lo fuerte que quieras el rebote
+            icons.forEach((el, i) => {
+                vel[i].y += scrollDelta * 0.05; // Ajusta la velocidad vertical
+                vel[i].x += scrollDelta * (Math.random() - 0.5) * 0.02; // Pequeño impulso horizontal aleatorio
+            });
+
+            lastScrollY = currentScrollY; // Actualiza la última posición del scroll
+        });
+
+        updatePhysics();
+    });
+    </script>
+
+</body>
+</html>

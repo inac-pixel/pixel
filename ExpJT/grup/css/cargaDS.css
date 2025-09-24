@@ -1,0 +1,614 @@
+:root {
+    --bg-dark-primary: #121212; /* Gris muy oscuro, casi negro */
+    --text-white: #F5F5F5; /* Blanco hueso suave */
+    --text-light-grey: #D3D3D3; /* Gris claro */
+    --progress-bar-bg: #333333; /* Gris oscuro para la barra de progreso */
+
+    /* Colores del círculo animado - Tonos de gris y blanco sutiles */
+    --circle-color-1: rgba(180, 180, 180, 0.15); /* Gris claro transparente */
+    --circle-color-2: rgba(200, 200, 200, 0.15); /* Gris más claro transparente */
+    --circle-color-3: rgba(160, 160, 160, 0.15); /* Gris ligeramente más oscuro transparente */
+    --circle-color-4: rgba(220, 220, 220, 0.15); /* Blanco muy suave transparente */
+    
+    --center-circle-bg: #222222; /* Gris oscuro para el centro */
+
+    /* Colores para la sección de bienvenida */
+    --welcome-bg: rgba(18, 18, 18, 0.85); /* Fondo oscuro para la bienvenida */
+    --welcome-title-color: #E0E0E0; /* Gris muy claro para el título de bienvenida */
+    --welcome-button-primary-bg: #A9A9A9; /* Gris medio para el botón primario */
+    --welcome-button-primary-text: #121212; /* Texto oscuro para el botón primario */
+    --welcome-button-primary-hover-bg: #C0C0C0; /* Gris plateado para el hover del primario */
+    --welcome-button-secondary-border: #B0B0B0; /* Gris medio para el borde del secundario */
+    --welcome-button-secondary-text: #B0B0B0; /* Texto gris medio para el secundario */
+    --welcome-button-secondary-hover-bg: rgba(176, 176, 176, 0.1); /* Hover suave para el secundario */
+    --welcome-button-secondary-hover-text: #F5F5F5; /* Texto blanco al hover del secundario */
+}
+
+/* MODIFICACIÓN CLAVE: Asegurar que HTML y BODY ocupen el 100% y no permitan scroll */
+html, body {
+    height: 100%; /* Ocupa el 100% del alto del viewport */
+    overflow: hidden; /* Evita cualquier scroll */
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Esto ya lo tenías y es bueno para centrar verticalmente */
+    overflow: hidden; /* Ya estaba aquí, pero lo consolidamos arriba para mayor seguridad */
+    position: relative;
+    transition: opacity 0.5s ease-out;
+    
+    /* Imagen de fondo del árbol - Mantenemos si así lo deseas */
+    background-image: url('../img/arbol.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+/* Fondo sutil (rejilla o puntos) - Ahora se superpone a la imagen del árbol */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Un overlay oscuro para que el texto y los elementos se vean mejor sobre la imagen */
+    background-color: rgba(0, 0, 0, 0.4); /* Ajusta la opacidad según necesites */
+    
+    /* Mantenemos el patrón de puntos/rejilla */
+    background-image: 
+        radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: 0 0, 40px 40px;
+    opacity: 1; /* Opacidad total para el overlay y el patrón */
+    z-index: -1; /* Detrás del contenido */
+    animation: moveGrid 30s linear infinite;
+}
+
+@keyframes moveGrid {
+    from { background-position: 0 0, 40px 40px; }
+    to { background-position: 80px 80px, 120px 120px; }
+}
+
+
+/* Estilos del encabezado */
+.app-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    box-sizing: border-box;
+    z-index: 10;
+    color: var(--text-light-grey);
+    text-shadow: 0 0 5px rgba(0,0,0,0.2); /* Sombra de texto sutil */
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    font-size: 1.8em;
+    margin-right: 10px;
+    color: var(--text-white);
+    text-shadow: 0 0 8px rgba(0,0,0,0.4); /* Sombra de icono sutil */
+}
+
+.app-title {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.user-name {
+    font-size: 0.9em;
+    margin-right: 20px;
+    color: var(--text-light-grey);
+}
+
+.menu-icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: var(--text-white);
+}
+
+/* Contenedor principal de la pantalla de carga */
+.loading-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.loading-container {
+    text-align: center;
+    background: rgba(34, 34, 34, 0.7); /* Gris oscuro semi-transparente */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    max-width: 500px;
+    width: 90%;
+}
+
+/* Contenedor del anillo animado */
+.animated-ring-container {
+    width: 350px;
+    height: 350px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.ring-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform-origin: center center;
+    will-change: transform, border-radius;
+}
+
+/* Capas del círculo con tonos de gris y blanco */
+.layer-1 {
+    background-color: var(--circle-color-1);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: 
+        rotateLayer1 20s linear infinite,
+        morphLayer1 8s ease-in-out infinite alternate;
+}
+
+.layer-2 {
+    background-color: var(--circle-color-2);
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    transform: rotate(45deg);
+    animation: 
+        rotateLayer2 25s linear infinite reverse,
+        morphLayer2 7s ease-in-out infinite alternate;
+}
+
+.layer-3 {
+    background-color: var(--circle-color-3);
+    border-radius: 60% 40% 60% 40% / 50% 50% 50% 50%;
+    transform: rotate(90deg);
+    animation: 
+        rotateLayer3 18s linear infinite,
+        morphLayer3 9s ease-in-out infinite alternate;
+}
+
+.layer-4 {
+    background-color: var(--circle-color-4);
+    border-radius: 40% 60% 40% 60% / 50% 50% 50% 50%;
+    transform: rotate(135deg);
+    animation: 
+        rotateLayer4 22s linear infinite reverse,
+        morphLayer4 6s ease-in-out infinite alternate;
+}
+
+/* Círculo blanco central */
+.center-circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: var(--center-circle-bg);
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenido de carga (texto y barra de progreso) */
+.loading-content {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0px);
+}
+
+/* Estilos para la imagen central (OPCIÓN 2) - Si la usas, ajústala a la paleta */
+.central-image {
+    width: 100px;
+    height: auto;
+    max-width: 80%;
+    max-height: 80px;
+    margin-bottom: 15px;
+    object-fit: contain;
+    z-index: 3;
+    filter: grayscale(80%); /* Opcional: aplicar escala de grises */
+}
+
+
+/* Animaciones de rotación para cada capa */
+@keyframes rotateLayer1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes rotateLayer2 { from { transform: rotate(45deg); } to { transform: rotate(405deg); } }
+@keyframes rotateLayer3 { from { transform: rotate(90deg); } to { transform: rotate(450deg); } }
+@keyframes rotateLayer4 { from { transform: rotate(135deg); } to { transform: rotate(495deg); } }
+
+/* Animaciones de morfología (deformación) para cada capa */
+@keyframes morphLayer1 {
+    0%, 100% { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+    50% { border-radius: 60% 40% 60% 40% / 50% 50% 50% 50%; }
+}
+@keyframes morphLayer2 {
+    0%, 100% { border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; }
+    50% { border-radius: 40% 60% 40% 60% / 50% 50% 50% 50%; }
+}
+@keyframes morphLayer3 {
+    0%, 100% { border-radius: 60% 40% 60% 40% / 50% 50% 50% 50%; }
+    50% { border-radius: 50% 50% 50% 50% / 40% 60% 40% 60%; }
+}
+@keyframes morphLayer4 {
+    0%, 100% { border-radius: 40% 60% 40% 60% / 50% 50% 50% 50%; }
+    50% { border-radius: 50% 50% 50% 50% / 60% 40% 60% 40%; }
+}
+
+
+/* Animaciones de texto y barra de progreso */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-title {
+    font-size: 2.2em; 
+    margin-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.3); /* Sombra oscura */
+    color: var(--text-white);
+}
+
+.subtitle {
+    font-size: 1.4em; 
+    margin-bottom: 25px;
+    color: var(--text-light-grey);
+    font-weight: 300;
+}
+
+.progress-bar {
+    background-color: var(--progress-bar-bg);
+    width: 250px; 
+    height: 8px; 
+    border-radius: 4px;
+    margin: 0 auto 15px auto;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.progress {
+    background: linear-gradient(90deg, var(--text-light-grey), var(--text-white)); /* Degradado gris a blanco */
+    height: 100%;
+    width: 0%;
+    border-radius: 4px;
+    animation: load 3s ease-in-out forwards;
+}
+
+@keyframes load {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+.loading-text {
+    font-size: 0.9em;
+    color: var(--text-light-grey);
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.7; }
+    to { opacity: 1; }
+}
+
+/* Clase para ocultar la pantalla de carga */
+.hide {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+}
+
+/* Estilos para la nueva sección de bienvenida */
+.welcome-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--welcome-bg); /* Fondo gris oscuro */
+    z-index: 5;
+    text-align: center;
+    box-sizing: border-box;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Clase para ocultar la sección de bienvenida inicialmente */
+.hide-content {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.welcome-content {
+    background: rgba(18, 18, 18, 0.9); /* Fondo aún más oscuro */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 60px rgba(200, 200, 200, 0.08), 0 0 30px rgba(200, 200, 200, 0.05);
+    max-width: 600px;
+    width: 90%;
+    border: 1px solid rgba(176, 176, 176, 0.15); /* Borde gris suave */
+}
+
+.welcome-title, .welcome-summary, .welcome-buttons {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 0.8s ease-out forwards;
+}
+
+.welcome-title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--welcome-title-color); /* Gris claro */
+    text-shadow: 0 0 10px rgba(224, 224, 224, 0.4); /* Sombra suave */
+    line-height: 1.2;
+}
+
+.welcome-summary {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: var(--text-light-grey);
+}
+
+.welcome-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: var(--welcome-button-primary-bg); /* Gris medio */
+    color: var(--welcome-button-primary-text); /* Gris oscuro */
+    box-shadow: 0 0 8px rgba(169, 169, 169, 0.4);
+}
+
+.btn-primary:hover {
+    background-color: var(--welcome-button-primary-hover-bg); /* Gris plateado */
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.6);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--welcome-button-secondary-text); /* Gris medio */
+    border: 2px solid var(--welcome-button-secondary-border); /* Borde gris medio */
+}
+
+.btn-secondary:hover {
+    background-color: var(--welcome-button-secondary-hover-bg); /* Hover gris suave */
+    color: var(--welcome-button-secondary-hover-text); /* Blanco suave al hover */
+    border-color: var(--welcome-button-secondary-hover-text); /* Borde blanco al hover */
+    transform: translateY(-2px);
+}
+
+/* Animación para aparecer y deslizarse hacia arriba */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ========================================= */
+/* MEDIA QUERIES PARA ADAPTACIÓN A CELULARES */
+/* ========================================= */
+
+/* Para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+    .app-header {
+        padding: 15px 20px;
+    }
+
+    .app-title {
+        font-size: 1em;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .menu-icon {
+        font-size: 1.3em;
+    }
+
+    .loading-container {
+        padding: 15px;
+        border-radius: 15px;
+        width: 95%;
+    }
+
+    .animated-ring-container {
+        width: 70vw;
+        height: 70vw;
+        margin-bottom: 20px;
+    }
+
+    .center-circle {
+        width: 40vw;
+        height: 40vw;
+    }
+
+    .main-title {
+        font-size: 1.8em;
+    }
+
+    .subtitle {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        width: 70%;
+        height: 6px;
+        margin-bottom: 10px;
+    }
+
+    .loading-text {
+        font-size: 0.8em;
+    }
+
+    .central-image {
+        width: 80px;
+        max-height: 60px;
+        margin-bottom: 10px;
+    }
+
+    /* Ajustes para la sección de bienvenida en pantallas pequeñas */
+    .welcome-content {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .welcome-title {
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+
+    .welcome-summary {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+
+    .welcome-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 10px 20px;
+    }
+}
+
+/* Para móviles muy pequeños */
+@media screen and (max-width: 480px) {
+    .app-header {
+        padding: 10px 15px;
+    }
+
+    .logo-icon {
+        font-size: 1.5em;
+    }
+
+    .app-title {
+        font-size: 0.9em;
+    }
+
+    .menu-icon {
+        font-size: 1.2em;
+    }
+
+    .loading-container {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .animated-ring-container {
+        width: 80vw;
+        height: 80vw;
+        margin-bottom: 15px;
+    }
+
+    .center-circle {
+        width: 45vw;
+        height: 45vw;
+    }
+
+    .main-title {
+        font-size: 1.5em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+        margin-bottom: 15px;
+    }
+
+    .progress-bar {
+        width: 80%;
+        height: 5px;
+        margin-bottom: 8px;
+    }
+
+    .loading-text {
+        font-size: 0.7em;
+    }
+
+    .central-image {
+        width: 60px;
+        max-height: 50px;
+        margin-bottom: 8px;
+    }
+
+    /* Ajustes para la sección de bienvenida en móviles muy pequeños */
+    .welcome-content {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .welcome-title {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+
+    .welcome-summary {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}

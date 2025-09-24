@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enseñanza de Patologías</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente Inter de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Carga de Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Configuración de la fuente Inter para todo el cuerpo */
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Previene el desbordamiento horizontal */
+            background-color: #E7E7E7; /* Color de fondo principal */
+        }
+
+        /* ------------------------------------ */
+        /* Keyframes para las Animaciones Estéticas */
+        /* ------------------------------------ */
+
+        /* Fade Slide In Up - Para títulos y elementos que suben suavemente */
+        @keyframes fadeSlideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Fade Scale In - Para párrafos y texto con un sutil escalado */
+        @keyframes fadeScaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Soft Pop In - Para botones con una aparición suave */
+        @keyframes softPopIn {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Slide In Left Subtle - Deslizamiento suave desde la izquierda */
+        @keyframes slideInLeftSubtle {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Slide In Right Subtle - Deslizamiento suave desde la derecha */
+        @keyframes slideInRightSubtle {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Rotate Fade In - Rotación sutil con desvanecimiento para iconos */
+        @keyframes rotateFadeIn {
+            from {
+                opacity: 0;
+                transform: rotate(-10deg) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        /* Simple Fade In - Animación de desvanecimiento básico */
+        @keyframes simpleFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ------------------------------------ */
+        /* Nuevas animaciones para la Bienvenida */
+        /* ------------------------------------ */
+
+        /* Animación para el texto de bienvenida (aparición) */
+        @keyframes welcomeFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Animación de desintegración */
+        @keyframes disintegrateOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2);
+                filter: blur(10px);
+            }
+        }
+        
+        /* Oculta la página hasta que la animación de bienvenida termine */
+        .content-hidden {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Estilo para el contenedor de la animación de bienvenida */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #E7E7E7;
+            z-index: 100;
+            color: #4B5563;
+        }
+
+        /* Estilo para el texto de bienvenida */
+        #welcome-text {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            animation: welcomeFadeIn 1s ease-out forwards;
+        }
+
+        /* Estilo para el efecto de desintegración */
+        #welcome-text.disintegrating {
+            animation: disintegrateOut 1.5s ease-out forwards;
+        }
+
+        /* ------------------------------------ */
+        /* Clases de Animación y Retardos */
+        /* ------------------------------------ */
+
+        /* Clases base para los elementos que serán animados */
+        .animated-element {
+            opacity: 0; /* Por defecto, los elementos están ocultos */
+        }
+
+        /* Clases para aplicar las animaciones cuando son visibles */
+        .animated-element.visible.fade-slide-in-up {
+            animation: fadeSlideInUp 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.fade-scale-in {
+            animation: fadeScaleIn 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.soft-pop-in {
+            animation: softPopIn 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
+        }
+
+        .animated-element.visible.slide-in-left-subtle {
+            animation: slideInLeftSubtle 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.slide-in-right-subtle {
+            animation: slideInRightSubtle 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.rotate-fade-in {
+            animation: rotateFadeIn 0.8s ease-out forwards;
+        }
+
+        .animated-element.visible.simple-fade-in {
+            animation: simpleFadeIn 0.8s ease-out forwards;
+        }
+
+        /* Retardos para animaciones escalonadas */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+        .delay-900 { animation-delay: 0.9s; }
+        .delay-1000 { animation-delay: 1s; }
+
+        /* Estilos generales para las secciones */
+        section {
+            padding: 4rem 1rem; /* Espaciado interno */
+            margin-bottom: 2rem; /* Margen inferior entre secciones */
+        }
+    </style>
+</head>
+<body class="content-hidden">
+
+    <!-- Pantalla de Bienvenida con Animación -->
+    <div id="welcome-screen">
+        <h1 id="welcome-text" class="text-4xl sm:text-5xl md:text-6xl font-extrabold">
+            Bienvenida a Patología
+        </h1>
+    </div>
+
+    <!-- Botón de Regresar -->
+    <a href="../port/salud.html" class="fixed top-4 left-4 z-50 bg-white text-gray-800 hover:bg-[#CFCFCF] font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 flex items-center">
+        <i class='bx bx-arrow-back text-xl mr-2'></i>
+        Regresar
+    </a>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-white to-[#E7E7E7] text-gray-800 py-20 sm:py-24 px-4 text-center rounded-b-3xl shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 animated-element fade-slide-in-up">
+                Explora el Mundo de las Patologías
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-8 animated-element fade-scale-in delay-200">
+                Comprende las Enfermedades y sus Mecanismos.
+            </p>
+            <button class="bg-white text-gray-800 hover:bg-[#CFCFCF] font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 animated-element soft-pop-in delay-400 text-base sm:text-lg">
+                Ver Contenido del Curso
+            </button>
+        </div>
+    </section>
+
+    <!-- Sección Nuestra Misión Educativa -->
+    <section class="bg-white py-16 sm:py-20 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 animated-element slide-in-left-subtle">
+                <img src="https://placehold.co/600x400/CFCFCF/000000?text=Estudio+Patologia" alt="Estudio de Patología" class="rounded-2xl shadow-xl w-full h-auto object-cover">
+            </div>
+            <div class="md:w-1/2 text-center md:text-left animated-element slide-in-right-subtle">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 animated-element fade-slide-in-up">Nuestra Misión Educativa</h2>
+                <p class="text-base sm:text-lg text-gray-600 leading-relaxed animated-element fade-scale-in delay-200">
+                    Nos dedicamos a proporcionar una formación integral en patología, equipando a los estudiantes con el conocimiento profundo de las enfermedades, desde su origen celular hasta sus manifestaciones clínicas. Nuestro objetivo es fomentar la comprensión y el análisis crítico.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Áreas de Estudio en Patología -->
+    <section class="bg-[#E7E7E7] py-16 sm:py-20 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-12 animated-element fade-slide-in-up">Áreas de Estudio en Patología</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Área 1: Patología Celular y Molecular -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg animated-element fade-scale-in delay-100">
+                    <div class="text-gray-700 text-5xl mb-4 animated-element rotate-fade-in delay-200"><i class='bx bx-dna'></i></div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Patología Celular y Molecular</h3>
+                    <p class="text-sm sm:text-base text-gray-600">
+                        Estudio de las alteraciones a nivel celular y genético que subyacen a las enfermedades.
+                    </p>
+                </div>
+                <!-- Área 2: Patología Sistémica -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg animated-element fade-scale-in delay-300">
+                    <div class="text-gray-700 text-5xl mb-4 animated-element rotate-fade-in delay-400"><i class='bx bx-body'></i></div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Patología Sistémica</h3>
+                    <p class="text-sm sm:text-base text-gray-600">
+                        Análisis de las enfermedades que afectan a los diferentes órganos y sistemas del cuerpo.
+                    </p>
+                </div>
+                <!-- Área 3: Diagnóstico Patológico -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg animated-element fade-scale-in delay-500">
+                    <div class="text-gray-700 text-5xl mb-4 animated-element rotate-fade-in delay-600"><i class='bx bx-microscope'></i></div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Diagnóstico Patológico</h3>
+                    <p class="text-sm sm:text-base text-gray-600">
+                        Métodos y técnicas para la identificación y clasificación de las patologías.
+                    </p>
+                </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Módulos de Aprendizaje Clave -->
+    <section class="bg-[#CFCFCF] py-16 sm:py-20 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-12 animated-element fade-slide-in-up">Módulos de Aprendizaje Clave</h2>
+            <p class="text-base sm:text-lg text-gray-600 mb-12 animated-element fade-scale-in delay-200">
+                Explora algunos de los temas fundamentales y casos de estudio que abordamos en nuestros programas.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Módulo 1: Cáncer y Oncología -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden animated-element fade-scale-in delay-100">
+                    <img src="https://placehold.co/600x350/E7E7E7/000000?text=Modulo+Oncologia" alt="Módulo de Oncología" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">Módulo: Cáncer y Oncología</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Profundiza en la biología del cáncer, su desarrollo y clasificación.
+                        </p>
+                    </div>
+                </div>
+                <!-- Módulo 2: Enfermedades Infecciosas -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden animated-element fade-scale-in delay-300">
+                    <img src="https://placehold.co/600x350/E7E7E7/000000?text=Modulo+Infecciosas" alt="Módulo de Enfermedades Infecciosas" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">Módulo: Enfermedades Infecciosas</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Comprende los agentes patógenos, mecanismos de infección y respuesta inmune.
+                        </p>
+                    </div>
+                </div>
+                <!-- Módulo 3: Patología Cardiovascular -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden animated-element fade-scale-in delay-500">
+                    <img src="https://placehold.co/600x350/E7E7E7/000000?text=Modulo+Cardiovascular" alt="Módulo de Patología Cardiovascular" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">Módulo: Patología Cardiovascular</h3>
+                        <p class="text-sm sm:text-base text-gray-600">
+                            Estudio de las afecciones del corazón y vasos sanguíneos, desde la aterosclerosis hasta la insuficiencia cardíaca.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Datos Curiosos sobre Patología -->
+    <section class="bg-white py-16 sm:py-20 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-12 animated-element fade-slide-in-up">Datos Curiosos sobre Patología</h2>
+            <p class="text-base sm:text-lg text-gray-600 mb-12 animated-element fade-scale-in delay-200">
+                Descubre hechos sorprendentes y poco conocidos del fascinante mundo de las enfermedades.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dato Curioso 1 -->
+                <div class="bg-[#E7E7E7] p-8 rounded-2xl shadow-lg animated-element fade-scale-in delay-100">
+                    <div class="text-gray-700 text-5xl mb-4 animated-element rotate-fade-in delay-200"><i class='bx bx-brain'></i></div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">El Cerebro y el Dolor Fantasma</h3>
+                    <p class="text-sm sm:text-base text-gray-600">
+                        El dolor fantasma en miembros amputados es un fenómeno neurológico donde el cerebro sigue recibiendo señales de una parte del cuerpo que ya no existe.
+                    </p>
+                </div>
+                <!-- Dato Curioso 2 -->
+                <div class="bg-[#E7E7E7] p-8 rounded-2xl shadow-lg animated-element fade-scale-in delay-300">
+                    <div class="text-gray-700 text-5xl mb-4 animated-element rotate-fade-in delay-400"><i class='bx bx-leaf'></i></div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Plantas que Curan el Cáncer</h3>
+                    <p class="text-sm sm:text-base text-gray-600">
+                        Algunos medicamentos quimioterapéuticos modernos, como el Paclitaxel, se derivan de compuestos originalmente encontrados en plantas, como el tejo del Pacífico.
+                    </p>
+                </div>
+                <!-- Dato Curioso 3 -->
+                <div class="bg-[#E7E7E7] p-8 rounded-2xl shadow-lg animated-element fade-scale-in delay-500">
+                    <div class="text-gray-700 text-5xl mb-4 animated-element rotate-fade-in delay-600"><i class='bx bx-heart'></i></div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">El Corazón con Memoria</h3>
+                    <p class="text-sm sm:text-base text-gray-600">
+                        Estudios sugieren que el corazón tiene su propio "cerebro" o sistema nervioso intrínseco, capaz de aprender, recordar e incluso tomar decisiones.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="bg-[#E7E7E7] text-gray-800 py-8 text-center">
+        <p class="animated-element simple-fade-in">&copy; 2025 Centro de Estudio de Patologías. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const welcomeText = document.getElementById('welcome-text');
+            const bodyContent = document.body;
+
+            // Muestra la pantalla de bienvenida
+            welcomeScreen.style.display = 'flex';
+            bodyContent.classList.remove('content-hidden');
+
+            // Lógica para la animación de bienvenida y desintegración
+            setTimeout(() => {
+                // Inicia la animación de desintegración
+                welcomeText.classList.add('disintegrating');
+                
+                // Después de la animación de desintegración, oculta la pantalla de bienvenida y muestra el contenido de la página
+                welcomeText.addEventListener('animationend', () => {
+                    welcomeScreen.style.display = 'none';
+                });
+            }, 2500); // Muestra el texto por 2.5 segundos
+
+            // Selecciona todos los elementos que tienen la clase 'animated-element'
+            const animatedElements = document.querySelectorAll('.animated-element');
+
+            // Opciones para el Intersection Observer
+            const observerOptions = {
+                root: null, // El viewport es el elemento raíz
+                rootMargin: '0px', // Sin margen adicional
+                threshold: 0.1 // El 10% del elemento debe ser visible para activar
+            };
+
+            // Callback que se ejecuta cuando un elemento cruza el umbral de visibilidad
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Si el elemento es visible, añade la clase 'visible'
+                        entry.target.classList.add('visible');
+                        // Deja de observar el elemento una vez que la animación se ha activado
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            // Crea una nueva instancia de Intersection Observer
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            // Observa cada elemento animado
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

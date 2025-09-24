@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bachillerato General</title>
+    <!-- Incluye Tailwind CSS para el estilo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Incluye la fuente 'Inter' de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Incluye Boxicons para los iconos -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Estilos de la pantalla de inicio */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+            z-index: 1000;
+            color: white;
+            transition: opacity 1s ease-in-out;
+        }
+          #return-button {
+            position: fixed; /* Hace el botón flotante */
+            bottom: 20px; /* Distancia desde la parte inferior */
+            right: 20px; /* Distancia desde la parte derecha */
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 0.5s ease-in-out; /* Transición suave para aparecer */
+            z-index: 10000; /* Asegura que esté por encima de la pantalla de carga y el contenido */
+        }
+
+        #splash-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .splash-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Estilos de la página principal */
+        #main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+        }
+
+        .icon-lg {
+            font-size: 3rem;
+        }
+
+        .icon-card {
+            color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Pantalla de Inicio (Splash Screen) -->
+    <div id="splash-screen">
+        <h1 class="splash-text">Bachillerato General</h1>
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Contenido Principal de la Página -->
+    <div id="main-content" class="container mx-auto px-4 py-8 md:px-8 lg:px-12">
+
+        <!-- Header y Título Principal -->
+        <header class="text-center mb-12 py-8 bg-white rounded-3xl shadow-lg border border-gray-200">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-indigo-700 leading-tight">
+                El Bachillerato General: Tu Puerta de Entrada a la Universidad
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                Una opción de educación media que te da las bases sólidas para un futuro sin límites.
+            </p>
+        </header>
+
+        <!-- Contenedor principal de la información -->
+        <main class="bg-white p-6 md:p-10 lg:p-16 rounded-3xl shadow-xl border border-gray-200">
+            <!-- Introducción -->
+            <section class="mb-10">
+                <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                    El **Bachillerato General** es una opción de educación media que, a diferencia de los bachilleratos técnicos, no se especializa en una profesión específica. Su objetivo principal es ofrecer una formación académica amplia y equilibrada en diversas áreas del conocimiento. El propósito es darte una base sólida para que, al graduarte, puedas elegir y cursar cualquier carrera universitaria sin restricciones.
+                </p>
+            </section>
+
+            <!-- Sección de Áreas de Conocimiento -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                    <i class='bx bxs-book-reader icon-card text-4xl mr-4'></i>
+                    <span>1. Áreas de Conocimiento y Materias Clave</span>
+                </h2>
+                <p class="text-gray-600 mb-8 text-lg">
+                    El plan de estudios está diseñado para cubrir los pilares fundamentales del conocimiento, preparando tu mente para el pensamiento crítico y la resolución de problemas.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Ciencias Exactas y Naturales -->
+                    <div class="bg-indigo-50 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <i class='bx bxs-calculator icon-lg text-indigo-700 mr-4'></i>
+                            <h3 class="text-2xl font-semibold text-indigo-800">Ciencias Exactas y Naturales</h3>
+                        </div>
+                        <ul class="space-y-4 text-gray-700">
+                            <li>
+                                <p><strong class="text-indigo-900">Matemáticas:</strong> Cubre desde álgebra y geometría hasta temas más avanzados como trigonometría y cálculo. Estas materias desarrollan tu razonamiento lógico y analítico, habilidades cruciales para casi cualquier campo profesional.</p>
+                            </li>
+                            <li>
+                                <p><strong class="text-indigo-900">Física y Química:</strong> Estudiarás las leyes fundamentales del universo y la composición de la materia. Esto te da una comprensión de cómo funciona el mundo que nos rodea.</p>
+                            </li>
+                           
+                        </ul>
+                    </div>
+
+                    <!-- Ciencias Sociales y Humanidades -->
+                    <div class="bg-yellow-50 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <i class='bx bxs-castle icon-lg text-yellow-700 mr-4'></i>
+                            <h3 class="text-2xl font-semibold text-yellow-800">Ciencias Sociales y Humanidades</h3>
+                        </div>
+                        <ul class="space-y-4 text-gray-700">
+                            <li>
+                                <p><strong class="text-yellow-900">Historia y Geografía:</strong> Te darán una perspectiva global sobre la evolución de las sociedades y su relación con el entorno físico.</p>
+                            </li>
+                            <li>
+                                <p><strong class="text-yellow-900">Ciencias Sociales:</strong> A menudo incluye materias como sociología y economía básica, que te ayudan a entender la organización social y los sistemas de mercado.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Lenguaje, Comunicación y Arte -->
+                    <div class="bg-emerald-50 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <i class='bx bxs-palette icon-lg text-emerald-700 mr-4'></i>
+                            <h3 class="text-2xl font-semibold text-emerald-800">Lenguaje, Comunicación </h3>
+                        </div>
+                        <ul class="space-y-4 text-gray-700">
+                            <li>
+                                <p><strong class="text-emerald-900">Lengua y Literatura:</strong> A lo largo de la carrera, perfeccionarás tus habilidades de redacción, gramática y comprensión de lectura. También analizarás obras literarias para entender su contexto cultural.</p>
+                            </li>
+                            <li>
+                                <p><strong class="text-emerald-900">Segundo Idioma:</strong> El inglés es un componente esencial, ya que te abre puertas a más información, oportunidades y comunicación a nivel global.</p>
+                            </li>
+                            <li>
+                                <p><strong class="text-emerald-900"> Educación Física:</strong> Estas áreas complementan tu formación,  el trabajo en equipo y un estilo de vida saludable.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Habilidades Clave -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                    <i class='bx bxs-zap icon-card text-4xl mr-4'></i>
+                    <span>2. Habilidades Clave que Desarrollarás</span>
+                </h2>
+                <p class="text-gray-600 mb-8 text-lg">
+                    Aunque no te prepara para un oficio en particular, el Bachillerato General te equipa con un conjunto de habilidades transferibles que son valiosas en cualquier ámbito.
+                </p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 list-none p-0">
+                    <li class="flex items-start bg-sky-50 p-4 rounded-xl shadow-sm">
+                        <span class="text-2xl text-sky-600 mr-4"><i class='bx bxs-bulb'></i></span>
+                        <p class="text-lg text-gray-700"><strong class="text-sky-800">Pensamiento Crítico:</strong> Aprenderás a evaluar la información de forma objetiva y a formar tus propias opiniones.</p>
+                    </li>
+                    <li class="flex items-start bg-sky-50 p-4 rounded-xl shadow-sm">
+                        <span class="text-2xl text-sky-600 mr-4"><i class='bx bxs-search-alt-2'></i></span>
+                        <p class="text-lg text-gray-700"><strong class="text-sky-800">Investigación y Análisis:</strong> Desarrollarás la capacidad de buscar, sintetizar y analizar información de diversas fuentes.</p>
+                    </li>
+                    <li class="flex items-start bg-sky-50 p-4 rounded-xl shadow-sm">
+                        <span class="text-2xl text-sky-600 mr-4"><i class='bx bxs-message-dots'></i></span>
+                        <p class="text-lg text-gray-700"><strong class="text-sky-800">Comunicación Oral y Escrita:</strong> Mejorarás tu habilidad para expresarte con claridad y efectividad, tanto al hablar en público como al redactar textos.</p>
+                    </li>
+                    <li class="flex items-start bg-sky-50 p-4 rounded-xl shadow-sm">
+                        <span class="text-2xl text-sky-600 mr-4"><i class='bx bxs-extension'></i></span>
+                        <p class="text-lg text-gray-700"><strong class="text-sky-800">Resolución de Problemas:</strong> A través de los desafíos académicos, adquirirás un enfoque estructurado para abordar problemas complejos.</p>
+                    </li>
+                </ul>
+            </section>
+              <button id="return-button" class="bg-[#CFCFCF] text-gray-800 hover:bg-[#E7E7E7] font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-full shadow-lg transition duration-300 text-sm sm:text-base">
+        Regresar
+    </button>
+
+            <!-- Sección de ¿Qué podrás hacer al terminar? -->
+            <section>
+                <h2 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                    <i class='bx bxs-graduation icon-card text-4xl mr-4'></i>
+                    <span>3. ¿Qué podrás hacer al terminar?</span>
+                </h2>
+                <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-4">
+                    El Bachillerato General es la ruta más directa para continuar tus estudios en la universidad. Al tener una formación tan amplia, puedes elegir prácticamente cualquier carrera universitaria, como Medicina, Ingeniería, Derecho, Administración, Artes, etc.
+                </p>
+                <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                    Es la opción ideal si no tienes claro qué profesión seguir, ya que te da tiempo para descubrir tus intereses y te prepara con las herramientas intelectuales necesarias para tener éxito en el siguiente nivel educativo.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const returnButton = document.getElementById('return-button');
+            returnButton.style.opacity = '0';
+
+              setTimeout(() => {
+                returnButton.style.opacity = '1';
+            }, 1800); // Aparece después de que el texto de bienvenida se haya animado
+
+
+
+            // Redirige al hacer clic en el botón "Regresar"
+            returnButton.addEventListener('click', () => {
+                window.location.href = '../admisiones.html';
+            });
+
+        // JavaScript para controlar la pantalla de inicio
+        window.addEventListener('load', () => {
+            const splashScreen = document.getElementById('splash-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            // Oculta la pantalla de inicio y muestra el contenido principal después de 2.5 segundos
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+                mainContent.classList.add('visible');
+            }, 2500); // 2.5 segundos
+        });
+        });
+    </script>
+</body>
+</html>

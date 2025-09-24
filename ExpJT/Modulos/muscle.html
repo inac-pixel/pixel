@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Visualizador de anatomía muscular</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Un visualizador de anatomía muscular en 3D optimizado para móviles.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :not(:defined) > * {
+            display: none;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 100vh; /* Usa 100vh para que ocupe toda la altura de la pantalla */
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            display: block;
+            width: 80%; /* Más ancho para móviles */
+            height: 2%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 25px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            background-color: rgba(0, 0, 0, 0.5);
+            max-width: 300px;
+        }
+
+        .progress-bar.hide {
+            visibility: hidden;
+            transition: visibility 0.3s;
+        }
+
+        .update-bar {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 0%;
+            height: 100%;
+            border-radius: 25px;
+            float: left;
+            transition: width 0.3s;
+        }
+
+        #ar-button {
+            background-image: url("https://modelviewer.dev/shared-assets/icons/hand.png"); /* URL directa para evitar errores de ruta */
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-position: 12px 50%;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            bottom: 20px; /* Separación del borde inferior */
+            padding: 0px 16px 0px 40px;
+            font-family: Roboto, sans-serif;
+            font-size: 14px;
+            color: #4285f4;
+            height: 40px; /* Altura más cómoda para tocar */
+            line-height: 40px;
+            border-radius: 20px;
+            border: 1px solid #DADCE0;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        #ar-button:active {
+            background-color: #E8EAED;
+        }
+
+        #ar-button:focus {
+            outline: none;
+        }
+
+        #ar-button:focus-visible {
+            outline: 1px solid #4285f4;
+        }
+
+        @keyframes circle {
+            from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+            to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+        }
+
+        @keyframes elongate {
+            from { transform: translateX(100px); }
+            to   { transform: translateX(-100px); }
+        }
+
+        model-viewer > #ar-prompt {
+            position: absolute;
+            left: 50%;
+            bottom: 80px; /* Posición más alta para evitar superposición */
+            animation: elongate 2s infinite ease-in-out alternate;
+            display: none;
+        }
+
+        model-viewer[ar-status="session-started"] > #ar-prompt {
+            display: block;
+        }
+
+        model-viewer > #ar-prompt > img {
+            animation: circle 4s linear infinite;
+            width: 50px; /* Tamaño del icono AR */
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <model-viewer 
+        src="../grup/3D/Muscle_Anatomy_Diagra_0725062329_texture.glb" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        tone-mapping="neutral" 
+        shadow-intensity="1"
+        alt="Modelo 3D de anatomía muscular"
+        loading="eager"
+        disable-zoom> <div class="progress-bar hide" slot="progress-bar">
+            <div class="update-bar"></div>
+        </div>
+        <button slot="ar-button" id="ar-button">
+            Ver en tu espacio
+        </button>
+        <div id="ar-prompt">
+            <img src="https://modelviewer.dev/shared-assets/icons/hand.png"> </div>
+    </model-viewer>  
+    <script>
+        // Maneja los eventos de carga para la barra de progreso
+        const onProgress = (event) => {
+            const progressBar = event.target.querySelector('.progress-bar');
+            const updatingBar = event.target.querySelector('.update-bar');
+            if (event.detail.totalProgress === 1) {
+                progressBar.classList.add('hide');
+                event.target.removeEventListener('progress', onProgress);
+            } else {
+                progressBar.classList.remove('hide');
+                updatingBar.style.width = `${event.detail.totalProgress * 100}%`;
+            }
+        };
+        document.querySelector('model-viewer').addEventListener('progress', onProgress);
+    </script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</body>
+</html>

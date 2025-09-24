@@ -1,0 +1,536 @@
+/* Add this at the very top of your CSS file */
+*, *::before, *::after {
+    box-sizing: border-box; /* Asegura que padding y border se incluyan en el ancho/alto total */
+}
+
+/* Importar fuentes de Google Fonts para un diseño moderno y legible */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Definición de variables CSS para colores y valores comunes, facilitando la personalización */
+:root {
+    --primary-color: #007bff; /* Azul principal para elementos interactivos y destacados */
+    --secondary-color: #6c757d; /* Gris oscuro para texto secundario y botones de cierre */
+    --background-light: #f8f9fa; /* Fondo general muy claro para la página */
+    --text-dark: #343a40; /* Color de texto oscuro para el contenido principal */
+    --card-bg: #ffffff; /* Fondo blanco para las tarjetas y modales */
+    --border-light: #e9ecef; /* Color de borde claro para separaciones sutiles */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Sombra ligera para elementos elevados */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Sombra media para efectos hover */
+    --overlay-dark: rgba(0, 50, 100, 0.6); /* Overlay oscuro para la imagen del hero */
+}
+
+/* Estilos globales para el cuerpo de la página */
+html, body { /* Aplicar overflow-x: hidden a ambos para mayor seguridad */
+    font-family: 'Open Sans', sans-serif; /* Fuente principal para el cuerpo */
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.7;
+    overflow-x: hidden; /* ¡CRÍTICO! Bloquea el scroll horizontal en toda la página */
+    -webkit-font-smoothing: antialiased; /* Mejora la renderización de fuentes en WebKit */
+    -moz-osx-font-smoothing: grayscale; /* Mejora la renderización de fuentes en Firefox */
+}
+
+/* Asegura que todas las imágenes sean responsivas y no causen desbordamiento */
+img {
+    max-width: 100%;
+    height: auto; /* Mantiene la relación de aspecto */
+    display: block; /* Elimina el espacio extra debajo de las imágenes */
+}
+
+/* Animación de entrada para el texto del hero */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Header / Hero Section --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 40vh; /* Altura mínima para asegurar visibilidad del contenido */
+    height: auto; /* Permite que la altura crezca si el contenido lo requiere */
+    /* Ruta de la imagen del hero. Se sube un nivel desde 'css' a 'grup', luego otro a 'tu_proyecto', y luego entra a 'img'. */
+    background: url('../img/image.png') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente en el hero */
+    align-items: center;
+    color: white;
+    text-align: center;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    z-index: 1; /* Asegura que el hero esté por encima de otros elementos si hay z-index negativos */
+    padding: 40px 20px; /* Padding para el contenido dentro del hero */
+}
+
+.hero-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-dark); /* Capa semi-transparente para mejorar contraste del texto */
+    z-index: -1; /* Coloca la capa detrás del contenido del header */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    padding: 20px 0;
+    z-index: 10; /* Asegura que el logo y la navegación estén al frente */
+    /* Posicionamiento para que el header-content se mantenga en la parte superior del hero */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: white;
+    /* Aquí podrías añadir estilos para un logo real (ej. background-image con tu logo) */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px; /* Espacio entre los ítems del menú de navegación */
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.05em;
+    transition: color 0.3s ease; /* Transición suave para el color del enlace */
+}
+
+nav a:hover {
+    color: var(--primary-color); /* Cambia de color al pasar el ratón */
+}
+
+.contact-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animación al pasar el ratón */
+}
+
+.contact-button:hover {
+    background-color: #0056b3; /* Tono más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Ligero desplazamiento hacia arriba */
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5; /* Asegura que el texto esté sobre el overlay */
+    width: 90%; /* Ancho responsivo para el texto */
+    max-width: 700px; /* Ancho máximo del texto del hero */
+    margin-top: 20px; /* Espacio superior */
+    margin-bottom: 20px; /* Espacio inferior */
+    /* Aplicar animación de entrada */
+    animation: fadeInSlideUp 1s ease-out forwards;
+}
+
+.hero-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5em; /* Tamaño del título del hero */
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Sombra para el texto */
+}
+
+.hero-text p {
+    font-size: 1.3em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.hero-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 30px; /* Botón tipo píldora */
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Animaciones completas */
+}
+
+.hero-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+/* --- Contenido Principal (Main) --- */
+main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 40px auto; /* Centra el contenido principal y le da margen superior */
+}
+
+.topics-overview {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.topics-overview h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1.5em;
+    position: relative;
+    display: inline-block; /* Para el subrayado animado */
+}
+
+.topics-overview h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+.topic-grid {
+    display: grid;
+    /* Columnas responsivas: mínimo 250px, máximo 1fr (distribuye el espacio equitativamente) */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px; /* Espacio entre las tarjetas */
+}
+
+.topic-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Animaciones para hover */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Empuja el botón hacia abajo */
+    text-align: center;
+}
+
+.topic-card:hover {
+    transform: translateY(-10px); /* Efecto de elevación */
+    box-shadow: 0 10px 25px var(--shadow-medium); /* Sombra más pronunciada */
+    background-color: #f0f8ff; /* Fondo ligeramente azulado al pasar el ratón */
+}
+
+/* Estilos para las imágenes en lugar de iconos */
+.topic-image {
+    width: 100px; /* Tamaño fijo para las imágenes */
+    height: 100px;
+    object-fit: contain; /* Asegura que la imagen se ajuste sin recortarse */
+    margin-bottom: 20px;
+    background-color: #e6f2ff; /* Fondo sutil para la imagen */
+    border-radius: 50%; /* Forma circular */
+    padding: 15px; /* Espacio alrededor de la imagen dentro del círculo */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra interna sutil */
+    transition: transform 0.3s ease; /* Animación para la imagen al pasar el ratón */
+}
+
+.topic-card:hover .topic-image {
+    transform: scale(1.1); /* Ligeramente más grande al pasar el ratón sobre la tarjeta */
+}
+
+.topic-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    color: var(--text-dark);
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.topic-card p {
+    font-size: 1.05em;
+    color: var(--secondary-color);
+    margin-bottom: 25px;
+    flex-grow: 1; /* Permite que el párrafo ocupe el espacio restante */
+}
+
+/* Botones dentro de las tarjetas */
+.topic-card .ver-mas {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 80%; /* Ancho del botón */
+    max-width: 200px;
+    margin-top: auto; /* Empuja el botón hacia la parte inferior de la tarjeta */
+}
+
+.topic-card .ver-mas:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* --- ESTILOS PARA LA VENTANA MODAL (FLOTANTE) --- */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla, no se desplaza con el contenido */
+    z-index: 1000; /* Por encima de todo lo demás */
+    left: 0;
+    top: 0;
+    width: 100%; /* Cubre todo el ancho de la ventana */
+    height: 100%; /* Cubre toda la altura de la ventana */
+    overflow-y: auto; /* Permite scroll vertical si el contenido es grande */
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente oscuro */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque al fondo (soporte variable en navegadores) */
+    display: flex; /* Usa flexbox para centrar el contenido de la modal */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    opacity: 0; /* Inicialmente transparente para la animación de entrada */
+    visibility: hidden; /* Oculto para accesibilidad y evitar interacciones */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Transición suave para la aparición del fondo */
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Animación de salida para la modal */
+@keyframes fadeOutShrink {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: auto; /* Centrado con flexbox */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    position: relative;
+    max-width: 800px; /* Ancho máximo del contenido de la modal */
+    width: 90%; /* Ancho responsivo */
+    transform: translateY(20px) scale(0.95); /* Animación de entrada: sube y se agranda */
+    opacity: 0; /* Inicialmente invisible para la animación de entrada */
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out; /* Transición suave para la modal */
+    max-height: 85vh; /* Altura máxima de la modal para que quepa en la pantalla */
+    overflow-y: auto; /* Añadir scroll interno si el contenido excede la altura */
+}
+
+.modal.active .modal-content {
+    transform: translateY(0) scale(1); /* Posición final y tamaño normal al activarse */
+    opacity: 1;
+}
+
+/* Cuando la modal no está activa, aplica la animación de salida */
+.modal:not(.active) .modal-content {
+    animation: fadeOutShrink 0.4s ease-in forwards; /* Animación de salida */
+}
+
+
+.close-button {
+    color: var(--secondary-color);
+    font-size: 2.5em;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease; /* Animación al pasar el ratón */
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    transform: rotate(90deg); /* Gira la 'X' al pasar el ratón */
+}
+
+.modal-content h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2em; /* Tamaño del título en la modal */
+    color: var(--primary-color);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: left; /* Títulos de la modal alineados a la izquierda */
+}
+
+.modal-content p {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    line-height: 1.7;
+    text-align: left; /* Párrafos de la modal alineados a la izquierda */
+    margin-bottom: 15px; /* Margen inferior para separar párrafos */
+}
+
+
+/* --- Pie de Página (Footer) --- */
+footer {
+    text-align: center;
+    padding: 2.5em 0;
+    background-color: var(--text-dark);
+    color: white;
+    margin-top: 60px;
+    font-size: 0.9em;
+}
+
+/* --- Diseño Responsivo (Media Queries) --- */
+
+/* Para pantallas medianas (tablets, laptops pequeñas) */
+@media (max-width: 992px) {
+    .hero-text h1 {
+        font-size: 3em;
+    }
+    .hero-text p {
+        font-size: 1.1em;
+    }
+    .topics-overview h2 {
+        font-size: 2.5em;
+    }
+    .topic-card h3 {
+        font-size: 1.6em;
+    }
+    .modal-content {
+        padding: 25px;
+        width: 95%; /* La modal ocupa más ancho en tablets */
+    }
+    .modal-content h3 {
+        font-size: 2em;
+    }
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    /* Ajustes para el contenido del header en móviles */
+    .header-content {
+        flex-direction: column; /* Apila logo y nav */
+        gap: 15px;
+        position: relative; /* Vuelve a posición relativa para mejor flujo */
+        top: auto;
+        left: auto;
+        transform: none;
+        padding: 15px 0;
+    }
+    nav ul {
+        flex-wrap: wrap; /* Permite que los ítems del nav se envuelvan */
+        justify-content: center;
+        gap: 15px;
+    }
+    /* Ajustes para la sección hero en móviles */
+    .hero-section {
+        min-height: 50vh; /* Aumentar un poco la altura mínima */
+        justify-content: center; /* Centrar el contenido verticalmente */
+        padding-top: 40px; /* Ajustar padding */
+        padding-bottom: 40px;
+        text-align: center;
+    }
+    .hero-text {
+        align-items: center; /* Centrar el texto */
+        margin-top: 0; /* Eliminar margen superior extra */
+    }
+    .hero-text h1 {
+        font-size: 2.5em;
+    }
+    .hero-text p {
+        font-size: 1em;
+    }
+    /* Las tarjetas se apilan en una sola columna */
+    .topic-grid {
+        grid-template-columns: 1fr;
+    }
+    .topic-card {
+        padding: 25px;
+    }
+    /* Estilos para las imágenes de las tarjetas en móvil */
+    .topic-image {
+        width: 80px;
+        height: 80px;
+        padding: 10px;
+    }
+    /* Ajustes para la modal en móvil */
+    .modal-content {
+        padding: 20px;
+    }
+    .modal-content h3 {
+        font-size: 1.8em;
+    }
+    .modal-content p {
+        font-size: 0.95em;
+    }
+}
+
+/* Para móviles muy pequeños */
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: 60vh; /* Aumentar aún más la altura mínima en móviles muy pequeños */
+    }
+    .hero-text h1 {
+        font-size: 2em;
+    }
+    .hero-text p {
+        font-size: 0.85em;
+    }
+    .topics-overview h2 {
+        font-size: 2em;
+    }
+    .topic-card .ver-mas {
+        width: 90%;
+    }
+    nav ul li {
+        margin: 0 0.8em;
+    }
+    .modal-content h3 {
+        font-size: 1.5em;
+    }
+}
+
+/* Clase para el body cuando una modal está activa, para bloquear el scroll */
+body.modal-active {
+    overflow: hidden;
+    padding-right: 5px; /* Evita el "salto" de layout cuando la barra de scroll desaparece */
+}
