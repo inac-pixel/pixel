@@ -25,37 +25,28 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --- Datos de Proyectos (Para el Modal) --- */
     const projectsData = {
         1: {
-            title: "Sistema de Gestión de Clientes (CRM)",
-            description: "Un robusto sistema de gestión de relaciones con clientes diseñado para optimizar la interacción y el seguimiento de ventas. Desarrollado con tecnologías de escritorio para un rendimiento óptimo y seguridad de datos local.",
+            title: "PeliPlus SV",
+            description: "un espacio digital centralizado y ordenado que simplifica la vida del consumidor de contenido, mientras provee a los equipos de gestión las herramientas para mantener un catálogo de alta calidad y veracidad.",
             features: [
-                "Gestión de contactos y empresas",
-                "Seguimiento de interacciones y oportunidades",
-                "Informes y análisis de ventas",
-                "Interfaz de usuario intuitiva"
+                
             ],
             demoLink: "#",
             repoLink: "#"
         },
         2: {
-            title: "Plataforma E-commerce Personalizada",
-            description: "Solución de comercio electrónico completamente personalizable y escalable, perfecta para pequeñas y medianas empresas. Incluye un sistema de gestión de productos, carrito de compras avanzado y pasarelas de pago seguras.",
+            title: "Corazones Solidarios",
+            description: "la plataforma es un puente digital que conecta la oferta de ropa donada con la demanda y gestión de proyectos sociales, todo ello bajo una misión central de beneficencia.",
             features: [
-                "Diseño responsivo para todos los dispositivos",
-                "Integración con múltiples pasarelas de pago",
-                "Gestión de inventario y pedidos",
-                "SEO optimizado y analíticas integradas"
+                
             ],
             demoLink: "#",
             repoLink: "#"
         },
         3: {
-            title: "Aplicación Móvil de Fitness 'IronWill'",
-            description: "Una aplicación móvil nativa (iOS y Android) que ayuda a los usuarios a seguir sus rutinas de ejercicio, registrar su progreso y alcanzar sus metas de fitness. Incluye recordatorios, planes personalizados y seguimiento GPS para actividades al aire libre.",
+            title: "Guardería Huellitas",
+            description: "Guardería Huellitas es la columna vertebral digital que asegura que la guardería pueda ofrecer un servicio de alta calidad, manteniendo todos los datos de clientes, mascotas y servicios de forma ordenada y accesible.",
             features: [
-                "Creación y seguimiento de rutinas de ejercicio",
-                "Registro de progreso con gráficos interactivos",
-                "Notificaciones personalizadas",
-                "Integración con wearables (ej. Apple Health, Google Fit)"
+               
             ],
             demoLink: "#",
             repoLink: "#"
@@ -278,5 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
             contactForm.reset(); // Limpiar el formulario
         });
     }
+
 
 });
