@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "Anatomía Humana": {
             description: "Se centra específicamente en el estudio de las estructuras del cuerpo humano, incluyendo huesos, músculos, órganos, nervios y vasos sanguíneos.",
-            image: "../grup/img/humn.ong"
+            image: "../grup/img/humn.png"
         },
         "Anatomía Vegetal": {
             description: "Estudia la estructura interna de las plantas, incluyendo sus tejidos (epidermis, parénquima, xilema, floema) y órganos (raíces, tallos, hojas, flores).",
@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 
