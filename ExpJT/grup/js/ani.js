@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const anatomyData = {
         "Anatomía Macroscópica": {
             description: "Estudia las estructuras del cuerpo que son visibles a simple vista, sin la necesidad de un microscopio. Incluye la anatomía regional (por partes del cuerpo), la anatomía sistémica (por sistemas de órganos) y la anatomía de superficie.",
-            image: "https://placehold.co/400x200/52c6f1/ffffff?text=Anatomía+Macroscópica"
+            image: "../img/macr.png"
         },
         "Anatomía Microscópica": {
             description: "También conocida como histología, se enfoca en el estudio de los tejidos y las células, que solo pueden observarse con la ayuda de un microscopio. Es crucial para entender la composición interna de los órganos.",
@@ -118,3 +118,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
