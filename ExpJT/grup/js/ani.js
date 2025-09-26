@@ -44,31 +44,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const anatomyData = {
         "Anatomía Macroscópica": {
             description: "Estudia las estructuras del cuerpo que son visibles a simple vista, sin la necesidad de un microscopio. Incluye la anatomía regional (por partes del cuerpo), la anatomía sistémica (por sistemas de órganos) y la anatomía de superficie.",
-            image: "../img/macr.png"
+            image: "../grup/img/macr.png"
         },
         "Anatomía Microscópica": {
             description: "También conocida como histología, se enfoca en el estudio de los tejidos y las células, que solo pueden observarse con la ayuda de un microscopio. Es crucial para entender la composición interna de los órganos.",
-            image: "https://placehold.co/400x200/52c6f1/ffffff?text=Anatomía+Microscópica"
+            image: "../grup/img/micro.png"
         },
         "Anatomía Comparada": {
             description: "Examina las similitudes y diferencias en la estructura de diferentes especies. Es fundamental para comprender la evolución y las relaciones filogenéticas entre los organismos.",
-            image: "https://placehold.co/400x200/52c6f1/ffffff?text=Anatomía+Comparada"
+            image: "../grup/img/comp.png"
         },
         "Anatomía Patológica": {
             description: "Se dedica al estudio de los cambios estructurales en tejidos y órganos causados por enfermedades. Es vital para el diagnóstico y comprensión de diversas patologías.",
-            image: "https://placehold.co/400x200/52c6f1/ffffff?text=Anatomía+Patológica"
+            image: "../grup/img/pato.png"
         },
         "Anatomía Radiológica": {
             description: "Estudia las estructuras del cuerpo utilizando técnicas de imagen como rayos X, tomografía computarizada (TC), resonancia magnética (RM) y ecografía. Es indispensable en el diagnóstico médico moderno.",
-            image: "https://placehold.co/400x200/52c6f1/ffffff?text=Anatomía+Radiológica"
+            image: "../grup/img/radi.png"
         },
         "Anatomía Humana": {
             description: "Se centra específicamente en el estudio de las estructuras del cuerpo humano, incluyendo huesos, músculos, órganos, nervios y vasos sanguíneos.",
-            image: "https://placehold.co/400x200/52c6f1/ffffff?text=Anatomía+Humana"
+            image: "../grup/img/humn.ong"
         },
         "Anatomía Vegetal": {
             description: "Estudia la estructura interna de las plantas, incluyendo sus tejidos (epidermis, parénquima, xilema, floema) y órganos (raíces, tallos, hojas, flores).",
-            image: "https://placehold.co/400x200/52c6f1/ffffff?text=Anatomía+Vegetal"
+            image: "../grup/img/vegt.png"
         }
         
         
@@ -118,4 +118,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
