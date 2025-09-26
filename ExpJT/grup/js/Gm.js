@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             repoLink: "#"
         },
         4: {
-            title: "Sistema de Análisis de Datos en la Nube 'InsightCloud'",
-            description: "Una plataforma basada en la nube para la ingesta, procesamiento y visualización de grandes volúmenes de datos. Permite a las empresas tomar decisiones basadas en datos con dashboards personalizables y análisis predictivos.",
+            title: "Hotel Paraiso Tropical",
+            description: "El proyecto es una plataforma web de gestión hotelera diseñada para automatizar el proceso de reservas de habitaciones y centralizar la administración de la información.",
             features: [
                 "Procesamiento de datos en tiempo real",
                 "Dashboards interactivos y personalizables",
@@ -272,3 +272,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
