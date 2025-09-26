@@ -55,10 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Hotel Paraiso Tropical",
             description: "El proyecto es una plataforma web de gestión hotelera diseñada para automatizar el proceso de reservas de habitaciones y centralizar la administración de la información.",
             features: [
-                "Procesamiento de datos en tiempo real",
-                "Dashboards interactivos y personalizables",
-                "Conectividad con diversas fuentes de datos",
-                "Escalabilidad y seguridad en la nube"
+           
             ],
             demoLink: "#",
             repoLink: "#"
@@ -272,4 +269,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
 
